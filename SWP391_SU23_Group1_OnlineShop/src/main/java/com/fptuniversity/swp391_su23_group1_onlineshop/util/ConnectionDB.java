@@ -7,7 +7,7 @@ package com.fptuniversity.swp391_su23_group1_onlineshop.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import com.fptuniversity.swp391_su23_group1_onlineshop.util.Config;
+import com.fptuniversity.swp391_su23_group1_onlineshop.config.Config;
 
 /**
  *
