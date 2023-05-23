@@ -260,6 +260,30 @@ Gi? h¨¤ng   /       <span class="cart-price"><span class="woocommerce-Price-amou
     list-style: none;
     height: 50px;
 }
+.elementor *, .elementor :after, .elementor :before {
+    box-sizing: border-box;
+}
+* {
+    letter-spacing: -0.2px;
+}
+.elementor-element {
+    --flex-direction: initial;
+    --flex-wrap: initial;
+    --justify-content: initial;
+    --align-items: initial;
+    --align-content: initial;
+    --gap: initial;
+    --flex-basis: initial;
+    --flex-grow: initial;
+    --flex-shrink: initial;
+    --order: initial;
+    --align-self: initial;
+    flex-basis: var(--flex-basis);
+    flex-grow: var(--flex-grow);
+    flex-shrink: var(--flex-shrink);
+    order: var(--order);
+    align-self: var(--align-self);
+}
 .phone-mobile{display:block !important}}</style><div class="giuseart-nav"><ul><li><a href="https://www.google.com/maps/place/Bum+Shop/@10.834714,106.663631,15z/data=!4m2!3m1!1s0x0:0x10311b7e3f8e578d?sa=X&amp;ved=2ahUKEwiP1uuUksrqAhX37HMBHfSQCSQQ_BIwDnoECBQQCA" rel="nofollow" target="_blank"><i class="ticon-heart"></i>T¨¬m ???ng</a></li><li><a href="https://zalo.me/0372469224" rel="nofollow" target="_blank"><i class="ticon-zalo-circle2"></i>Chat Zalo</a></li><li class="phone-mobile">
 <a href="tel:0907872866" rel="nofollow" class="button">
 <span class="phone_animation animation-shadow">
