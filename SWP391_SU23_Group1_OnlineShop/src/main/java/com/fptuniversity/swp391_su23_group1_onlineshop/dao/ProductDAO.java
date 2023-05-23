@@ -5,6 +5,7 @@
  */
 package dal;
 
+import com.fptuniversity.swp391_su23_group1_onlineshop.util.ConnectionDB;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +20,7 @@ import model.Product;
  *
  * @author hoang
  */
-public class ProductDAO extends DBContext implements IDAO<Product> {
+public class ProductDAO extends ConnectionDB implements IDAO<Product> {
 
     private final DecimalFormat df = new DecimalFormat("#.00");
     private final String SQL_INSERT = "INSERT INTO dbo.Product\n"
