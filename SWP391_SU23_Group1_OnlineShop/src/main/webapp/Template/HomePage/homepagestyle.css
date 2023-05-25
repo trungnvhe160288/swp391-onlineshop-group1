@@ -467,7 +467,7 @@ header {
   color: var(--white);
 }
 
-@media (width < 900px) {
+@media (width: 900px) {
   header {
     margin-top: 5rem;
   }
@@ -506,7 +506,7 @@ header {
   }
 }
 
-@media (width < 600px) {
+@media (width: 600px) {
   .nav__links {
     display: none;
   }
