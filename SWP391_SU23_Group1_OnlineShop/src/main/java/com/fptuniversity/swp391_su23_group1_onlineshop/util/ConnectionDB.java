@@ -14,7 +14,6 @@ import com.fptuniversity.swp391_su23_group1_onlineshop.config.Config;
  * @author trung
  */
 public class ConnectionDB {
-    protected Connection connection;
 
     public static Connection makeConnection() throws SQLException{
         Connection conn = null;
