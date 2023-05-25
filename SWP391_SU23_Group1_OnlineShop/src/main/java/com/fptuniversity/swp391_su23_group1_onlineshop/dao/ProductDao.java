@@ -147,7 +147,7 @@ public class ProductDao {
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PostDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;
