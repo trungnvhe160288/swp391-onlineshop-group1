@@ -16,7 +16,7 @@ import com.fptuniversity.swp391_su23_group1_onlineshop.config.Config;
 public class ConnectionDB {
     protected Connection connection;
 
-    public static Connection getConnection() {
+    public static Connection makeConnection() throws SQLException{
         Connection conn = null;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
