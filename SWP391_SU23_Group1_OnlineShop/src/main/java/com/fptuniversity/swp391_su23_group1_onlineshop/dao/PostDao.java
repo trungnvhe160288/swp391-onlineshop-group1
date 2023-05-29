@@ -22,6 +22,7 @@ import com.fptuniversity.swp391_su23_group1_onlineshop.util.ConnectionDB;
  */
 public class PostDao {
 
+    //Get all Blog/Post
     public static ArrayList<Post> getAllPosts() {
         ArrayList<Post> postList = new ArrayList<>();
 
@@ -51,6 +52,7 @@ public class PostDao {
         return postList;
     }
 
+    //Get Blog/Post by id 
     public static Post getPostById(int id) {
         try ( Connection cn = ConnectionDB.makeConnection()) {
             if (cn != null) {
@@ -79,6 +81,7 @@ public class PostDao {
         return null;
     }
 
+    //Add new Blog/Post
     public static void addPost(Post post) {
         try ( Connection cn = ConnectionDB.makeConnection()) {
             if (cn != null) {
@@ -99,6 +102,7 @@ public class PostDao {
         }
     }
 
+    //Update a Blog/Post 
     public static void updatePost(Post post) {
         try ( Connection cn = ConnectionDB.makeConnection()) {
             if (cn != null) {
@@ -120,6 +124,7 @@ public class PostDao {
         }
     }
 
+    //Delete a Post
     public static void deletePost(int id) {
         try ( Connection cn = ConnectionDB.makeConnection()) {
             if (cn != null) {
