@@ -18,7 +18,7 @@ import jakarta.servlet.annotation.WebServlet;
 
 /**
  *
- * @author trung
+ * @author dotra
  */
 @WebServlet(name = "ShoppingController", value = "/shop")
 public class ShoppingController extends HttpServlet {

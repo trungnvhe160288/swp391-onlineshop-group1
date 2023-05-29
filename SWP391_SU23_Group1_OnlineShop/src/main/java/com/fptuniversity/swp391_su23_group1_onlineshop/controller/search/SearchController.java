@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author trung
+ * @author dotra
  */
 @WebServlet(name = "SearchController", urlPatterns = {"/search"})
 public class SearchController extends HttpServlet {

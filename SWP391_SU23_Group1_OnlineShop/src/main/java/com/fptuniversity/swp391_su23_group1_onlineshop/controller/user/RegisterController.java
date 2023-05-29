@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 
 /**
  *
- * @author Baoli
+ * @author dotra
  */
 @WebServlet(name = "RegisterController", value = "/register")
 public class RegisterController extends HttpServlet {

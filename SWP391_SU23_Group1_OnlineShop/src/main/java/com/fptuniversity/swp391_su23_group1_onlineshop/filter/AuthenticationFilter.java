@@ -29,7 +29,7 @@ import com.fptuniversity.swp391_su23_group1_onlineshop.model.User;
 
 /**
  *
- * @author trung
+ * @author dotra
  */
 @WebFilter(filterName = "AuthenticationFilter", urlPatterns = {"/*"})
 public class AuthenticationFilter implements Filter {
