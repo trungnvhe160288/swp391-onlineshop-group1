@@ -29,7 +29,8 @@ public class ProfileController extends HttpServlet {
         String email = "";
         
         try {
-            // Establish database connection
+            
+            // Connect DB
             String dbURL = "jdbc:mysql://localhost:3306/your_database_name";
             String dbUser = "your_username";
             String dbPassword = "your_password";
@@ -42,7 +43,7 @@ public class ProfileController extends HttpServlet {
             
             ResultSet resultSet = statement.executeQuery();
 
-            // Extract user details from the result set
+            // Extract user details 
             if (resultSet.next()) {
                 userName = resultSet.getString("userName");
                 fullName = resultSet.getString("fullName");
@@ -51,7 +52,7 @@ public class ProfileController extends HttpServlet {
                 email = resultSet.getString("email");
             }
 
-            // Close the database connection
+            // Close connection
             resultSet.close();
             statement.close();
             conn.close();
