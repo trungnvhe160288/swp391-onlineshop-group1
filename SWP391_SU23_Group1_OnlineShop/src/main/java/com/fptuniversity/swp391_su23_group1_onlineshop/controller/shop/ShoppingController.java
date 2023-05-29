@@ -4,6 +4,7 @@
  */
 package com.fptuniversity.swp391_su23_group1_onlineshop.controller.shop;
 
+import com.fptuniversity.swp391_su23_group1_onlineshop.dao.ColorDao;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -38,6 +39,7 @@ public class ShoppingController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String url = SUCCESS_JSP;
+
         try {
             String id = request.getParameter("id");
             if (id != null) {
@@ -51,20 +53,35 @@ public class ShoppingController extends HttpServlet {
                 String parCategoryId = request.getParameter("categoryId");
                 String parColorId = request.getParameter("colorId");
                 String parRating = request.getParameter("rating");
-
+                String parPage = request.getParameter("page");
+                String parSort = request.getParameter("sort");
+                if (parPage == null || parPage.isEmpty()) {
+                    parPage = "1";
+                }
                 String productName = (parProductName != null && !parProductName.isEmpty()) ? parProductName : null;
                 Float minPrice = (parMinPricePrice != null && !parMinPricePrice.isEmpty()) ? Float.parseFloat(parMinPricePrice) : null;
                 Float maxPrice = (parMaxPricePrice != null && !parMaxPricePrice.isEmpty()) ? Float.parseFloat(parMaxPricePrice) : null;
                 Integer categoryId = (parCategoryId != null && !parCategoryId.isEmpty()) ? Integer.parseInt(parCategoryId) : null;
                 Integer colorId = (parColorId != null && !parColorId.isEmpty()) ? Integer.parseInt(parColorId) : null;
                 Float rating = (parRating != null && !parRating.isEmpty()) ? Float.parseFloat(parRating) : null;
-
-                ArrayList<Product> listProducts = ProductDao.filterProducts(productName, minPrice, maxPrice, categoryId, colorId, rating);
+                String orderBy = null;
+                String orderType = null;
+                if (parSort != null && !parSort.isEmpty() && !"none".equals(parSort)) {
+                    String[] parSortSlip = parSort.split("~");
+                    orderBy = parSortSlip[0];
+                    orderType = parSortSlip[1];
+                }
+                int page = Integer.parseInt(parPage);
+                int size = 6;
+                ArrayList<Product> listProducts = ProductDao.filterProducts(productName, minPrice, maxPrice, categoryId, colorId, rating, page, size, orderBy, orderType);
+                int count = ProductDao.countFilterProducts(productName, minPrice, maxPrice, categoryId, colorId, rating);
+                int totalPage = (int) Math.ceil((double) count / (double) size);
                 request.setAttribute("listProducts", listProducts);
+                request.setAttribute("colors", ColorDao.getAll());
+                request.setAttribute("totalPage", totalPage);
+                request.setAttribute("count", count);
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (NumberFormatException e) {
         } finally {
             RequestDispatcher dispatcher = request.getRequestDispatcher(url);
             dispatcher.forward(request, response);
