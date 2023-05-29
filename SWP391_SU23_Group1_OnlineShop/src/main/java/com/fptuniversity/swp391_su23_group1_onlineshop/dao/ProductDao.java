@@ -5,6 +5,7 @@
  */
 package com.fptuniversity.swp391_su23_group1_onlineshop.dao;
 
+import com.fptuniversity.swp391_su23_group1_onlineshop.model.Color;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.fptuniversity.swp391_su23_group1_onlineshop.model.Product;
+import com.fptuniversity.swp391_su23_group1_onlineshop.model.Size;
 import com.fptuniversity.swp391_su23_group1_onlineshop.util.ConnectionDB;
 
 public class ProductDao {
@@ -58,13 +60,84 @@ public class ProductDao {
         return productList;
     }
 
-    public static ArrayList<Product> filterProducts(String productName, Float minPrice, Float maxPrice, Integer categoryId, Integer colorId, Float rating) {
+    public static ArrayList<Product> filterProducts(String productName, Float minPrice, Float maxPrice, Integer categoryId, Integer colorId, Float rating, int page, int size, String orderBy, String orderType) {
         ArrayList<Product> filteredList = new ArrayList<>();
-
+        int offset = size * (page - 1);
         try ( Connection cn = ConnectionDB.makeConnection()) {
             if (cn != null) {
                 StringBuilder sqlQuery = new StringBuilder("SELECT DISTINCT p.id, p.name, p.thumbnail_url, p.description, p.price, p.percent_discount, p.quantity, ")
-                        .append(" p.category_id, p.total_rating, p.created_at, p.deleted_at FROM products p ");
+                        .append(" p.category_id, p.total_rating, p.created_at, p.deleted_at, COUNT(od.id) AS order_count FROM products p ");
+
+                if (colorId != null) {
+                    sqlQuery.append(" JOIN product_color pc ON p.id = pc.product_id ");
+                }
+                sqlQuery.append(" LEFT JOIN order_detail od ON p.id = od.product_id ");
+                sqlQuery.append(" WHERE 1=1");
+                // Add filters based on input parameters
+                if (productName != null && !productName.isEmpty()) {
+                    sqlQuery.append(" AND p.name LIKE '%").append(productName).append("%'");
+                }
+                if (minPrice != null) {
+                    sqlQuery.append(" AND p.price >= ").append(minPrice);
+                }
+                if (maxPrice != null) {
+                    sqlQuery.append(" AND p.price <= ").append(maxPrice);
+                }
+                if (categoryId != null) {
+                    sqlQuery.append(" AND p.category_id = ").append(categoryId);
+                }
+                if (colorId != null) {
+                    sqlQuery.append(" AND pc.color_id = ").append(colorId);
+                }
+                if (rating != null) {
+                    sqlQuery.append(" AND pc.total_rating = ").append(rating);
+                }
+                sqlQuery.append(" GROUP BY p.id, p.name, p.thumbnail_url, p.description, p.price, p.percent_discount, p.quantity, p.category_id, p.total_rating, p.created_at, p.deleted_at");
+                sqlQuery.append(" ORDER BY ");
+                if (orderBy != null && !orderBy.isEmpty()) {
+                    sqlQuery.append(orderBy).append(" ").append(orderType).append(" , ");
+                }
+                sqlQuery.append(" id ASC");
+                sqlQuery.append(" OFFSET ");
+                sqlQuery.append(offset).append(" ROWS \nFETCH NEXT ").append(size).append(" ROWS ONLY");
+                try ( Statement st = cn.createStatement();  ResultSet rs = st.executeQuery(sqlQuery.toString())) {
+                    while (rs.next()) {
+                        // Retrieve product details from result set and create Product objects
+                        int id = rs.getInt("id");
+                        String name = rs.getString("name");
+                        String thumbnailUrl = rs.getString("thumbnail_url");
+                        String description = rs.getString("description");
+                        float price = rs.getFloat("price");
+                        float percentDiscount = rs.getFloat("percent_discount");
+                        int quantity = rs.getInt("quantity");
+
+                        int fetchedCategoryId = rs.getInt("category_id");
+                        float totalRating = rs.getFloat("total_rating");
+                        Date createdAt = rs.getDate("created_at");
+                        Date deletedAt = rs.getDate("deleted_at");
+                        int orderCount = rs.getInt("order_count");
+                        Product product = new Product(id, name, thumbnailUrl, description, price, percentDiscount,
+                                quantity, fetchedCategoryId, totalRating, createdAt, deletedAt);;
+                        product.setOrderCount(orderCount);
+                        filteredList.add(product);
+
+                    }
+                }
+            }
+
+            cn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return filteredList;
+    }
+
+    public static int countFilterProducts(String productName, Float minPrice, Float maxPrice, Integer categoryId, Integer colorId, Float rating) {
+
+        try ( Connection cn = ConnectionDB.makeConnection()) {
+            if (cn != null) {
+                StringBuilder sqlQuery = new StringBuilder("SELECT DISTINCT p.id FROM products p ");
 
                 if (colorId != null) {
                     sqlQuery.append("JOIN product_color pc ON p.id = pc.product_id ");
@@ -89,26 +162,13 @@ public class ProductDao {
                 if (rating != null) {
                     sqlQuery.append(" AND pc.total_rating = ").append(rating);
                 }
-                try ( Statement st = cn.createStatement();  ResultSet rs = st.executeQuery(sqlQuery.toString())) {
+                String query = "SELECT COUNT(*) as count FROM (" + sqlQuery.toString() + ") AS subquery;";
+                try ( Statement st = cn.createStatement();  ResultSet rs = st.executeQuery(query)) {
                     while (rs.next()) {
-                        // Retrieve product details from result set and create Product objects
-                        int id = rs.getInt("id");
-                        String name = rs.getString("name");
-                        String thumbnailUrl = rs.getString("thumbnail_url");
-                        String description = rs.getString("description");
-                        float price = rs.getFloat("price");
-                        float percentDiscount = rs.getFloat("percent_discount");
-                        int quantity = rs.getInt("quantity");
-
-                        int fetchedCategoryId = rs.getInt("category_id");
-                        float totalRating = rs.getFloat("total_rating");
-                        Date createdAt = rs.getDate("created_at");
-                        Date deletedAt = rs.getDate("deleted_at");
-
-                        Product product = new Product(id, name, thumbnailUrl, description, price, percentDiscount,
-                                quantity, fetchedCategoryId, totalRating, createdAt, deletedAt);
-                        filteredList.add(product);
+                        int count = rs.getInt("count");
+                        return count;
                     }
+
                 }
             }
 
@@ -117,7 +177,7 @@ public class ProductDao {
             Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return filteredList;
+        return 0;
     }
 
     public static Product getProductById(int id) {
@@ -139,15 +199,20 @@ public class ProductDao {
                             Date createdAt = rs.getDate("created_at");
                             Date deletedAt = rs.getDate("deleted_at");
 
-                            return new Product(id, name, thumbnailUrl, description, price, percentDiscount,
+                            Product product = new Product(id, name, thumbnailUrl, description, price, percentDiscount,
                                     quantity, categoryId, totalRating, createdAt, deletedAt);
+                            ArrayList<Color> colors = ProductColorDao.getAllProductColorByProductId(id);
+                            product.setColors(colors);
+                            ArrayList<Size> sizes = ProductSizeDao.getAllProductSizeByProductId(id);
+                            product.setSizes(sizes);
+                            return product;
 
                         }
                     }
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PostDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;
@@ -233,5 +298,84 @@ public class ProductDao {
         }
 
         return false;
+    }
+
+    public static Product getNewProduct() {
+        Product product = null;
+        try ( Connection cn = ConnectionDB.makeConnection()) {
+            if (cn != null) {
+                String sqlQuery = "SELECT id, name, thumbnail_url, description, price, percent_discount, quantity, category_id, total_rating, created_at, deleted_at\n"
+                        + "FROM products\n"
+                        + "ORDER BY created_at DESC\n"
+                        + "OFFSET 0 ROWS\n"
+                        + "FETCH NEXT 1 ROWS ONLY;";
+
+                try ( PreparedStatement ps = cn.prepareStatement(sqlQuery)) {
+                    try ( ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            int id = rs.getInt("id");
+                            String name = rs.getString("name");
+                            String thumbnailUrl = rs.getString("thumbnail_url");
+                            String description = rs.getString("description");
+                            float price = rs.getFloat("price");
+                            float percentDiscount = rs.getFloat("percent_discount");
+                            int quantity = rs.getInt("quantity");
+                            int categoryId = rs.getInt("category_id");
+                            float totalRating = rs.getFloat("total_rating");
+                            Date createdAt = rs.getDate("created_at");
+                            Date deletedAt = rs.getDate("deleted_at");
+                            return new Product(id, name, thumbnailUrl, description, price, percentDiscount,
+                                    quantity, categoryId, totalRating, createdAt, deletedAt);
+
+                        }
+                    }
+                }
+            }
+
+            cn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return product;
+    }
+
+    public static ArrayList<Product> getBestSaler(int top) {
+        ArrayList<Product> list = new ArrayList<>();
+        try ( Connection cn = ConnectionDB.makeConnection()) {
+            if (cn != null) {
+                String sqlQuery = "SELECT DISTINCT p.id, p.name, p.thumbnail_url, p.description, p.price, p.percent_discount, p.quantity,  p.category_id, p.total_rating, p.created_at, p.deleted_at, COUNT(od.id) AS order_count \n"
+                        + "FROM products p  LEFT JOIN order_detail od ON p.id = od.product_id  \n"
+                        + "GROUP BY p.id, p.name, p.thumbnail_url, p.description, p.price, p.percent_discount, p.quantity, p.category_id, p.total_rating, p.created_at, p.deleted_at \n"
+                        + "ORDER BY COUNT(od.id) DESC \n"
+                        + "OFFSET 0 ROWS \n"
+                        + "FETCH NEXT " + top + " ROWS ONLY";
+
+                try ( Statement st = cn.createStatement();  ResultSet rs = st.executeQuery(sqlQuery)) {
+                    while (rs.next()) {
+                        int id = rs.getInt("id");
+                        String name = rs.getString("name");
+                        String thumbnailUrl = rs.getString("thumbnail_url");
+                        String description = rs.getString("description");
+                        float price = rs.getFloat("price");
+                        float percentDiscount = rs.getFloat("percent_discount");
+                        int quantity = rs.getInt("quantity");
+                        int categoryId = rs.getInt("category_id");
+                        float totalRating = rs.getFloat("total_rating");
+                        Date createdAt = rs.getDate("created_at");
+                        Date deletedAt = rs.getDate("deleted_at");
+
+                        Product product = new Product(id, name, thumbnailUrl, description, price, percentDiscount,
+                                quantity, categoryId, totalRating, createdAt, deletedAt);
+                        list.add(product);
+                    }
+
+                }
+            }
+
+            cn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 }
