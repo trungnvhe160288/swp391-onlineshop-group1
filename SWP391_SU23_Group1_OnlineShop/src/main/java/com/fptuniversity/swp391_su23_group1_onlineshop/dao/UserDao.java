@@ -52,6 +52,43 @@ public class UserDao {
         return user;
     }
 
+    public static User getInfoUserById(int userId) {
+        User user = null;
+
+        try ( Connection cn = ConnectionDB.makeConnection()) {
+
+            if (cn != null) {
+                String sqlQuery = "SELECT id, email,avatar,password,fullname,username,phone,user_role,address,created_at,deleted_at \n"
+                        + "FROM users \n"
+                        + "WHERE id = ?";
+                PreparedStatement pst = cn.prepareStatement(sqlQuery);
+                pst.setInt(1, userId);
+                ResultSet rs = pst.executeQuery();
+                // step 3 :
+                if (!rs.next()) {
+                    return null;
+                } else {
+                    int id = rs.getInt("id");
+                    String email = rs.getString("email");
+                    String password = rs.getString("password");
+                    String avatar = rs.getString("avatar");
+                    String fullname = rs.getString("fullname");
+                    String phone = rs.getString("phone");
+                    String username = rs.getString("username");
+                    String address = rs.getString("address");
+                    String userRole = rs.getString("user_role");
+                    Date createdAt = rs.getDate("created_at");
+                    Date deletedAt = rs.getDate("deleted_at");
+                    user = new User(id, avatar, email, password, fullname, username, address, phone, userRole, createdAt, deletedAt);
+                }
+            }
+            cn.close();
+        } catch (Exception ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
+    }
+
     public static User getInfoUserByUsername(String usernameCheck) {
         User user = null;
 
@@ -243,10 +280,40 @@ public class UserDao {
                     ps.setString(5, user.getUsername());
                     ps.setString(6, user.getAddress());
                     ps.setString(7, user.getPhone());
-                    ps.setString(8, user.getPhone());
+                    ps.setString(8, user.getUserRole());
                     ps.setDate(9, user.getCreatedAt());
                     ps.setDate(10, user.getDeletedAt());
                     ps.setInt(11, user.getId());
+                    rowsAffected = ps.executeUpdate();
+                }
+                cn.close();
+
+                return rowsAffected > 0;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+
+    public static boolean updateInfoUser(User user) {
+        try ( Connection cn = ConnectionDB.makeConnection()) {
+            if (cn != null) {
+                String sqlQuery = "UPDATE users SET email=?, fullname=?,  "
+                        + "address=?, phone=? WHERE id=?";
+                int rowsAffected;
+                try ( PreparedStatement ps = cn.prepareStatement(sqlQuery)) {
+                    System.out.println("fullname " + user.getFullname());
+                    System.out.println("email " + user.getEmail());
+                    System.out.println("address " + user.getAddress());
+                    System.out.println("phone " + user.getPhone());
+                    System.out.println("id " + user.getId());
+                    ps.setString(1, user.getEmail());
+                    ps.setString(2, user.getFullname());
+                    ps.setString(3, user.getAddress());
+                    ps.setString(4, user.getPhone());
+                    ps.setInt(5, user.getId());
                     rowsAffected = ps.executeUpdate();
                 }
                 cn.close();
