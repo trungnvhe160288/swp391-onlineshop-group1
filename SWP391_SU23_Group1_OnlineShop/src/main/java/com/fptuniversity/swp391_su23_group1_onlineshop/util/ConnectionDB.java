@@ -15,14 +15,13 @@ import com.fptuniversity.swp391_su23_group1_onlineshop.config.Config;
  */
 public class ConnectionDB {
 
-    public static Connection makeConnection() throws SQLException{
+    public static Connection makeConnection() throws SQLException {
         Connection conn = null;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            conn = DriverManager.getConnection("jdbc:sqlserver://" + Config.SERVER + ":" + Config.PORT_NUMBER 
-                    + ";databaseName=" + Config.DB_NAME,
-                    Config.DB_USERNAME, Config.DB_PASSWORD);
-            System.out.println("Connect databse successfully");
+            String url = "jdbc:sqlserver://" + Config.SERVER + ":" + Config.PORT_NUMBER
+                    + "; databaseName=" + Config.DB_NAME;
+            conn = DriverManager.getConnection(url, Config.DB_USERNAME, Config.DB_PASSWORD);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
