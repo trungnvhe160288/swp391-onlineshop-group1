@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author dotra
+ * @author lenovo
  */
 @WebServlet(name = "UpdateProfileController", urlPatterns = {"/updateProfile"})
 public class UpdateProfileController extends HttpServlet {

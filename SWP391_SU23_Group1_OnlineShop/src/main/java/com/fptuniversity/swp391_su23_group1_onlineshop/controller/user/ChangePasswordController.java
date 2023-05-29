@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author dotra
+ * @author lenovo
  */
 @WebServlet(name = "ChangePasswordController", urlPatterns = {"/changePassword"})
 public class ChangePasswordController extends HttpServlet {
