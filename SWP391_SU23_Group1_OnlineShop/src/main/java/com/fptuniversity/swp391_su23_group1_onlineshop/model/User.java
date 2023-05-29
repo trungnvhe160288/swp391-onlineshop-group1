@@ -4,7 +4,7 @@
  */
 package com.fptuniversity.swp391_su23_group1_onlineshop.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -20,8 +20,8 @@ public class User {
     private String address;
     private String phone;
     private String userRole;
-    private java.sql.Date createdAt;
-    private java.sql.Date deletedAt;
+    private Date createdAt;
+    private Date deletedAt;
 
     public User() {
     }
