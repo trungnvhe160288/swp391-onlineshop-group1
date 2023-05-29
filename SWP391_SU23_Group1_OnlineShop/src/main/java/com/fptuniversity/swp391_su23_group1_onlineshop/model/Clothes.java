@@ -55,11 +55,9 @@ public class Clothes {
         this.size = size;
     }
 
-    // Other methods
-    public void displayInfo() {
-        System.out.println("Name: " + name);
-        System.out.println("Brand: " + brand);
-        System.out.println("Price: " + price);
-        System.out.println("Size: " + size);
+    @Override
+    public String toString() {
+        return "Clothes{" + "name=" + name + ", brand=" + brand + ", price=" + price + ", size=" + size + '}';
     }
+
 }
