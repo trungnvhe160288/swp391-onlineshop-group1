@@ -4,6 +4,10 @@
  */
 package com.fptuniversity.swp391_su23_group1_onlineshop.controller.home;
 
+import com.fptuniversity.swp391_su23_group1_onlineshop.dao.PostDao;
+import com.fptuniversity.swp391_su23_group1_onlineshop.dao.ProductDao;
+import com.fptuniversity.swp391_su23_group1_onlineshop.model.Post;
+import com.fptuniversity.swp391_su23_group1_onlineshop.model.Product;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -11,13 +15,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import java.util.ArrayList;
 
 /**
  *
  * @author dotra
  */
-@WebServlet(name = "HomeController", urlPatterns = {"/home"})
+@WebServlet(name = "HomeController", urlPatterns = {"", "/home"})
 public class HomeController extends HttpServlet {
 
     /**
@@ -32,6 +36,12 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        Product newProduct = ProductDao.getNewProduct();
+        ArrayList<Product> featuredProducts = ProductDao.getBestSaler(3);
+        ArrayList<Post> lastestPosts = PostDao.getAllPosts(1, 2, "created_at", "DESC");
+        request.setAttribute("newProduct", newProduct);
+        request.setAttribute("featuredProducts", featuredProducts);
+        request.setAttribute("lastestPosts", lastestPosts);
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);
     }
