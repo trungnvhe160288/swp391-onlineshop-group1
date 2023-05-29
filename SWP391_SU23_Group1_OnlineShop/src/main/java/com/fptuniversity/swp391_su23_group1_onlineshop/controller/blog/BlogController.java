@@ -17,7 +17,7 @@ import jakarta.servlet.annotation.WebServlet;
 
 /**
  *
- * @author dotra
+ * @author PhucLH
  */
 @WebServlet(name = "BlogController", value = "/blog")
 public class BlogController extends HttpServlet {

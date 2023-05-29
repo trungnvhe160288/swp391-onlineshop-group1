@@ -8,7 +8,7 @@ import java.sql.Date;
 
 /**
  *
- * @author phuc
+ * @author PhucLH
  */
 public class Post {
 
