@@ -4,7 +4,6 @@
  */
 package com.fptuniversity.swp391_su23_group1_onlineshop.controller.blog;
 
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -13,11 +12,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import com.fptuniversity.swp391_su23_group1_onlineshop.model.Post;
 import com.fptuniversity.swp391_su23_group1_onlineshop.dao.PostDao;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.annotation.WebServlet;
 
 /**
  *
- * @author PhucLH
+ * @author PbucLH
  */
 @WebServlet(name = "BlogController", value = "/blog")
 public class BlogController extends HttpServlet {
@@ -41,15 +41,34 @@ public class BlogController extends HttpServlet {
         try {
 
             String id = request.getParameter("id");
+
             if (id != null) {
+                int idPost = Integer.parseInt(id);
                 Post post = PostDao.getPostById(Integer.parseInt(id));
                 url = BLOG_DETAIL_JSP;
                 request.setAttribute("post", post);
             } else {
-                ArrayList<Post> listPosts = PostDao.getAllPosts();
+
+                String parSort = request.getParameter("sort");
+                String parPage = request.getParameter("page");
+                if (parPage == null || parPage.isEmpty()) {
+                    parPage = "1";
+                }
+                String orderBy = null;
+                String orderType = null;
+                if (parSort != null && !parSort.isEmpty() && !"none".equals(parSort)) {
+                    String[] parSortSlip = parSort.split("~");
+                    orderBy = parSortSlip[0];
+                    orderType = parSortSlip[1];
+                }
+                int page = Integer.parseInt(parPage);
+                int size = 3;
+                ArrayList<Post> listPosts = PostDao.getAllPosts(page, size, orderBy, orderType);
+                int count = PostDao.countAllPosts();
+                int totalPage = (int) Math.ceil((double) count / (double) size);
+                request.setAttribute("totalPage", totalPage);
                 request.setAttribute("listPosts", listPosts);
             }
-
         } catch (Exception e) {
         } finally {
             RequestDispatcher dispatcher = request.getRequestDispatcher(url);
