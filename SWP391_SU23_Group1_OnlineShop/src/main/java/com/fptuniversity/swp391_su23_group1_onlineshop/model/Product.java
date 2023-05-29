@@ -5,6 +5,7 @@
 package com.fptuniversity.swp391_su23_group1_onlineshop.model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,6 +24,9 @@ public class Product {
     private float totalRating;
     private Date createdAt;
     private Date deletedAt;
+    private ArrayList<Color> colors;
+    private ArrayList<Size> sizes;
+    private int orderCount;
 
     public Product() {
     }
@@ -127,6 +131,30 @@ public class Product {
 
     public void setDeletedAt(Date deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    public ArrayList<Color> getColors() {
+        return colors;
+    }
+
+    public void setColors(ArrayList<Color> colors) {
+        this.colors = colors;
+    }
+
+    public ArrayList<Size> getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(ArrayList<Size> sizes) {
+        this.sizes = sizes;
+    }
+
+    public int getOrderCount() {
+        return orderCount;
+    }
+
+    public void setOrderCount(int orderCount) {
+        this.orderCount = orderCount;
     }
 
 }
