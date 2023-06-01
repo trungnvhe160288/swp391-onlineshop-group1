@@ -16,7 +16,7 @@
     </head>
     <body>
         <jsp:include page="components/header.jsp" />
-        <div class="py-8 my-3 w-full text-black text-center font-semibold text-2xl" style="background-color: #a8a8a8">TIN TỨC THỜI TRANG</div>
+        <div class="py-8 my-3 w-full text-black text-center font-semibold text-2xl" style="background-color: #a8a8a8">FASHION NEWS</div>
         <div class="container mx-auto">
             <div class="sorting-bar">
                 <label for="sort-select">Sort By:</label>
