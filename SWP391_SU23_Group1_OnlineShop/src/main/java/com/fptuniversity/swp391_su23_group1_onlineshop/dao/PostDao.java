@@ -18,7 +18,7 @@ import com.fptuniversity.swp391_su23_group1_onlineshop.util.ConnectionDB;
 
 /**
  *
- * @author PhucLH
+ * @author dotra
  */
 public class PostDao {
 

@@ -6,7 +6,6 @@ package com.fptuniversity.swp391_su23_group1_onlineshop.controller.user;
 
 import com.fptuniversity.swp391_su23_group1_onlineshop.dao.UserDao;
 import com.fptuniversity.swp391_su23_group1_onlineshop.model.User;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author dotra
+ * @author Lenovo
  */
 @WebServlet(name = "ChangePasswordController", urlPatterns = {"/changePassword"})
 public class ChangePasswordController extends HttpServlet {

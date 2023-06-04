@@ -30,7 +30,6 @@
             if (parCategoryId != null && parCategoryId.isEmpty()) {
                 parCategoryId = null;
             }
-            System.out.println("parCategoryId " + parCategoryId == "1");
             String parColorId = request.getParameter("colorId");
             if (parColorId != null && parColorId.isEmpty()) {
                 parColorId = null;
@@ -40,7 +39,6 @@
                 parRating = null;
             }
 
-            int isSelected;
         %>
         <jsp:include page="components/header.jsp" />
         <div class="py-8 my-3 w-full text-black text-center font-semibold text-2xl" style="background-color: #a8a8a8">SHOPPING PAGE</div>
