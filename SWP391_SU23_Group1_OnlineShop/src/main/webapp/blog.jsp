@@ -5,7 +5,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Date"%>
 
-
 <!DOCTYPE html>
 <html>
     <head>
