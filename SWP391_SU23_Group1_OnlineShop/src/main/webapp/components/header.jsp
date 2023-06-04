@@ -38,12 +38,11 @@
             <div class="inline-block">
                 <form class="flex justify-center items-center" action="search" method="POST">
                     <div class="inline-block mx-4">
-                        <input type="text" placeholder="Search" name="keySearch"  id="keySearch" class="px-4 py-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-400" />
-                        <button type="submit" class="bg-gray-500 text-white px-4 py-2 rounded-r-lg">Search</button>
+                        <input type="text" placeholder="Search" name="keySearch" id="keySearch" class="px-2 py-1 rounded-l-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-400" />
+                        <button type="submit" class="bg-gray-500 text-white px-2 py-1 rounded-r-lg">Search</button>
                     </div>
                 </form>
             </div>
-
 
             <%
                 if (account != null) {
