@@ -75,17 +75,17 @@
                     <h1 class="m-2 text-3xl font-semibold text-center">Password</h1>
                     <div class="mb-4">
                         <label class="block text-sm font-bold mb-2" for="oldPassword">Current Password</label>
-                        <input class="border rounded px-3 py-2 w-full" type="password" id="oldPassword" name="oldPassword">
+                        <input class="border rounded px-3 py-2 w-full" required type="password" id="oldPassword" name="oldPassword">
                     </div>
 
                     <div class="mb-4">
                         <label class="block text-sm font-bold mb-2" for="newPassword">New Password</label>
-                        <input class="border rounded px-3 py-2 w-full" type="password" id="newPassword" name="newPassword">
+                        <input class="border rounded px-3 py-2 w-full" required type="password" id="newPassword" name="newPassword">
                     </div>
 
                     <div class="mb-4">
                         <label class="block text-sm font-bold mb-2" for="confirmPassword">Password again</label>
-                        <input class="border rounded px-3 py-2 w-full" type="password" id="confirmPassword" name="confirmPassword">
+                        <input class="border rounded px-3 py-2 w-full" required type="password" id="confirmPassword" name="confirmPassword">
                     </div>
                     <div  class="flex justify-end">
                         <button class="py-2 px-6 rounded mr-4 border-black border-2"  onclick="validatePassword(event,<%=userProfile.getPassword()%>)" >Save</button>
