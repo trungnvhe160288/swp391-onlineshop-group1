@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Blog detail</title>
         <link rel="stylesheet" href="styles/tailwindcss/tailwind-all.min.css">
-    </head>
+    </head>head
     <body>
         <jsp:include page="components/header.jsp" />
         <%
@@ -24,7 +24,7 @@
                 <div><input  style="border: 1px; border-color: black;background-color: #d9d9d9" class="mr-2 px-2 py-1"  placeholder="Họ tên"/> </div>
                 <div><input style="border: 1px; border-color: black;background-color: #d9d9d9" class="mr-2 px-2 py-1"  placeholder="Email"/> </div>
             </div>
-            <div class="mb-2"><input style="border: 1px ; border-color: black; width: 300px; height: 200px;background-color: #d9d9d9" placeholder="Nội dung"/> </div>
+            <div class="mb-2"><input style="border: 1px ; border-color: black; width: 500px; height: 200px;background-color: #d9d9d9" placeholder="Nội dung"/> </div>
             <button type="submit" class=" hover:bg-blue-600 text-white py-2 px-4 rounded-md mt-4" style="background-color:  #fcaf17">Gởi bình luận</button>
         </div>
         <jsp:include page="components/footer.jsp" />
