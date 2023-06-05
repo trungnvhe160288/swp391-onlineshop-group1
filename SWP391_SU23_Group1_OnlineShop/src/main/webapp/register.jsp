@@ -27,12 +27,16 @@
         </script>
     </head>
     <body>
-        <jsp:include page="components/header.jsp" />
+        <div class="bg-black text-white font-bold text-lg text-center mb-2">
+            <div>Free shipping on Orders Over $50</div>
+        </div>
+        <div class="flex flex-1 justify-between mx-8">
+            <div>
+                <a class="font-extrabold text-2xl" href="home">Mon'sa</a>
+            </div>
+        </div>
 
-
-
-
-        <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="min-h-screen flex justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div class="max-w-md w-full space-y-8">
                 <div>
                     <h2 class="mt-6 text-center text-2xl font-semibold text-gray-800">
@@ -97,6 +101,14 @@
                             </span>
                             Register
                         </button>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <p class="text-sm font-medium text-gray-700">
+                            Already have an account?
+                            <a href="login" class="text-indigo-600 hover:text-indigo-500">
+                                Login here
+                            </a>
+                        </p>
                     </div>
                 </form>
             </div>
