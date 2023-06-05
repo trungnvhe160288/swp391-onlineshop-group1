@@ -63,7 +63,6 @@
                             for (int i = 1; i <= totalPage; i++) {
                         %>
                         <button class="px-4 py-2  m-2" style="background:#FF7315; border-radius:8px" onclick="appendParameter('page',<%=i%>)" class="bg-red-200 p-2 m-2"><%=i%></button>
-
                         <%
                             }
                         %>
