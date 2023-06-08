@@ -30,6 +30,7 @@
             if (parCategoryId != null && parCategoryId.isEmpty()) {
                 parCategoryId = null;
             }
+            System.out.println("parCategoryId " + parCategoryId == "1");
             String parColorId = request.getParameter("colorId");
             if (parColorId != null && parColorId.isEmpty()) {
                 parColorId = null;
@@ -39,6 +40,7 @@
                 parRating = null;
             }
 
+            int isSelected;
         %>
         <jsp:include page="components/header.jsp" />
         <div class="py-8 my-3 w-full text-black text-center font-semibold text-2xl" style="background-color: #a8a8a8">SHOPPING PAGE</div>
@@ -111,7 +113,7 @@
                             <option value="created_at~ASC">Sort by Oldest Date</option>
                             <option value="name~ASC">Sort by A-Z</option>
                             <option value="name~DESC">Sort by Z-A</option>
-                            <option value="none">Sort by Rating</option>
+                            <option value="total_rating~DESC">Sort by Rating</option>
                             <option value="price~ASC">Sort by Price: Low to High</option>
                             <option value="price~DESC">Sort by Price: High to Low</option>
                         </select>
