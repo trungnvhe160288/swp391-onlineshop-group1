@@ -1,3 +1,6 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="com.fptuniversity.swp391_su23_group1_onlineshop.model.Feedback"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.fptuniversity.swp391_su23_group1_onlineshop.model.Product"%>
 <%
@@ -39,8 +42,22 @@
             <div class="flex flex-col w-1/2">
                 <h1 class=" text-3xl font-bold mb-6 text-black font-semibold"><%=productName%></h1>
                 <div class="flex gap-4">
-                    <span><h3 class="text-gray-700 mb-6 font-semibold text-xl" style="color: #FF7315">$<%= productPrice%></h3></span>
+
+                    <%
+                        if (productPercentDiscount != 0) {
+
+                            float newPrice = productPrice * (1 - productPercentDiscount);
+                    %>
+                    <span><h3 class="text-gray-700 mb-6 font-semibold text-xl" style="color: #FF7315">$<%= newPrice%></h3></span>
                     <span><h3 class="text-gray-700 mb-6 font-semibold text-xl" style="color: #6B778D; text-decoration: line-through;">$<%= productPrice%></h3></span>
+                    <%
+                    } else {
+                    %>
+                    <span><h3 class="text-gray-700 mb-6 font-semibold text-xl" style="color: #FF7315">$<%= productPrice%></h3></span>
+                    <%
+                        }
+                    %>
+
                 </div>
                 <div>
                     <h2 class='font-semibold text-xl'>Description</h2>
@@ -58,6 +75,36 @@
                 </div>
             </div>
         </div>
+        <div class="m-12 px-8 py-4" style="background: #D9D9D9">
+            <div class='font-semibold text-xl '>CUSTOMER FEED BACK</div>
+            <!--            map comment here-->
+            <div class='flex flex-col justify-between my-3' >
+
+                <%
+                    ArrayList<Feedback> feedbackLists = (ArrayList<Feedback>) request.getAttribute("feedbackLists");
+                    for (int i = 0; i < feedbackLists.size(); i++) {
+                        Feedback feedback = feedbackLists.get(i);
+                %>
+                <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+                <div class="flex flex-col justify-between ">
+                    <div  class="flex flex-row ">
+                        <h2 class="font-bold text-lg flex justify-center items-center">
+                            Rating: <%= feedback.getRating()%>/5
+                        </h2>
+                        <p class="ml-10 flex justify-center items-center">
+                            <%= feedback.getContent()%>
+                        </p>
+                    </div>
+                    <p class="mt-4">
+                        By <%= feedback.getAuthorName()%> on <%= feedback.getCreatedAt()%>
+                    </p>
+                </div>
+
+                <%
+                    }
+                %>
+            </div>
+        </div>
         <div class='flex flex-col mx-auto text-center'>
             <div class="font-semibold text-3xl">
                 MAYBE YOU <span style="color:#FF7315">WILL LIKE</span>
@@ -66,54 +113,33 @@
                 Product with similarity
             </div>
             <div class="flex flex-1 justify-between mt-4 mx-6 gap-4">
-                <div>
+                <%
+                    ArrayList<Product> productSuggestions = (ArrayList<Product>) request.getAttribute("productSuggestions");
+                    for (int i = 0; i < productSuggestions.size(); i++) {
+                        Product item = productSuggestions.get(i);
+                        int itemProductId = item.getId();
+                        String itemProductThumbnailUrl = item.getThumbnailUrl();
+                        String itemProductName = item.getName();
+                        float itemProductPrice = item.getPrice();
+                %>
+                <a href="?id=<%=itemProductId%>">
                     <div>
-                        <img style="max-height: 320px; max-width: 250px" class="object-center" src="<%= productThumbnailUrl%>" alt="Post Thumbnail">
+
+                        <img style="max-height: 320px; max-width: 250px" class="object-center" src="<%= itemProductThumbnailUrl%>" alt="Post Thumbnail"/>
                     </div>
                     <div class='font-normal text-xl'>
-                        <%=productName%>
+                        <%=itemProductName%>
                     </div>
                     <div class="flex gap-4 flex-1 justify-center">
-                        <span><h3 class="text-gray-700 mb-6 font-normal text-lg" style="color: #FF7315">$<%= productPrice%></h3></span>
+                        <span><h3 class="text-gray-700 mb-6 font-normal text-lg" style="color: #FF7315">$<%= itemProductPrice%></h3></span>
                         <span><h3 class="text-gray-700 mb-6 font-normal text-lg" style="color: #6B778D; text-decoration: line-through;">$<%= productPrice%></h3></span>
                     </div>
-                </div>
-                <div>
-                    <div>
-                        <img style="max-height: 320px; max-width: 250px" class="object-center" src="<%= productThumbnailUrl%>" alt="Post Thumbnail">
-                    </div>
-                    <div class='font-normal text-xl'>
-                        <%=productName%>
-                    </div>
-                    <div class="flex gap-4 flex-1 justify-center">
-                        <span><h3 class="text-gray-700 mb-6 font-normal text-lg" style="color: #FF7315">$<%= productPrice%></h3></span>
-                        <span><h3 class="text-gray-700 mb-6 font-normal text-lg" style="color: #6B778D; text-decoration: line-through;">$<%= productPrice%></h3></span>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <img style="max-height: 320px; max-width: 250px" class="object-center" src="<%= productThumbnailUrl%>" alt="Post Thumbnail">
-                    </div>
-                    <div class='font-normal text-xl'>
-                        <%=productName%>
-                    </div>
-                    <div class="flex gap-4 flex-1 justify-center">
-                        <span><h3 class="text-gray-700 mb-6 font-normal text-lg" style="color: #FF7315">$<%= productPrice%></h3></span>
-                        <span><h3 class="text-gray-700 mb-6 font-normal text-lg" style="color: #6B778D; text-decoration: line-through;">$<%= productPrice%></h3></span>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <img style="max-height: 320px; max-width: 250px" class="object-center" src="<%= productThumbnailUrl%>" alt="Post Thumbnail">
-                    </div>
-                    <div class='font-normal text-xl'>
-                        <%=productName%>
-                    </div>
-                    <div class="flex gap-4 flex-1 justify-center">
-                        <span><h3 class="text-gray-700 mb-6 font-normal text-lg" style="color: #FF7315">$<%= productPrice%></h3></span>
-                        <span><h3 class="text-gray-700 mb-6 font-normal text-lg" style="color: #6B778D; text-decoration: line-through;">$<%= productPrice%></h3></span>
-                    </div>
-                </div>
+                </a>
+                <%
+                    }
+                %>
+
+
 
             </div>
         </div>
