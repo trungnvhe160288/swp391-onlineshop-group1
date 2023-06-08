@@ -23,7 +23,7 @@ public class UserDao {
             if (cn != null) {
                 String sqlQuery = "SELECT id, email,avatar,password,fullname,username,phone,user_role,address,created_at,deleted_at \n"
                         + "FROM users \n"
-                        + "WHERE status=1 AND email = ? COLLATE Latin1_General_CS_AS";
+                        + "WHERE deleted_at IS NULL AND email = ?";
                 PreparedStatement pst = cn.prepareStatement(sqlQuery);
                 pst.setString(1, emailCheck);
                 ResultSet rs = pst.executeQuery();
@@ -126,6 +126,7 @@ public class UserDao {
         return user;
     }
 
+ 
     public static User userLoginByUsernameAndPassowrd(String inputUsername, String inputPassword) throws SQLException {
         User user = null;
         try ( Connection cn = ConnectionDB.makeConnection()) {
@@ -296,24 +297,18 @@ public class UserDao {
 
         return false;
     }
+    
 
-    public static boolean updateInfoUser(User user) {
+
+    public static boolean updateAvatar(User user) {
         try ( Connection cn = ConnectionDB.makeConnection()) {
             if (cn != null) {
-                String sqlQuery = "UPDATE users SET email=?, fullname=?,  "
-                        + "address=?, phone=? WHERE id=?";
+                String sqlQuery = "UPDATE users SET avarta=? WHERE id=?";
                 int rowsAffected;
                 try ( PreparedStatement ps = cn.prepareStatement(sqlQuery)) {
-                    System.out.println("fullname " + user.getFullname());
-                    System.out.println("email " + user.getEmail());
-                    System.out.println("address " + user.getAddress());
-                    System.out.println("phone " + user.getPhone());
-                    System.out.println("id " + user.getId());
+
                     ps.setString(1, user.getEmail());
-                    ps.setString(2, user.getFullname());
-                    ps.setString(3, user.getAddress());
-                    ps.setString(4, user.getPhone());
-                    ps.setInt(5, user.getId());
+                    ps.setInt(2, user.getId());
                     rowsAffected = ps.executeUpdate();
                 }
                 cn.close();
