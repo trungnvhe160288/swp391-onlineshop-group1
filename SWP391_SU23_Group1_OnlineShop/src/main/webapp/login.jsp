@@ -39,7 +39,11 @@
                 </div>
                 <form class="mt-8 space-y-6" action="login" method="POST">
                     <input type="hidden" name="remember" value="true">
-
+                    <div class="container flex justify-center">
+                        <a href="google-login" class="login-button">
+                            <img src="assets/images/google-icon.png" width="50" height="50"/>
+                        </a>
+                    </div>
                     <div>
                         <label for="username" class="sr-only">Username</label>
                         <input id="username" name="username" type="username" autocomplete="username" required
