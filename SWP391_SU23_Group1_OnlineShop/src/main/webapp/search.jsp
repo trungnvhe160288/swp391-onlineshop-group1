@@ -64,7 +64,7 @@
                     int totalPageProduct = (int) request.getAttribute("totalPageProduct");
                     for (int i = 1; i <= totalPageProduct; i++) {
                 %>
-                <button onclick="appendParameter('page',<%=i%>);" class="px-4 py-2  m-2" style="background:#FF7315; border-radius:8px"><%=i%></button>
+                <button onclick="appendParameter('pageProduct',<%=i%>);" class="px-4 py-2  m-2" style="background:#FF7315; border-radius:8px"><%=i%></button>
                 <%
                     }
                 %>
@@ -77,12 +77,12 @@
                 </div>
                 <div class="sorting-bar">
                     <label for="sort-select">Sort By:</label>
-                    <select id="sort-select" onchange="appendParameter('sortProduct', this.value)">
+                    <select id="sort-select" onchange="appendParameter('sortPost', this.value)">
                         <option value="none">---</option>
                         <option value="created_at~DESC">Sort by Latest Date</option>
                         <option value="created_at~ASC">Sort by Oldest Date</option>
-                        <option value="name~ASC">Sort by A-Z</option>
-                        <option value="name~DESC">Sort by Z-A</option>
+                        <option value="title~ASC">Sort by A-Z</option>
+                        <option value="title~DESC">Sort by Z-A</option>
                     </select>
                 </div>
 
@@ -131,7 +131,7 @@
                     int totalPagePost = (int) request.getAttribute("totalPagePost");
                     for (int i = 1; i <= totalPagePost; i++) {
                 %>
-                <button onclick="appendParameter('page',<%=i%>);" class="px-4 py-2  m-2" style="background:#FF7315; border-radius:8px"><%=i%></button>
+                <button onclick="appendParameter('pagePost',<%=i%>);" class="px-4 py-2  m-2" style="background:#FF7315; border-radius:8px"><%=i%></button>
                 <%
                     }
                 %>
