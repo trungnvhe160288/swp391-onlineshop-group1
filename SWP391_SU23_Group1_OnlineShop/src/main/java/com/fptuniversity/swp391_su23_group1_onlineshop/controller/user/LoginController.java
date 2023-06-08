@@ -52,7 +52,7 @@ public class LoginController extends HttpServlet {
             }
             if (!token.equals("")) {
                 User user = UserDao.userLoginWithTokenRememberMe(token);
-                System.out.println(user);
+              
                 HttpSession session = request.getSession(true);
                 session.setAttribute(SESSION_ACCOUNT_INFOMATION, user);
                 type = SEND_REDIRECT;
@@ -71,7 +71,7 @@ public class LoginController extends HttpServlet {
                     dispatcher.forward(request, response);
                     break;
                 case SEND_REDIRECT:
-                    response.sendRedirect(SEND_REDIRECT);
+                    response.sendRedirect(HOME_PAGE);
                     break;
                 default:
                     throw new AssertionError();
