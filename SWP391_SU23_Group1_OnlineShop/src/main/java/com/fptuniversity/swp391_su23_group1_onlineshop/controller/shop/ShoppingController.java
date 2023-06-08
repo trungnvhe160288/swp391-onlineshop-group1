@@ -5,6 +5,7 @@
 package com.fptuniversity.swp391_su23_group1_onlineshop.controller.shop;
 
 import com.fptuniversity.swp391_su23_group1_onlineshop.dao.ColorDao;
+import com.fptuniversity.swp391_su23_group1_onlineshop.dao.FeedbackDao;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -13,13 +14,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import com.fptuniversity.swp391_su23_group1_onlineshop.dao.ProductDao;
+import com.fptuniversity.swp391_su23_group1_onlineshop.model.Feedback;
 import com.fptuniversity.swp391_su23_group1_onlineshop.model.Product;
 import jakarta.servlet.annotation.WebServlet;
 
-/**
- *
- * @author dotra
- */
+
 @WebServlet(name = "ShoppingController", value = "/shop")
 public class ShoppingController extends HttpServlet {
 
@@ -44,8 +43,14 @@ public class ShoppingController extends HttpServlet {
             String id = request.getParameter("id");
             if (id != null) {
                 Product product = ProductDao.getProductById(Integer.parseInt(id));
+                ArrayList<Product> productSuggestions = ProductDao.getProductSuggestions(Integer.parseInt(id));
+                ArrayList<Feedback> feedbackLists = FeedbackDao.getFeedbackByProductId(Integer.parseInt(id));
                 url = PRODUCT_DETAIL_JSP;
+
                 request.setAttribute("product", product);
+                request.setAttribute("productSuggestions", productSuggestions);
+                System.out.println("feedbackLists ==> " + feedbackLists.size());
+                request.setAttribute("feedbackLists", feedbackLists);
             } else {
                 String parProductName = request.getParameter("productName");
                 String parMinPricePrice = request.getParameter("minPrice");
