@@ -300,6 +300,43 @@ public class ProductDao {
         return false;
     }
 
+public static ArrayList<Product> getProductSuggestions(int productId) {
+        ArrayList<Product> suggestions = new ArrayList<>();
+        String query = "SELECT TOP 4 * FROM (SELECT P1.id, P1.name, P1.thumbnail_url, P1.description, P1.price, P1.percent_discount, P1.quantity, P1.category_id, P1.total_rating, P1.created_at, P1.deleted_at FROM products P1 WHERE P1.category_id = (SELECT category_id FROM products WHERE id = ?) AND P1.id <> ? AND P1.deleted_at IS NULL UNION SELECT P2.id, P2.name, P2.thumbnail_url, P2.description, P2.price, P2.percent_discount, P2.quantity, P2.category_id, P2.total_rating, P2.created_at, P2.deleted_at FROM products P2 WHERE P2.category_id <> (SELECT category_id FROM products WHERE id = ?) AND P2.id NOT IN (SELECT id FROM products WHERE category_id = (SELECT category_id FROM products WHERE id = ?)) AND P2.id <> ? AND P2.deleted_at IS NULL) AS Suggestions ORDER BY NEWID()";
+
+        try ( Connection connection = ConnectionDB.makeConnection();  PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, productId);
+            statement.setInt(2, productId);
+            statement.setInt(3, productId);
+            statement.setInt(4, productId);
+            statement.setInt(5, productId);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                // Create a Product object and populate its properties from the resultSet
+                Product product = new Product();
+                product.setId(resultSet.getInt("id"));
+                product.setName(resultSet.getString("name"));
+                product.setThumbnailUrl(resultSet.getString("thumbnail_url"));
+                product.setDescription(resultSet.getString("description"));
+                product.setPrice(resultSet.getFloat("price"));
+                product.setPercentDiscount(resultSet.getFloat("percent_discount"));
+                product.setQuantity(resultSet.getInt("quantity"));
+                product.setCategoryId(resultSet.getInt("category_id"));
+                product.setTotalRating(resultSet.getFloat("total_rating"));
+                product.setCreatedAt(resultSet.getDate("created_at"));
+                product.setDeletedAt(resultSet.getDate("deleted_at"));
+
+                suggestions.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return suggestions;
+    }
+
     public static Product getNewProduct() {
         Product product = null;
         try ( Connection cn = ConnectionDB.makeConnection()) {
