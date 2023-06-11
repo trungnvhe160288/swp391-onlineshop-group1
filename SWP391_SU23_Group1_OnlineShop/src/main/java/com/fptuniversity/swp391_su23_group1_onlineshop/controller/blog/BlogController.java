@@ -47,7 +47,7 @@ public class BlogController extends HttpServlet {
                 // Call PostDao 
                 Post post = PostDao.getPostById(Integer.parseInt(id));
                 url = BLOG_DETAIL_JSP;
-                //
+                // Set data for view 
                 request.setAttribute("post", post);
             } else {
 
