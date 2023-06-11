@@ -45,7 +45,7 @@ public class BlogController extends HttpServlet {
             if (id != null) {
                 int idPost = Integer.parseInt(id);
                 
-                // Call PostDao 
+                // Call PostDao : get list blog 
                 Post post = PostDao.getPostById(Integer.parseInt(id));
                 url = BLOG_DETAIL_JSP;
                 
@@ -68,6 +68,8 @@ public class BlogController extends HttpServlet {
                 }
                 int page = Integer.parseInt(parPage);
                 int size = 3;
+                
+                // Call PostDAO : get detail blog
                 ArrayList<Post> listPosts = PostDao.getAllPosts(page, size, orderBy, orderType);
                 int count = PostDao.countAllPosts();
                 int totalPage = (int) Math.ceil((double) count / (double) size);
