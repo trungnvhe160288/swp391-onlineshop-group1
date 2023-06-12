@@ -71,8 +71,11 @@ public class BlogController extends HttpServlet {
                 
                 // Call PostDAO : get list blog
                 ArrayList<Post> listPosts = PostDao.getAllPosts(page, size, orderBy, orderType);
+                // Call PostDAO : count post to paging
                 int count = PostDao.countAllPosts();
                 int totalPage = (int) Math.ceil((double) count / (double) size);
+                
+                
                 request.setAttribute("totalPage", totalPage);
                 request.setAttribute("listPosts", listPosts);
             }
