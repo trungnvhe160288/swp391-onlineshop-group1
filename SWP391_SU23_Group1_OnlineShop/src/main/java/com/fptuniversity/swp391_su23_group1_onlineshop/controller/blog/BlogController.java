@@ -44,11 +44,16 @@ public class BlogController extends HttpServlet {
 
             if (id != null) {
                 int idPost = Integer.parseInt(id);
+                
+                // Call PostDao : get detail blog 
                 Post post = PostDao.getPostById(Integer.parseInt(id));
                 url = BLOG_DETAIL_JSP;
+                
+                // Set data for view 
                 request.setAttribute("post", post);
             } else {
-
+                
+                // Get data from view 
                 String parSort = request.getParameter("sort");
                 String parPage = request.getParameter("page");
                 if (parPage == null || parPage.isEmpty()) {
@@ -63,9 +68,14 @@ public class BlogController extends HttpServlet {
                 }
                 int page = Integer.parseInt(parPage);
                 int size = 3;
+                
+                // Call PostDAO : get list blog
                 ArrayList<Post> listPosts = PostDao.getAllPosts(page, size, orderBy, orderType);
+                // Call PostDAO : count post to paging
                 int count = PostDao.countAllPosts();
                 int totalPage = (int) Math.ceil((double) count / (double) size);
+                
+                // Set data for view 
                 request.setAttribute("totalPage", totalPage);
                 request.setAttribute("listPosts", listPosts);
             }
