@@ -75,7 +75,7 @@ public class BlogController extends HttpServlet {
                 int count = PostDao.countAllPosts();
                 int totalPage = (int) Math.ceil((double) count / (double) size);
                 
-                
+                // Set data for view 
                 request.setAttribute("totalPage", totalPage);
                 request.setAttribute("listPosts", listPosts);
             }
