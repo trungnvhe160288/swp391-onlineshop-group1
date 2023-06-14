@@ -25,8 +25,30 @@
                 document.getElementById("registerForm").submit();
             }
         </script>
+        <style>
+            .blur-background {
+                background-image: url('assets/images/background.jpg');
+                background-size: cover;
+                background-position: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                filter: blur(8px);
+                -webkit-filter: blur(3px); /* For Safari support */
+                z-index: -1;
+            }
+
+            .content {
+                position: relative;
+                z-index: 1;
+            }
+        </style>
     </head>
     <body>
+        <div class="blur-background"></div>
+        <div class="content">
         <div class="bg-black text-white font-bold text-lg text-center mb-2">
             <div>Free shipping on Orders Over $50</div>
         </div>
