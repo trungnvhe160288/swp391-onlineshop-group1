@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.fptuniversity.swp391_su23_group1_onlineshop.model.Post"%>
 <%@page import="java.util.ArrayList"%>
