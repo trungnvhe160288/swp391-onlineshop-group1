@@ -2,6 +2,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.fptuniversity.swp391_su23_group1_onlineshop.model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<link href="bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script src="bootstrap-5.0.2-dist/js/bootstrap.min.js" type="text/javascript"></script>
 
 <!DOCTYPE html>
 <html>
@@ -10,7 +12,9 @@
         <link rel="stylesheet" href="styles/tailwindcss/tailwind-all.min.css">
         <title>Home Page</title>
     </head>
-    <body class="w-full h-screen flex flex-col  ">
+    <body >
+        <div class="container">
+        <div class="w-full h-screen flex flex-col  ">
         <jsp:include page="components/header.jsp" />
         <%
             Product newProduct = (Product) request.getAttribute("newProduct");
@@ -97,6 +101,9 @@
             </div>
         </div>
         <!-- Footer -->
+        
         <jsp:include page="components/footer.jsp" />
+        </div>
+        </div>
     </body>
 </html>
