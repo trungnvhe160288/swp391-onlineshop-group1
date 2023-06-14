@@ -22,6 +22,7 @@ import jakarta.servlet.annotation.WebServlet;
 @WebServlet(name = "BlogController", value = "/blog")
 public class BlogController extends HttpServlet {
 
+    //Path of view
     private static final String SUCCESS_JSP = "blog.jsp";
     private static final String BLOG_DETAIL_JSP = "blogDetail.jsp";
 
