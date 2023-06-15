@@ -79,7 +79,6 @@ public class googleCallbackController extends HttpServlet {
                 String email = idToken.getPayload().getEmail();
                 String fullName = (String) idToken.getPayload().get("name");
                 String profilePictureUrl = (String) idToken.getPayload().get("picture");
-
                 User checkUser = UserDao.getInfoUserByEmail(email);
 
                 if (checkUser == null) {
