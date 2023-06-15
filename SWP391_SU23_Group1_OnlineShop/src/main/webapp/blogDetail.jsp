@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.fptuniversity.swp391_su23_group1_onlineshop.model.Post"%>
+
+
 <!DOCTYPE html>
 <html>
     <head>
