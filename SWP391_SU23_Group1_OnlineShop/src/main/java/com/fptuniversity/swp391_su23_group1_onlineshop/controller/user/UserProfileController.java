@@ -30,7 +30,7 @@ public class UserProfileController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private static final String HOME_PAGE = "home";
-    private static final String PROFILE_PAGE_JSP = "userProfile.jsp";
+    private static final String PROFILE_PAGE_JSP = "userprofile.jsp";
     private static final String FORWARD = "FORWARD";
     private static final String SEND_REDIRECT = "SEND_REDIRECT";
 
