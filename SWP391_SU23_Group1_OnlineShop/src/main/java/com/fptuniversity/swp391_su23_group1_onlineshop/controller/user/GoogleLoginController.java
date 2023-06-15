@@ -53,7 +53,6 @@ public class GoogleLoginController extends HttpServlet {
 
         GoogleAuthorizationCodeRequestUrl url = flow.newAuthorizationUrl()
                 .setRedirectUri(REDIRECT_URI);
-
         response.sendRedirect(url.build());
     }
 
