@@ -52,7 +52,7 @@ public class LoginController extends HttpServlet {
             }
             if (!token.equals("")) {
                 User user = UserDao.userLoginWithTokenRememberMe(token);
-              
+
                 HttpSession session = request.getSession(true);
                 session.setAttribute(SESSION_ACCOUNT_INFOMATION, user);
                 type = SEND_REDIRECT;
