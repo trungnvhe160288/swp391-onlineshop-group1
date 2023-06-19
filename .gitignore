@@ -1,4 +1,3 @@
-/SWP391_SU23_Group1_OnlineShop/target/
 SWP391_SU23_Group1_OnlineShop/build/
 SWP391_SU23_Group1_OnlineShop/nbproject/
 ant-deploy.xml
@@ -9,7 +8,6 @@ build-impl.xml
 SWP391_SU23_Group1_OnlineShop/nbproject/private/
 private.xml
 private.properties
-build-impl.xml
 nb-configuration.xml
 SWP391_SU23_Group1_OnlineShop/dist/
 SWP391_SU23_Group1_OnlineShop/build.xml
