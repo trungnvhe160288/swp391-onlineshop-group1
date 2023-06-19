@@ -128,16 +128,16 @@
                                             </div>
                                         </div>
 
-<!--                                        <div class="card margin-15px-bottom border-radius-none">
-                                            <div class="card-header">
-                                                <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree"> PayPal </a>
-                                            </div>
-                                            <div id="collapseThree" class="collapse" data-parent="#accordion">
-                                                <div class="card-body">
-                                                    <p class="no-margin font-15">Pay via PayPal; you can pay with your credit card if you don't have a PayPal account.</p>
-                                                </div>
-                                            </div>
-                                        </div>-->
+                                        <!--                                        <div class="card margin-15px-bottom border-radius-none">
+                                                                                    <div class="card-header">
+                                                                                        <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree"> PayPal </a>
+                                                                                    </div>
+                                                                                    <div id="collapseThree" class="collapse" data-parent="#accordion">
+                                                                                        <div class="card-body">
+                                                                                            <p class="no-margin font-15">Pay via PayPal; you can pay with your credit card if you don't have a PayPal account.</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>-->
 
                                     </div>
                                 </div>
