@@ -57,7 +57,8 @@ public class ShopController extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
         }
     }
-
+    
+    
     private void getDetail(HttpServletRequest request, HttpServletResponse response) {
         ProductDAO pd = new ProductDAO();
 
