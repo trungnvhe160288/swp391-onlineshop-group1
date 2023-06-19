@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package Models;
 
 import java.sql.Date;
 import java.util.List;
 
 public class Order {
+
     private int id;
     private int uid;
     private int status;
@@ -19,7 +19,7 @@ public class Order {
     private String note;
     private Date createAt;
     private Date updateAt;
-    
+
     private List<OrderLine> orderLine;
 
     public Order() {
@@ -126,15 +126,14 @@ public class Order {
     public void setOrderLine(List<OrderLine> orderLine) {
         this.orderLine = orderLine;
     }
-    
-    public double getTotalPrice(){
+
+    public double getTotalPrice() {
         double total = 0;
         for (OrderLine item : orderLine) {
             total += item.getTotalPrice();
         }
-        
+
         return total;
     }
-    
-    
+
 }
