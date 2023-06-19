@@ -13,6 +13,7 @@
     </div>
     <!--End Page Title-->
 
+    
     <div class="container">
         <div class="row">
             <c:if test="${cart.items.isEmpty()}">
