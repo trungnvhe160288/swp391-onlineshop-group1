@@ -60,6 +60,7 @@ public class ProductDao {
         return productList;
     }
 
+    
     public static ArrayList<Product> filterProducts(String productName, Float minPrice, Float maxPrice, Integer categoryId, Integer colorId, Float rating, int page, int size, String orderBy, String orderType) {
         ArrayList<Product> filteredList = new ArrayList<>();
         int offset = size * (page - 1);
