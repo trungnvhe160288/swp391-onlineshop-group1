@@ -2,10 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/E:/Desktop/5.SU22/SWP391/Group1_Online_Shop/web/WEB-INF/views/cart/orderdetail.jsp</file>
-            <file>file:/E:/Desktop/5.SU22/SWP391/Group1_Online_Shop/src/java/Controllers/CartController.java</file>
-            <file>file:/E:/Desktop/5.SU22/SWP391/Group1_Online_Shop/src/java/DAL/CartDAO.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

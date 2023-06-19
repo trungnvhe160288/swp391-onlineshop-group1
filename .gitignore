@@ -1,11 +1,17 @@
 /SWP391_SU23_Group1_OnlineShop/target/
-/shopping-java-servlet/nbproject/private/
-SWP391_SU23_Group1_OnlineShop/.idea/.gitignore
-SWP391_SU23_Group1_OnlineShop/.idea/compiler.xml
-SWP391_SU23_Group1_OnlineShop/.idea/encodings.xml
-SWP391_SU23_Group1_OnlineShop/.idea/jarRepositories.xml
-SWP391_SU23_Group1_OnlineShop/.idea/misc.xml
-SWP391_SU23_Group1_OnlineShop/.idea/vcs.xml
-SWP391_SU23_Group1_OnlineShop/.idea/webContexts.xml
-/SWP391_SU23_Group1_OnlineShop/src/main/java/com/fptuniversity/swp391_su23_group1_onlineshop/config/Config.java
+SWP391_SU23_Group1_OnlineShop/build/
+SWP391_SU23_Group1_OnlineShop/nbproject/
+ant-deploy.xml
+project.xml
+project.properties
+genfiles.properties
+build-impl.xml
+SWP391_SU23_Group1_OnlineShop/nbproject/private/
+private.xml
+private.properties
+build-impl.xml
+nb-configuration.xml
+SWP391_SU23_Group1_OnlineShop/dist/
+SWP391_SU23_Group1_OnlineShop/build.xml
+
 
