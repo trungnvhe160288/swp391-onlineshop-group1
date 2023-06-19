@@ -126,15 +126,15 @@ public class CartDAO extends DBContext {
                 while (rs1.next()) {
                     Product product = getProductByID(rs1.getInt("product_id"));
 
-                    OrderLine ol = new OrderLine(rs1.getInt("id"), orderID, rs1.getInt("quantity"), rs1.getDouble("total_price")
-                            , rs1.getInt("colorID"), rs1.getInt("sizeID"), product);
+                    OrderLine ol = new OrderLine(rs1.getInt("id"), orderID, rs1.getInt("quantity"), rs1.getDouble("total_price"),
+                            rs1.getInt("colorID"), rs1.getInt("sizeID"), product);
 
                     orderLine.add(ol);
                 }
 
                 Order order = new Order(orderID, rs.getInt("user_id"), rs.getInt("status"), rs.getString("fullname"),
-                         rs.getString("email"), rs.getString("phone"), rs.getString("address"), rs.getString("note"),
-                         rs.getDate("created_at"), rs.getDate("update_at"), orderLine);
+                        rs.getString("email"), rs.getString("phone"), rs.getString("address"), rs.getString("note"),
+                        rs.getDate("created_at"), rs.getDate("update_at"), orderLine);
 
                 list.add(order);
 
@@ -146,7 +146,7 @@ public class CartDAO extends DBContext {
 
         return list;
     }
-    
+
     public Order getOrderByID(int id) {
 
         try {
@@ -173,7 +173,6 @@ public class CartDAO extends DBContext {
             while (rs.next()) {
                 List<OrderLine> orderLine = new ArrayList<>();
                 int orderID = rs.getInt("id");
-               
 
                 String sql1 = "SELECT [id]\n"
                         + "      ,[order_id]\n"
@@ -191,17 +190,17 @@ public class CartDAO extends DBContext {
                 ResultSet rs1 = st1.executeQuery();
 
                 while (rs1.next()) {
-                    
+
                     Product product = getProductByID(rs1.getInt("product_id"));
 
-                    OrderLine ol = new OrderLine(rs1.getInt("id"), orderID, rs1.getInt("quantity"), rs1.getDouble("total_price")
-                            , rs1.getInt("colorID"), rs1.getInt("sizeID"), product);
+                    OrderLine ol = new OrderLine(rs1.getInt("id"), orderID, rs1.getInt("quantity"), rs1.getDouble("total_price"),
+                            rs1.getInt("colorID"), rs1.getInt("sizeID"), product);
                     orderLine.add(ol);
                 }
 
                 Order order = new Order(orderID, rs.getInt("user_id"), rs.getInt("status"), rs.getString("fullname"),
-                         rs.getString("email"), rs.getString("phone"), rs.getString("address"), rs.getString("note"),
-                         rs.getDate("created_at"), rs.getDate("update_at"), orderLine);
+                        rs.getString("email"), rs.getString("phone"), rs.getString("address"), rs.getString("note"),
+                        rs.getDate("created_at"), rs.getDate("update_at"), orderLine);
 
                 return order;
 
