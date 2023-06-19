@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package Models;
 
 import java.sql.Date;
 
 public class User {
+
     private int id;
     private String email;
     private String password;
@@ -93,7 +93,6 @@ public class User {
         this.address = address;
     }
 
-    
     public int getStatus() {
         return status;
     }
@@ -125,6 +124,5 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
-    
-    
+
 }
