@@ -9,7 +9,7 @@
     <!--Page Title-->
     <div class="page section-header text-center mb-0">
         <div class="page-title">
-            <div class="wrapper"><h1 class="page-width">Blog: ${data.title}</h1></div>
+            <div class="wrapper"><h1 class="page-width">${data.title}</h1></div>
         </div>
     </div>
     <!--End Page Title-->
@@ -61,16 +61,6 @@
                                 <i class="fa fa-envelope" aria-hidden="true"></i> <span class="share-title" aria-hidden="true">Email</span>
                             </a>
                         </div>
-                        <!--                        <div class="blog-nav">
-                                                    <div class="text-left">
-                                                        <i class="icon icon-arrow-circle-left"></i>
-                                                        <a href="${pageContext.request.contextPath}/blog/detail.do?id=${data.id - 1}" title="">Previous</a>
-                                                    </div>
-                                                    <div class="text-right">
-                                                        <a href="${pageContext.request.contextPath}/blog/detail.do?id=${data.id + 1}" title="">Next</a>
-                                                        <i class="icon icon-arrow-circle-right"></i>
-                                                    </div>
-                                                </div>-->
                         <div class="blog-nav">
                             <div class="text-left" style="${data.id == 1 ? 'display: none;' : ''}">
                                 <i class="icon icon-arrow-circle-left"></i>
