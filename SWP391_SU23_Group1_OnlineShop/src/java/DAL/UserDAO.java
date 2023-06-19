@@ -248,7 +248,7 @@ public class UserDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, Common.convertPassToMD5(u.getPassword()));
             ps.setString(2, u.getEmail());
-            
+
             ps.executeUpdate();
 
         } catch (SQLException e) {
