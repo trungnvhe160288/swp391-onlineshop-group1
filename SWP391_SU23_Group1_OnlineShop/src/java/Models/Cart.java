@@ -44,7 +44,6 @@ public final class Cart {
                         items.add(newItem);
                     }
                 }
-
             }
 
         } catch (NumberFormatException e) {
