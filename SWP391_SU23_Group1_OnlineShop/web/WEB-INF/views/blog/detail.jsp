@@ -9,7 +9,7 @@
     <!--Page Title-->
     <div class="page section-header text-center mb-0">
         <div class="page-title">
-            <div class="wrapper"><h1 class="page-width">Blog: ${data.title}</h1></div>
+            <div class="wrapper"><h1 class="page-width">${data.title}</h1></div>
         </div>
     </div>
     <!--End Page Title-->
@@ -41,6 +41,9 @@
                             <p>${data.description}</p>
                         </div>
                         <hr/>
+                        <div class="rte" style="white-space: pre-wrap;">
+                            <p style="font-size: 16px; color: #333; font-weight: bold; font-style: italic;">${data.content}</p>
+                        </div>
                         <div class="social-sharing">
                             <a target="_blank" href="#" class="btn btn--small btn--secondary btn--share share-facebook" title="Share on Facebook">
                                 <i class="fa fa-facebook-square" aria-hidden="true"></i> <span class="share-title" aria-hidden="true">Share</span>
@@ -59,7 +62,7 @@
                             </a>
                         </div>
                         <div class="blog-nav">
-                            <div class="text-left">
+                            <div class="text-left" style="${data.id == 1 ? 'display: none;' : ''}">
                                 <i class="icon icon-arrow-circle-left"></i>
                                 <a href="${pageContext.request.contextPath}/blog/detail.do?id=${data.id - 1}" title="">Previous</a>
                             </div>
@@ -78,7 +81,7 @@
                 <div class="sidebar_tags">
 
                     <div class="sidebar_widget">
-                        
+
 
                         <c:set var="recent" value="${bd.getRecentBlog()}"/>
                         <div class="widget-title"><h2>Recent Posts</h2></div>

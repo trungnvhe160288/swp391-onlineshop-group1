@@ -15,6 +15,7 @@
 
     <div class="container">
 
+
         <div class="row billing-fields">
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 sm-margin-30px-bottom">
                 <div class="create-ac-content bg-light-gray padding-20px-all">
@@ -81,7 +82,8 @@
                                     <c:forEach items="${data.orderLine}" var="item">
                                         <tr>
                                             <td>
-                                                <img style="height: 3rem; width: 3rem" src="${pageContext.request.contextPath}/${item.product.thumbnail_url}" alt="alt"/>
+                                                <img style="height: 3rem; width: 3rem" src="${pageContext.request.contextPath}${item.product.thumbnail_url}" 
+                                                     alt="alt"/>
                                             </td>
                                             <td class="text-left">${item.product.name}</td>
                                             <td>${common.getPriceFormat(item.product.lastPrice)}</td>

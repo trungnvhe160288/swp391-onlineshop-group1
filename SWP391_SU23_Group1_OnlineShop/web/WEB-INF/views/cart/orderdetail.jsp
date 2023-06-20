@@ -82,7 +82,8 @@
                                     <c:forEach items="${data.orderLine}" var="item">
                                         <tr>
                                             <td>
-                                                <img style="height: 3rem; width: 3rem" src="${pageContext.request.contextPath}/${item.product.thumbnail_url}" alt="alt"/>
+                                                <img style="height: 3rem; width: 3rem" src="${pageContext.request.contextPath}${item.product.thumbnail_url}" 
+                                                     alt="alt"/>
                                             </td>
                                             <td class="text-left">${item.product.name}</td>
                                             <td>${common.getPriceFormat(item.product.lastPrice)}</td>
