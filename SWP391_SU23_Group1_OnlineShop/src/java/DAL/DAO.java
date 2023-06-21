@@ -7,7 +7,6 @@ package DAL;
 import Models.Color;
 import Models.Size;
 import Ultils.DBContext;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,6 +43,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
+
     //getAllSize
     public List<Size> getAllSize() {
         List<Size> list = new ArrayList<>();
