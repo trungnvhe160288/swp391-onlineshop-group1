@@ -16,7 +16,6 @@ import Models.Size;
 import Models.User;
 import Ultils.Common;
 import Ultils.DBContext;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -214,6 +213,7 @@ public class CartDAO extends DBContext {
 
         return null;
     }
+
     //getProductByID
     private Product getProductByID(int id) {
 

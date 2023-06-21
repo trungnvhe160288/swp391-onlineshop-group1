@@ -140,7 +140,6 @@
                 </div>
                 <c:if test="${data.isEmpty()}" >
                     <h2 class="text-warning text-center mt-5">Not Found '${blog_search}'</h2>
-
                 </c:if>
 
                 <c:if test="${!data.isEmpty()}" >
@@ -169,7 +168,6 @@
                             </div>
                         </c:forEach>
                     </div>
-
                     <div class="pagination d-flex justify-content-end" >
                         <ul class="" style="margin: unset">
                             <c:if test="${page > 1}">
