@@ -83,7 +83,7 @@ public class UserDAO extends DBContext {
             System.out.println(e);
         }
     }
-
+    //checkEmailExits
     public boolean checkEmailExits(String email) {
         System.out.println(email);
         try {

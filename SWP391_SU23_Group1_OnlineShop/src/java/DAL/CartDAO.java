@@ -25,6 +25,7 @@ import java.util.List;
 
 public class CartDAO extends DBContext {
 
+    //createOrder
     public void createOrder(Cart cart, User user, String fullName, String email, String phone, String address, String note) {
         try {
 
