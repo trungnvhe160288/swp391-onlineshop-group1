@@ -81,8 +81,6 @@
                 <div class="sidebar_tags">
 
                     <div class="sidebar_widget">
-
-
                         <c:set var="recent" value="${bd.getRecentBlog()}"/>
                         <div class="widget-title"><h2>Recent Posts</h2></div>
                         <div class="widget-content">
