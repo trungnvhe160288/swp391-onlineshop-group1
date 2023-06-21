@@ -44,7 +44,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
-
+    //getAllSize
     public List<Size> getAllSize() {
         List<Size> list = new ArrayList<>();
 
