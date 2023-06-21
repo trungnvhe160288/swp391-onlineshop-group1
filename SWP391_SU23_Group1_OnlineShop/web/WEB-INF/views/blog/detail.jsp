@@ -79,7 +79,6 @@
             <!--Sidebar-->
             <div class="col-12 col-sm-12 col-md-3 col-lg-3 sidebar">
                 <div class="sidebar_tags">
-
                     <div class="sidebar_widget">
                         <c:set var="recent" value="${bd.getRecentBlog()}"/>
                         <div class="widget-title"><h2>Recent Posts</h2></div>
