@@ -15,6 +15,7 @@ public class OrderLine {
     }
 
     
+    
     public OrderLine(int id, int oid, int quantity, double totalPrice, int colorID, int sizeID, Product product) {
         this.id = id;
         this.oid = oid;
