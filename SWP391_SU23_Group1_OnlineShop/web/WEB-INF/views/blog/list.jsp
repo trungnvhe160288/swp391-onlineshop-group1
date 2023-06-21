@@ -168,7 +168,6 @@
                             </div>
                         </c:forEach>
                     </div>
-
                     <div class="pagination d-flex justify-content-end" >
                         <ul class="" style="margin: unset">
                             <c:if test="${page > 1}">
