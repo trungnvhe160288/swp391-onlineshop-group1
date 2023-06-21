@@ -103,7 +103,7 @@ public class CartController extends HttpServlet {
             request.setAttribute("data", data);
         }
     }
-
+    // getOrderDetail
     private void getOrderDetail(HttpServletRequest request, HttpServletResponse response) {
         CartDAO cd = new CartDAO();
 
