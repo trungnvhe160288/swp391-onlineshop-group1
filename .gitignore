@@ -1,14 +1,16 @@
 SWP391_SU23_Group1_OnlineShop/build/
-SWP391_SU23_Group1_OnlineShop/nbproject/
-ant-deploy.xml
-project.xml
-project.properties
-genfiles.properties
-build-impl.xml
-SWP391_SU23_Group1_OnlineShop/nbproject/private/
-private.xml
-private.properties
-nb-configuration.xml
+SWP391_SU23_Group1_OnlineShop/nbproject/*
+
+###ant-deploy.xml
+###project.xml
+###project.properties
+###genfiles.properties
+###build-impl.xml
+###SWP391_SU23_Group1_OnlineShop/nbproject/private/
+###private.xml
+###private.properties
+###nb-configuration.xml
+
 SWP391_SU23_Group1_OnlineShop/dist/
 SWP391_SU23_Group1_OnlineShop/build.xml
 
