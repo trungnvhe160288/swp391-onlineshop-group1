@@ -40,4 +40,32 @@ public class SupportMessage {
 
     }
 
+    public static void sendToastToDashboard(HttpSession session, int type, String title, String message) {
+        String toast__type = "";
+        String toast__title = title;
+
+        switch (type) {
+            case 0:
+                toast__type = "error";
+
+                break;
+            case 1:
+                toast__type = "success";
+                break;
+            case 2:
+                toast__type = "warning";
+                break;
+            case 3:
+                toast__type = "info";
+                break;
+            default:
+                break;
+        }
+
+        session.setAttribute("dashboard_toast_title", toast__title);
+        session.setAttribute("dashboard_toast__message", message);
+        session.setAttribute("toast__type", toast__type);
+
+    }
+
 }
