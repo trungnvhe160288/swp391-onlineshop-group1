@@ -163,7 +163,10 @@
                     <div class="grid-products grid--view-items">
                         <div class="row ${data.isEmpty() ? 'justify-content-center': ''} ">
                             <c:if test="${data.isEmpty()}">
-                                <h2 >Not Found Any Data...</h2>
+                                <div style="text-align: center;">
+                                    <img src="https://cdn.dribbble.com/users/1058271/screenshots/3308780/media/178f7adc82972a23bd05f460662d533c.png" alt="No Products" style="width: 500px; height: 500px;">
+                                    <h2>We apologize, but the product you are looking for could not be found.</h2>
+                                </div>
                             </c:if>
                             <c:if test="${!data.isEmpty()}">
                                 <c:forEach  items="${data}" var="item">

@@ -90,35 +90,43 @@
                                     </div>
                                 </div>
                                 <p class="product-single__price product-single__price-product-template">
-
                                     <span class="product-price__price product-price__price-product-template">
-                                        <span id="ProductPrice-product-template">Unit Price: <span class="money">${data.priceFormat}</span></span>
+                                        <span id="ProductPrice-product-template">Unit Price: 
+                                            <span class="money">${data.priceFormat}</span>
+                                        </span>
                                     </span>
                                 </p>
 
-                                <form method="" action="" id="product_form_10508262282" accept-charset="UTF-8" class="product-form product-form-product-template hidedropdown" enctype="multipart/form-data">
+                                <form action="${pageContext.request.contextPath}/shop/detail.do" method="post"  id="product_form_10508262282"  class="product-form product-form-product-template hidedropdown">
                                     <input type="hidden" name="id" value="${data.id}">
                                     <div class="swatch clearfix swatch-0 option1" data-option-index="0">
                                         <div class="product-form__item">
                                             <label class="header">Color:</label>
-                                            <c:forEach items="${data.color}" var="item">
-                                                <div data-value="${item.name}" class="swatch-element color black available">
-                                                    <input class="swatchInput" id="color${item.id}" type="radio" name="color" value="${item.name}">
-                                                    <label class="swatchLbl color rectangle large" for="color${item.id}" style="background-color: ${item.bgr_hex};" title="${item.name}"></label>
-                                                </div>
-                                            </c:forEach>
+                                            <c:set var="color" value="${data.color}"/>
+                                            <c:if test="${!color.isEmpty()}">
+                                                <c:forEach begin="${0}" end="${color.size() - 1}" var="i">
+                                                    <div data-value="${color.get(i).name}" class="swatch-element color black available">
+                                                        <input class="swatchInput" ${i == 0 ? 'checked' : ''} id="color${color.get(i).id}" type="radio" name="color" value="${color.get(i).id}">
+                                                        <label class="swatchLbl color rectangle large" for="color${color.get(i).id}" style="background-color: ${color.get(i).bgr_hex};" title="${color.get(i).name}"></label>
+                                                    </div>
+                                                </c:forEach>
+                                            </c:if>
                                         </div>
                                     </div>
                                     <div class="swatch clearfix swatch-1 option2" data-option-index="1">
                                         <div class="product-form__item">
 
                                             <label class="header">Size: </label>
-                                            <c:forEach items="${data.size}" var="item">
-                                                <div data-value="${item.name}" class="swatch-element xs available">
-                                                    <input class="swatchInput" id="size${item.id}" type="radio" name="size" value="${item.name}">
-                                                    <label class="swatchLbl  rectangle" for="size${item.id}" title="${item.name}">${item.name}</label>
-                                                </div>
-                                            </c:forEach>
+                                            <c:set var="size" value="${data.size}"/>
+                                            <c:if test="${!size.isEmpty()}">
+                                                <c:forEach begin="${0}" end="${size.size() - 1}" var="i">
+                                                    <div data-value="${size.get(i).name}" class="swatch-element xs available">
+                                                        <input class="swatchInput" ${i == 0 ? 'checked' : ''} id="size${size.get(i).id}" type="radio" name="size" value="${size.get(i).id}">
+                                                        <label class="swatchLbl  rectangle" for="size${size.get(i).id}" title="${size.get(i).name}">${size.get(i).name}</label>
+                                                    </div>
+                                                </c:forEach>
+                                            </c:if>
+
                                         </div>
                                     </div>
                                     <p class="infolinks">
@@ -417,12 +425,12 @@
                                         <div class="grid__item">
                                             <div class="mini-list-item">
                                                 <div class="mini-view_image">
-                                                    <a class="grid-view-item__link" href="#">
+                                                    <a class="grid-view-item__link" href="${pageContext.request.contextPath}/shop/detail.do?id=${item.id}">
                                                         <img class="grid-view-item__image" src="${pageContext.request.contextPath}/${item.thumbnail_url}" alt="">
                                                     </a>
                                                 </div>
                                                 <div class="details">
-                                                    <a class="grid-view-item__title" href="#">${item.name}</a>
+                                                    <a class="grid-view-item__title" href="${pageContext.request.contextPath}/shop/detail.do?id=${item.id}">${item.name}</a>
                                                     <div class="grid-view-item__meta"><span class="product-price__price"><span class="money">${common.getPriceFormat(data.lastPrice)}</span></span></div>
                                                     <div class="product-review">
                                                         <i class="font-13 fa fa-star"></i>

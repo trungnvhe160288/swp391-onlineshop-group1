@@ -2,7 +2,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean class="Ultils.CommonForJSP" id="common"/>
 <jsp:useBean class="DAL.BlogDAO" id="bd"/>
-
+<jsp:useBean class="DAL.UserDAO" id="ud"/>
+<jsp:useBean class="DAL.ProductDAO" id="pd"/>
 
 
 <div id="page-content">
@@ -62,63 +63,31 @@
                     </div>
                     <div class="sidebar_widget">
                         <div class="widget-title">
-                            <h2>Trending Now</h2>
+                            <h2>Popular Products</h2>
                         </div>
                         <div class="widget-content">
                             <div class="list list-sidebar-products">
                                 <div class="grid">
-                                    <div class="grid__item">
-                                        <div class="mini-list-item">
-                                            <div class="mini-view_image">
-                                                <a class="grid-view-item__link" href="#">
-                                                    <img class="grid-view-item__image blur-up lazyload"
-                                                         data-src="${pageContext.request.contextPath}/assets/images/product-images/mini-product-img.jpg"
-                                                         src="${pageContext.request.contextPath}/assets/images/product-images/mini-product-img.jpg" alt="" />
-                                                </a>
-                                            </div>
-                                            <div class="details"> <a class="grid-view-item__title" href="#">Cena Skirt</a>
-                                                <div class="grid-view-item__meta"><span class="product-price__price"><span
-                                                            class="money">$173.60</span></span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="grid__item">
-                                        <div class="mini-list-item">
-                                            <div class="mini-view_image"> <a class="grid-view-item__link" href="#"><img
-                                                        class="grid-view-item__image blur-up lazyload"
-                                                        data-src="${pageContext.request.contextPath}/assets/images/product-images/mini-product-img1.jpg"
-                                                        src="${pageContext.request.contextPath}/assets/images/product-images/mini-product-img1.jpg" alt="" /></a> </div>
-                                            <div class="details"> <a class="grid-view-item__title" href="#">Block Button Up</a>
-                                                <div class="grid-view-item__meta"><span class="product-price__price"><span
-                                                            class="money">$378.00</span></span></div>
+                                    <c:set var="popular" value="${pd.getProductPopularTopX(5)}"/>
+                                    <c:forEach items="${popular}" var="item">
+                                        <div class="grid__item">
+                                            <div class="mini-list-item">
+                                                <div class="mini-view_image">
+                                                    <a class="grid-view-item__link" href="${pageContext.request.contextPath}/shop/detail.do?id=${item.id}">
+                                                        <img class="grid-view-item__image blur-up lazyload"
+                                                             data-src="${pageContext.request.contextPath}${item.thumbnail_url}"
+                                                             src="${pageContext.request.contextPath}${item.thumbnail_url}" alt="" />
+                                                    </a>
+                                                </div>
+                                                <div class="details">
+                                                    <a class="grid-view-item__title" href="${pageContext.request.contextPath}/shop/detail.do?id=${item.id}">${item.name}</a>
+                                                    <div class="grid-view-item__meta"><span class="product-price__price">
+                                                            <span class="money">${item.lastPrice} $</span></span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="grid__item">
-                                        <div class="mini-list-item">
-                                            <div class="mini-view_image"> <a class="grid-view-item__link" href="#"><img
-                                                        class="grid-view-item__image blur-up lazyload"
-                                                        data-src="${pageContext.request.contextPath}/assets/images/product-images/mini-product-img2.jpg"
-                                                        src="${pageContext.request.contextPath}/assets/images/product-images/mini-product-img2.jpg" alt="" /></a> </div>
-                                            <div class="details"> <a class="grid-view-item__title" href="#">Balda Button Pant</a>
-                                                <div class="grid-view-item__meta"><span class="product-price__price"><span
-                                                            class="money">$278.60</span></span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="grid__item">
-                                        <div class="mini-list-item">
-                                            <div class="mini-view_image"> <a class="grid-view-item__link" href="#"><img
-                                                        class="grid-view-item__image blur-up lazyload"
-                                                        data-src="${pageContext.request.contextPath}/assets/images/product-images/mini-product-img3.jpg"
-                                                        src="${pageContext.request.contextPath}/assets/images/product-images/mini-product-img3.jpg" alt="" /></a> </div>
-                                            <div class="details"> <a class="grid-view-item__title" href="#">Border Dress in
-                                                    Black/Silver</a>
-                                                <div class="grid-view-item__meta"><span class="product-price__price"><span
-                                                            class="money">$228.00</span></span></div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
@@ -154,7 +123,7 @@
                                     <a href="${pageContext.request.contextPath}/blog/detail.do?id=${item.id}">${item.title}</a>
                                 </h2>
                                 <ul class="publish-detail">
-                                    <li><i class="anm anm-user-al" aria-hidden="true"></i> User</li>
+                                    <li><i class="anm anm-user-al" aria-hidden="true"></i> ${ud.getUserByID(item.user_id).fullName}</li>
                                     <li><i class="icon anm anm-clock-r"></i> <time datetime="2017-05-02">${common.getDateFormat(item.createAt, "dd-MM-yyyy")}</time></li>
                                 </ul>
                                 <div class="rte hidden-content">
