@@ -8,6 +8,8 @@ import Ultils.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO extends DBContext {
 
@@ -123,6 +125,26 @@ public class UserDAO extends DBContext {
         }
 
         return false;
+    }
+
+    public void updateStatus(int id, int status) {
+        try {
+
+            String sql = "UPDATE [dbo].[Users]\n"
+                    + "   SET [status] = ?, [update_at] = ? \n"
+                    + " WHERE [id] = ?";
+
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, status);
+            st.setDate(2, Common.getCurrentDate());
+            st.setInt(3, id);
+
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
     }
 
     public boolean saveOTP(String code, String type, String email) {
@@ -254,6 +276,98 @@ public class UserDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+
+    public List<User> getAllUser() {
+
+        try {
+            List<User> list = new ArrayList<>();
+
+            String sql = "SELECT u.[id]\n"
+                    + "      ,[email]\n"
+                    + "      ,[password]\n"
+                    + "      ,[fullname]\n"
+                    + "      ,[avatar]\n"
+                    + "      ,[phone]\n"
+                    + "      ,[address]\n"
+                    + "      ,[status]\n"
+                    + "      ,[created_at]\n"
+                    + "      ,[update_at]\n"
+                    + "      ,[rid]\n"
+                    + "	     ,r.[name]\n"
+                    + "      ,r.[createAt] as 'roleCA'\n"
+                    + "      ,r.[updateAt] as 'roleUA'\n"
+                    + "      ,r.[isActive]\n"
+                    + "  FROM [dbo].[users] u inner join [dbo].[role] r\n"
+                    + "  ON u.rid = r.id";
+
+            PreparedStatement st = connection.prepareStatement(sql);
+
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+
+                Role role = new Role(rs.getInt("rid"), rs.getString("name"), rs.getDate("roleCA"), rs.getDate("roleUA"),
+                        rs.getBoolean("isActive"));
+
+                User user = new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"), rs.getString("fullname"),
+                        rs.getString("avatar"), rs.getString("phone"), rs.getString("address"), rs.getInt("status"),
+                        rs.getDate("created_at"), rs.getDate("update_at"), role);
+
+                list.add(user);
+            }
+
+            return list;
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public User getUserByID(int id) {
+        try {
+
+            String sql = "SELECT u.[id]\n"
+                    + "      ,[email]\n"
+                    + "      ,[password]\n"
+                    + "      ,[fullname]\n"
+                    + "      ,[avatar]\n"
+                    + "      ,[phone]\n"
+                    + "      ,[address]\n"
+                    + "      ,[status]\n"
+                    + "      ,[created_at]\n"
+                    + "      ,[update_at]\n"
+                    + "      ,[rid]\n"
+                    + "	     ,r.[name]\n"
+                    + "      ,r.[createAt] as 'roleCA'\n"
+                    + "      ,r.[updateAt] as 'roleUA'\n"
+                    + "      ,r.[isActive]\n"
+                    + "  FROM [dbo].[users] u inner join [dbo].[role] r\n"
+                    + "  ON u.rid = r.id\n"
+                    + "  WHERE u.id = ?";
+
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+
+                Role role = new Role(rs.getInt("rid"), rs.getString("name"), rs.getDate("roleCA"), rs.getDate("roleUA"),
+                        rs.getBoolean("isActive"));
+
+                User user = new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"), rs.getString("fullname"),
+                        rs.getString("avatar"), rs.getString("phone"), rs.getString("address"), rs.getInt("status"),
+                        rs.getDate("created_at"), rs.getDate("update_at"), role);
+
+                return user;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
     }
 
 }
