@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SliderDAO extends DBContext {
-
+    //getAllSlider
     public List<Slider> getAll() {
         List<Slider> list = new ArrayList<>();
 

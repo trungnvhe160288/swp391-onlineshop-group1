@@ -108,7 +108,7 @@ public class BlogDAO extends DBContext {
 
         return result;
     }
-
+    //getBlogByID
     public Blog getBlogByID(int id) {
 
         try {

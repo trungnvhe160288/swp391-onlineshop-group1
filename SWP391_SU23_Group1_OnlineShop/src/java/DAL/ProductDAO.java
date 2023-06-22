@@ -13,8 +13,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDAO extends DBContext {
 
+public class ProductDAO extends DBContext {
+    //getAll
     public List<Product> getAll() {
         List<Product> list = new ArrayList<>();
 
@@ -345,7 +346,7 @@ public class ProductDAO extends DBContext {
         }
         return 0;
     }
-
+    
     public List<Product> getProductByPrice(int min, int max) {
         List<Product> list = new ArrayList<>();
 

@@ -22,11 +22,8 @@ public final class Cart {
 
                 for (String itemLine : itemLines) {
                     String[] itemDetails = itemLine.split("_");
-
                     int id = Integer.parseInt(itemDetails[0]);
-
                     String[] last = itemDetails[1].split("/");
-
                     int quantity = Integer.parseInt(last[0]);
 
                     String[] end = last[1].split(":");

@@ -5,7 +5,6 @@ import Models.Role;
 import Models.User;
 import Ultils.Common;
 import Ultils.DBContext;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -83,6 +82,7 @@ public class UserDAO extends DBContext {
             System.out.println(e);
         }
     }
+
     //checkEmailExits
     public boolean checkEmailExits(String email) {
         System.out.println(email);
