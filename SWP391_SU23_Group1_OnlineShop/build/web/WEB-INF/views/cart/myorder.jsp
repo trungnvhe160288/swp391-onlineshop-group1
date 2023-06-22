@@ -15,9 +15,13 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
                 <form action="#">
                     <c:if test="${data.isEmpty()}">
-                        <h1 class="text-center">You No Have Any Order Before !</h1>
+                        <div class="text-center">
+                            <img src="https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-4816550-4004141.png" alt="Empty Order List" style="width: 350px; height: 300px;">
+                            <h1>You don't have any orders yet!</h1>
+                            <a href="${pageContext.request.contextPath}/shop/list.do" class="btn" style="margin-top: 20px;">Explore Our Product Here</a>
+                        </div>
                     </c:if>
-                        <!-- comment -->
+
                     <c:if test="${!data.isEmpty()}">
                         <div class="wishlist-table table-content table-responsive">
                             <table class="table table-bordered">
@@ -40,15 +44,13 @@
                                             <td class="product-price text-center"><span class="amount">${common.getDateFormat(item.createAt, 'dd-MM-yyyy')}</span></td>
 
                                             <td class="stock text-center">
-                                                <span class="in-stock">${item.status == 1 ? 'Paid' : 'Pending'}</span>
+                                                <span class="text-${item.status == 1 ? 'success' : item.status == -1 ? 'danger' : 'warning'}">${item.status == 1 ? 'Paid' : item.status == -1 ? 'Cancel' : 'Pending'}</span>
                                             </td>
                                             <td class="product-subtotal text-center">
                                                 <a href="${pageContext.request.contextPath}/cart/orderdetail.do?id=${item.id}" class="btn btn-small text-white">Order Infomation</a>
                                             </td>
                                         </tr>
                                     </c:forEach>
-
-
                                 </tbody>
                             </table>
                         </div>

@@ -15,7 +15,7 @@
 
     <div class="container">
 
-        <!-- comment -->
+
         <div class="row billing-fields">
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 sm-margin-30px-bottom">
                 <div class="create-ac-content bg-light-gray padding-20px-all">
@@ -82,8 +82,7 @@
                                     <c:forEach items="${data.orderLine}" var="item">
                                         <tr>
                                             <td>
-                                                <img style="height: 3rem; width: 3rem" src="${pageContext.request.contextPath}${item.product.thumbnail_url}" 
-                                                     alt="alt"/>
+                                                <img style="height: 3rem; width: 3rem" src="${pageContext.request.contextPath}/${item.product.thumbnail_url}" alt="alt"/>
                                             </td>
                                             <td class="text-left">${item.product.name}</td>
                                             <td>${common.getPriceFormat(item.product.lastPrice)}</td>
@@ -106,7 +105,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="6" class="text-right">Status</td>
-                                        <td class="text-${item.status == 1 ? 'success' : 'warning'}">${item.status == 1 ? 'Paid' : 'Pending'}</td>
+                                        <td class="text-${data.status == 1 ? 'success' : data.status == -1 ? 'danger' : 'warning'}">${data.status == 1 ? 'Paid' : data.status == -1 ? 'Cancel' : 'Pending'}</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -115,6 +114,46 @@
 
                     <hr />
 
+                    <div class="your-payment">
+                        <h2 class="payment-title mb-3">More Action</h2>
+                        <div class="payment-method">
+                            <div class="payment-accordion">
+                                <div id="accordion" class="payment-section">
+                                    <c:if test="${data.status != 1 && data.status != -1}">
+                                        <div class="card mb-2">
+                                            <div class="card-header">
+                                                <a class="card-link" data-toggle="collapse" href="#collapseOne">Cancel The Order</a>
+                                            </div>
+                                            <form action="${pageContext.request.contextPath}/cart/orderdetail.do" method="POST">
+                                                <div id="collapseOne" class="collapse" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        <p class="no-margin font-15 d-flex justify-content-between">
+                                                            <span style="font-size: 12px; font-weight: bold; color: red;">Are You Sure That You Want To Cancel This Order?</span>
+
+                                                            <input type="hidden" name="action" value="cancel">
+                                                            <input type="hidden" name="id" value="${data.id}">
+                                                            <button class="btn btn-danger bg-danger " onclick="this.form.submit()">Cancel</button>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </c:if>
+                                    <div class="card mb-2">
+                                        <div class="card-header">
+                                            <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">Number Phone Support</a>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <p class="no-margin font-15"><strong>Site Support</strong> <a style="font-family: Arial, sans-serif; color: #333; text-decoration: none; border-bottom: 1px dashed #333;" href="tel:+84987654321">+84 987654321</a></p>
+                                                <p class="no-margin font-15"><strong>Sale Support</strong> <a style="font-family: Arial, sans-serif; color: #333; text-decoration: none; border-bottom: 1px dashed #333;" href="tel:+84123456789">+84 123456789</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
