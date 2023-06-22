@@ -1,6 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:useBean class="Ultils.CommonForJSP" id="common"/>
+<jsp:useBean class="DAL.DAO" id="dao"/>
+
+
 
 <div id="page-content">
     <!--Page Title-->
@@ -16,18 +19,21 @@
     <div class="container">
         <div class="row">
             <c:if test="${cart.items.isEmpty()}">
-                <div class="col-12">
-                    <h2 class="text-center">You Don't Have Any Product In Cart</h2>
-
+                <div class="col-12 text-center">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <img src="https://images.genial.ly/5aaa5a140c5abf545bfee334/18f0dd37-25c7-4fb9-9929-e3e42112ddc7.png" alt="Empty Cart List" style="width: 350px; height: 300px; margin: auto;">
+                        <h2 style="margin-top: 20px;">You don't have any products in your cart yet!</h2>
+                        <a href="${pageContext.request.contextPath}/shop/list.do" class="btn" style="margin-top: 20px;">Go to Shopping Site</a>
+                    </div>
                 </div>
             </c:if>
             <c:if test="${!cart.items.isEmpty()}">
-                <div class="col-12 col-sm-12 col-md-8 col-lg-8 main-col">
+                <div class="col-12 col-sm-12 col-md-9 col-lg-9 main-col">
                     <div  class="cart style2">
                         <table>
                             <thead class="cart__row cart__header">
                                 <tr>
-                                    <th colspan="2" class="text-center">Product</th>
+                                    <th colspan="3" class="text-center">Product</th>
                                     <th class="">Price</th>
                                     <th class="">Color</th>
                                     <th class="">Size</th>
@@ -38,6 +44,9 @@
                             </thead>
                             <tbody>
                                 <c:forEach items="${cart.items}" var="item">
+                                    <c:set var="itemColor" value="${dao.getColorById(item.colorID)}"/>
+                                    <c:set var="itemSize" value="${dao.getSizeByID(item.sizeID)}"/>
+
                                     <tr class="cart__row border-bottom line1 cart-flex border-top">
                                         <td class="cart__image-wrapper cart-flex-item">
                                             <a href="${pageContext.request.contextPath}/shop/detail.do?id=${item.product.id}">
@@ -48,11 +57,12 @@
                                                 <a href="${pageContext.request.contextPath}/shop/detail.do?id=${item.product.id}">${item.product.name}</a>
                                             </div>
                                         </td>
+                                        <td></td>
                                         <td class="cart__price-wrapper cart-flex-item">
                                             <span class="money">${item.product.lastPriceFormat}</span>
                                         </td>
-                                        <td class="cart__price-wrapper cart-flex-item">
-                                            <span class="money">${item.colorID}</span>
+                                        <td class="cart__price-wrapper cart-flex-item" >
+                                            <span class="money"  style="background-color: ${itemColor.bgr_hex}; border: 1px solid #000; padding: 5px 10px"></span>
                                         </td>
                                         <td class="cart__price-wrapper cart-flex-item">
                                             <span class="money">${item.sizeID}</span>
@@ -108,7 +118,7 @@
                         <hr>
                     </div>
                 </div>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4 cart__footer">
+                <div class="col-12 col-sm-12 col-md-3 col-lg-3 cart__footer">
 
                     <div class="solid-border">
                         <div class="row">
