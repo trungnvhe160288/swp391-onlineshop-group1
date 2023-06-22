@@ -12,6 +12,7 @@ import Models.Item;
 import Models.Order;
 import Models.Product;
 import Models.User;
+import Ultils.SupportMessage;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -78,16 +79,30 @@ public class CartController extends HttpServlet {
                 checkout(request, response);
                 response.sendRedirect(request.getContextPath() + "/cart/checkout.do");
                 break;
-//            case "addtocart":
-//                addToCart(request, response);
-//                response.sendRedirect(request.getContextPath() + "/cart/detail.do");
-//                break;
+            case "orderdetail":
+                String id_raw = request.getParameter("id");
+                int id = Common.parseInt(id_raw);
+                cancel(request, response, id);
+                response.sendRedirect(request.getContextPath() + "/cart/orderdetail.do?id=" + id);
+                break;
             default:
                 //Show error page
                 request.setAttribute("controller", "error");
                 request.setAttribute("action", "error");
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+        }
+    }
 
+    private void cancel(HttpServletRequest request, HttpServletResponse response, int id) {
+        String action = request.getParameter("action");
+
+        if (action.equalsIgnoreCase("cancel")) {
+            CartDAO dao = new CartDAO();
+
+            dao.updateStatus(id, -1);
+
+            HttpSession session = request.getSession();
+            SupportMessage.sendToast(session, 1, "Cancel Success !");
         }
     }
 
@@ -114,10 +129,10 @@ public class CartController extends HttpServlet {
         if (u != null) {
             String id_raw = request.getParameter("id");
             int id = Common.parseInt(id_raw);
-            Order order = cd.getOrderByID(id);            
+
+            Order order = cd.getOrderByID(id);
+
             request.setAttribute("data", order);
-            
-           
         }
     }
 
@@ -156,6 +171,8 @@ public class CartController extends HttpServlet {
             c.setPath(request.getContextPath());
             c.setMaxAge(0);
             response.addCookie(c);
+
+            SupportMessage.sendToast(session, 1, "Checkout Success !");
         }
 
     }
@@ -220,6 +237,9 @@ public class CartController extends HttpServlet {
         c.setPath(request.getContextPath());
         c.setMaxAge(2 * 24 * 60 * 60);
         response.addCookie(c);
+        HttpSession session = request.getSession();
+
+        SupportMessage.sendToast(session, 1, "Update Cart Success !");
     }
 
     /**

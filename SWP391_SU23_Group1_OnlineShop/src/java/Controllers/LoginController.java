@@ -132,21 +132,18 @@ public class LoginController extends HttpServlet {
                     SupportMessage.sendToast(session, 1, "Login Successfull !");
                     response.sendRedirect(request.getContextPath() + "/index.do");
                     break;
-                case 0:
+                case -1:
                     SupportMessage.sendToast(session, 0, "Your Account Has Blocked !");
                     request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
-
                     break;
-                case -1:
+                case 0:
                     SupportMessage.sendToast(session, 2, "Your Account Has Not Yet Verified Email !");
                     request.setAttribute("message", "<h3 >You Must Verify Email To Use Account ! <a href=\"https://mail.google.com/mail/u/0/#inbox\" target=\"_blank\" class=\"text-info\">Click Here To Verify Email !</a></h3>");
                     request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                     break;
-
                 default:
                     break;
             }
-
         } else {
             SupportMessage.sendToast(session, 2, "UserName or Password Incorrect !");
             request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);

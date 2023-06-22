@@ -7,6 +7,7 @@ import DAL.ProductDAO;
 import Models.Cart;
 import Models.Category;
 import Models.Color;
+import Models.Item;
 import Models.Product;
 import Models.Size;
 import Ultils.SupportConvert;
@@ -90,10 +91,15 @@ public class ShopController extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 break;
             case "detail":
-                request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+                String id_raw = request.getParameter("id");
+                int id = Common.parseInt(id_raw);
+                System.out.println(id);
+                addToCart(request, response, session);
+                response.sendRedirect(request.getContextPath() + "/shop/detail.do?id=" + id);
                 break;
             case "addtocart":
                 addToCart(request, response, session);
+                response.sendRedirect(request.getContextPath() + "/shop/list.do");
                 break;
             default:
                 //Show error page
@@ -205,18 +211,18 @@ public class ShopController extends HttpServlet {
         }
         return data;
     }
-    
-    private List<Product> search(HttpServletRequest request, HttpServletResponse response){
+
+    private List<Product> search(HttpServletRequest request, HttpServletResponse response) {
         ProductDAO pd = new ProductDAO();
-        
+
         String search = request.getParameter("search");
-        
-        if(search == null || search.isEmpty()){
+
+        if (search == null || search.isEmpty()) {
             return pd.getAll();
-        }else {
+        } else {
             return pd.getProductByKey(search);
         }
-        
+
     }
 
     private void pagination(HttpServletRequest request, HttpServletResponse response) {
@@ -372,7 +378,7 @@ public class ShopController extends HttpServlet {
         String id_raw = request.getParameter("id");
         String quantity_raw = request.getParameter("quantity");
         String color_raw = request.getParameter("color");
-        String size_raw = request.getParameter("color");
+        String size_raw = request.getParameter("size");
 
         int id = Common.parseInt(id_raw);
         int quantity = Common.parseInt(quantity_raw);
@@ -383,18 +389,13 @@ public class ShopController extends HttpServlet {
         Product pcheckQuan = pd.getProductByID(id);
 
         if (txt.isEmpty()) {
-            if (quantity < pcheckQuan.getQuantity()) {
-                txt = id + "_" + quantity + "/" + color + ":" + size;
-            }
+            txt = id + "_" + quantity + "/" + color + ":" + size;
 
         } else if (cartCheck.getItemByProductID(id) == null) {
-            if (quantity < pcheckQuan.getQuantity()) {
-                txt += "-" + id + "_" + quantity + "/" + color + ":" + size;
-            }
-
+            txt += "-" + id + "_" + quantity + "/" + color + ":" + size;
         } else if ((cartCheck.getQuantityByProductID(id) + quantity) >= pcheckQuan.getQuantity()) {
 
-        } else {
+        }  else {
             txt += "-" + id + "_" + quantity + "/" + color + ":" + size;
         }
 
@@ -410,7 +411,6 @@ public class ShopController extends HttpServlet {
         request.setAttribute("cart", cart);
         SupportMessage.sendToast(session, 1, "Add To Cart Successful !");
 
-        response.sendRedirect(request.getContextPath() + "/shop/list.do");
     }
 
     /**

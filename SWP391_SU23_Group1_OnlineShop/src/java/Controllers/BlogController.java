@@ -7,7 +7,6 @@ package Controllers;
 import DAL.BlogDAO;
 import Ultils.Common;
 import Models.Blog;
-
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -47,7 +46,7 @@ public class BlogController extends HttpServlet {
                 String id_raw = request.getParameter("id");
                 int id = Common.parseInt(id_raw);
 
-                Blog b = bd.getBlogByID(id);
+                Blog b = bd.getBlogByIDAndPublished(id);
                 request.setAttribute("data", b);
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 break;
@@ -122,7 +121,7 @@ public class BlogController extends HttpServlet {
                 String id_raw = request.getParameter("id");
                 int id = Common.parseInt(id_raw);
 
-                Blog b = bd.getBlogByID(id);
+                Blog b = bd.getBlogByIDAndPublished(id);
                 request.setAttribute("data", b);
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 break;
