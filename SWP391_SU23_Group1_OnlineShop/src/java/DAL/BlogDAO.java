@@ -51,6 +51,40 @@ public class BlogDAO extends DBContext {
         return list;
     }
 
+    public List<Blog> getAll() {
+        List<Blog> list = new ArrayList<>();
+
+        try {
+
+            String sql = "SELECT [id]\n"
+                    + "      ,[thumbnail_url]\n"
+                    + "      ,[user_id]\n"
+                    + "      ,[title]\n"
+                    + "      ,[description]\n"
+                    + "      ,[content]\n"
+                    + "      ,[created_at]\n"
+                    + "      ,[updateAt]\n"
+                    + "      ,[isPublished]\n"
+                    + "  FROM [dbo].[posts]";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Blog blog = new Blog(rs.getInt("id"), rs.getString("thumbnail_url"), rs.getInt("user_id"), rs.getString("title"),
+                        rs.getString("description"), rs.getString("content"), rs.getDate("created_at"), rs.getDate("updateAt"),
+                        rs.getBoolean("isPublished"));
+
+                list.add(blog);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public List<Blog> getBlogByKey(String key) {
         List<Blog> list = new ArrayList<>();
 
@@ -67,8 +101,8 @@ public class BlogDAO extends DBContext {
                     + "      ,[isPublished]\n"
                     + "  FROM [dbo].[posts]\n"
                     + "  WHERE isPublished = 1 ";
-            
-            if(!key.isEmpty()){
+
+            if (!key.isEmpty()) {
                 sql += " AND title like '%" + key + "%' or description like'%" + key + "%' or content like '%" + key + "%'";
             }
 
@@ -108,8 +142,8 @@ public class BlogDAO extends DBContext {
 
         return result;
     }
-    //getBlogByID
-    public Blog getBlogByID(int id) {
+
+    public Blog getBlogByIDAndPublished(int id) {
 
         try {
 
@@ -142,6 +176,96 @@ public class BlogDAO extends DBContext {
             System.out.println(e);
         }
         return null;
+    }
+
+    public Blog getBlogByID(int id) {
+
+        try {
+
+            String sql = "SELECT [id]\n"
+                    + "      ,[thumbnail_url]\n"
+                    + "      ,[user_id]\n"
+                    + "      ,[title]\n"
+                    + "      ,[description]\n"
+                    + "      ,[content]\n"
+                    + "      ,[created_at]\n"
+                    + "      ,[updateAt]\n"
+                    + "      ,[isPublished]\n"
+                    + "  FROM [dbo].[posts]\n"
+                    + "  WHERE id = ?";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Blog blog = new Blog(rs.getInt("id"), rs.getString("thumbnail_url"), rs.getInt("user_id"), rs.getString("title"),
+                        rs.getString("description"), rs.getString("content"), rs.getDate("created_at"), rs.getDate("updateAt"),
+                        rs.getBoolean("isPublished"));
+
+                return blog;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public void update(Blog b) {
+
+        try {
+
+            String sql = "UPDATE [dbo].[posts] SET \n"
+                    + "       [title] = ?\n"
+                    + "      ,[description] = ?\n"
+                    + "      ,[content] = ?\n"
+                    + "      ,[updateAt] = ?\n"
+                    + "      ,[isPublished] = ?\n"
+                    + " WHERE [id] = ?";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, b.getTitle());
+            ps.setString(2, b.getDescription());
+            ps.setString(3, b.getContent());
+            ps.setDate(4, b.getUpdateAt());
+            ps.setBoolean(5, b.isPublished());
+            ps.setInt(6, b.getId());
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public boolean add(Blog b) {
+
+        try {
+
+            String sql = "INSERT INTO [dbo].[posts]\n"
+                    + "([thumbnail_url], [user_id], [title], [description], [content], [created_at], [updateAt], [isPublished])\n"
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, b.getThumbnail_url());
+            ps.setInt(2, b.getUser_id());
+            ps.setString(3, b.getTitle());
+            ps.setString(4, b.getDescription());
+            ps.setString(5, b.getContent());
+            ps.setDate(6, b.getCreateAt());
+            ps.setDate(7, b.getUpdateAt());
+            ps.setBoolean(8, b.isPublished());
+            
+
+            ps.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            return false;
+        }
     }
 
     public List<Blog> getListByPage(List<Blog> list, int start, int end) {
