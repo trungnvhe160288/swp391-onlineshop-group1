@@ -35,12 +35,19 @@ public final class Cart {
                     Item newItem = new Item(product, quantity, colorID, sizeID);
 
                     if (getItemByProductID(newItem.getProduct().getId()) != null) {
-                        Item oldItem = getItemByProductID(newItem.getProduct().getId());
-                        oldItem.setQuantity(oldItem.getQuantity() + newItem.getQuantity());
+                        Item item = getItemByProductID(newItem.getProduct().getId());
+                        if (item.getColorID() != colorID || item.getSizeID() != sizeID) {
+                            items.add(newItem);
+                        } else if(item.getColorID() == colorID && item.getSizeID() == sizeID){
+                            Item oldItem = getItemByProductID(newItem.getProduct().getId());
+                            oldItem.setQuantity(oldItem.getQuantity() + newItem.getQuantity());
+                        }
+
                     } else {
                         items.add(newItem);
                     }
                 }
+
             }
 
         } catch (NumberFormatException e) {

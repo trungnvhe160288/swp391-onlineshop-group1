@@ -75,5 +75,11 @@ public class Color {
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
     }
+
+    @Override
+    public String toString() {
+        return "Color{" + "id=" + id + ", name=" + name + ", bgr_hex=" + bgr_hex + ", text_hex=" + text_hex + ", createAt=" + createAt + ", updateAt=" + updateAt + '}';
+    }
+    
     
 }

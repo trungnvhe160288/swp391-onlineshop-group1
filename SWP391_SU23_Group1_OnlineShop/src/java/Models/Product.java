@@ -162,7 +162,7 @@ public class Product {
     }
 
     public double getLastPrice() {
-        return this.price - this.price * this.percent_discount;
+        return Math.round(this.price - (this.price * this.percent_discount));
     }
 
     public String getLastPriceFormat() {

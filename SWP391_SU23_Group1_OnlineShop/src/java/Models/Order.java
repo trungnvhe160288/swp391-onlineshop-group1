@@ -126,8 +126,8 @@ public class Order {
     public void setOrderLine(List<OrderLine> orderLine) {
         this.orderLine = orderLine;
     }
-
-    public double getTotalPrice() {
+    
+    public double getTotalPrice(){
         double total = 0;
         for (OrderLine item : orderLine) {
             total += item.getTotalPrice();
