@@ -60,7 +60,7 @@ public class ShopController extends HttpServlet {
     }
     
     
-    
+    //getDetail
     private void getDetail(HttpServletRequest request, HttpServletResponse response) {
         ProductDAO pd = new ProductDAO();
 
