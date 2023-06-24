@@ -123,8 +123,14 @@ public class BlogDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Blog blog = new Blog(rs.getInt("id"), rs.getString("thumbnail_url"), rs.getInt("user_id"), rs.getString("title"),
-                        rs.getString("description"), rs.getString("content"), rs.getDate("created_at"), rs.getDate("updateAt"),
+                Blog blog = new Blog(rs.getInt("id"), 
+                        rs.getString("thumbnail_url"), 
+                        rs.getInt("user_id"), 
+                        rs.getString("title"),
+                        rs.getString("description"), 
+                        rs.getString("content"), 
+                        rs.getDate("created_at"), 
+                        rs.getDate("updateAt"),
                         rs.getBoolean("isPublished"));
 
                 list.add(blog);
