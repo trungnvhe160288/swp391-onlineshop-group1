@@ -219,7 +219,7 @@ public class ProductDAO extends DBContext {
         }
         return list;
     }
-
+    //getProductById
     public Product getProductByID(int id) {
 
         try {
