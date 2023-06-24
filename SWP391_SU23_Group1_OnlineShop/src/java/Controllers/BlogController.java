@@ -45,7 +45,6 @@ public class BlogController extends HttpServlet {
             case "detail":
                 String id_raw = request.getParameter("id");
                 int id = Common.parseInt(id_raw);
-
                 Blog b = bd.getBlogByIDAndPublished(id);
                 request.setAttribute("data", b);
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
