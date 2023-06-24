@@ -57,6 +57,7 @@ public class BlogDAO extends DBContext {
         return list;
     }
 
+    // Get all Blog
     public List<Blog> getAll() {
         List<Blog> list = new ArrayList<>();
 
