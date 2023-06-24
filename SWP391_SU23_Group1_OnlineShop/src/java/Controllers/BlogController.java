@@ -73,9 +73,7 @@ public class BlogController extends HttpServlet {
 
     private void pagination(HttpServletRequest request, HttpServletResponse response) {
         BlogDAO bd = new BlogDAO();
-
         List<Blog> data = search(request, response);
-
         String xpage = request.getParameter("page");
 
         int page = (xpage == null) ? 1 : Common.parseInt(xpage);
