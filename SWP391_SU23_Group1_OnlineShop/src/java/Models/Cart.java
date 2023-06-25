@@ -104,7 +104,7 @@ public final class Cart {
             items.remove(getItemByProductID(productID));
         }
     }
-
+    //getProductByID
     private Product getProductByProductID(int productID, List<Product> list) {
         for (Product item : list) {
             if (item.getId() == productID) {
