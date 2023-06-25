@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+//Slider
 public class SliderDAO extends DBContext {
     //getAllSlider
     public List<Slider> getAll() {
