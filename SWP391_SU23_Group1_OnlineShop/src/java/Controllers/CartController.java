@@ -105,7 +105,7 @@ public class CartController extends HttpServlet {
             SupportMessage.sendToast(session, 1, "Cancel Success !");
         }
     }
-
+    //getMyOrder
     private void getMyOrder(HttpServletRequest request, HttpServletResponse response) {
         CartDAO cd = new CartDAO();
 
