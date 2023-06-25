@@ -98,6 +98,7 @@ public class BlogDAO extends DBContext {
         return list;
     }
 
+    // Get blog isPulished
     public List<Blog> getBlogByKey(String key) {
         List<Blog> list = new ArrayList<>();
 
