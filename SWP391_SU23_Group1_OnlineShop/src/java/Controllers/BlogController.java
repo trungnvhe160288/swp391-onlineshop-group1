@@ -66,7 +66,8 @@ public class BlogController extends HttpServlet {
 
         String search = request.getParameter("blog_search");
         request.setAttribute("blog_search", search);
-
+        
+        // call DAO and return 
         return bd.getBlogByKey((search == null ? "" : search));
 
     }
@@ -74,7 +75,7 @@ public class BlogController extends HttpServlet {
     // Process pagination 
     private void pagination(HttpServletRequest request, HttpServletResponse response) {
         BlogDAO bd = new BlogDAO();
-        List<Blog> data = search(request, response);
+        List<Blog> data = search(request, response); // call search method 
         String xpage = request.getParameter("page");
 
         int page = (xpage == null) ? 1 : Common.parseInt(xpage);
