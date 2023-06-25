@@ -39,7 +39,7 @@ public class BlogController extends HttpServlet {
 
         switch (action) {
             case "list":
-                pagination(request, response);
+                pagination(request, response); // call pagenation below
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response); 
                 break;
             case "detail":
@@ -70,7 +70,8 @@ public class BlogController extends HttpServlet {
         return bd.getBlogByKey((search == null ? "" : search));
 
     }
-
+    
+    // Process pagination 
     private void pagination(HttpServletRequest request, HttpServletResponse response) {
         BlogDAO bd = new BlogDAO();
         List<Blog> data = search(request, response);
