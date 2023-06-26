@@ -4,11 +4,14 @@
  */
 package Ultils;
 
+import Models.Color;
+import Models.Size;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,6 +51,30 @@ public class Common {
 
         return n;
     }
+    
+    public static float parseFloat(String x) {
+        float n = 0;
+
+        try {
+            n = Float.parseFloat(x);
+        } catch (NumberFormatException e) {
+            System.out.println("Error Parse Float: " + e);
+        }
+
+        return n;
+    }
+    
+    public static double parseDouble(String x) {
+        double n = 0;
+
+        try {
+            n = Double.parseDouble(x);
+        } catch (NumberFormatException e) {
+            System.out.println("Error Parse Double: " + e);
+        }
+
+        return n;
+    }
 
     public static String getPriceFormat(double price) {
         Locale localeVN = new Locale("vi", "VN");
@@ -58,4 +85,6 @@ public class Common {
     public static int getRandomNumber(int min, int max){
         return (int)Math.floor(Math.random() * (max - min + 1)) + min;
     }
+    
+    
 }

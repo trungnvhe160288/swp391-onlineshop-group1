@@ -4,14 +4,22 @@
  */
 package Ultils;
 
+import Models.Color;
+import Models.Size;
 import java.sql.Date;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 public class CommonForJSP {
 
-    
+    public Date getCurrentDate() {
+        LocalDate curDate = java.time.LocalDate.now();
+        return Date.valueOf(curDate.toString());
+    }
 
     public int parseInt(String x) {
         int n = 0;
@@ -35,8 +43,48 @@ public class CommonForJSP {
         return new SimpleDateFormat(pattern).format(date);
     }
 
-    public int getRandomNumber(int min, int max){
-        return (int)Math.floor(Math.random() * (max - min + 1)) + min;
+    public int getRandomNumber(int min, int max) {
+        return (int) Math.floor(Math.random() * (max - min + 1)) + min;
     }
+
+    public boolean[] getCheckedColor(List<Color> color) {
+        List<Color> list = new DAO().getAllColor();
+        boolean[] checked = new boolean[list.size()];
+
+        for (int i = 0; i < checked.length; i++) {
+            checked[i] = checkedC(list.get(i).getId(), color);
+        }
+
+        return checked;
+    }
+    public boolean[] getCheckedSize(List<Size> size) {
+        List<Size> list = new DAO().getAllSize();
+        boolean[] checked = new boolean[list.size()];
+
+        for (int i = 0; i < list.size(); i++) {
+            checked[i] = checkedS(list.get(i).getId(), size);
+        }
+        return checked;
+    }
+
+    private boolean checkedC(int id, List<Color> list) {
+        for (Color item : list) {
+            if (item.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkedS(int id, List<Size> list) {
+        for (Size item : list) {
+            if (item.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     
+
 }
