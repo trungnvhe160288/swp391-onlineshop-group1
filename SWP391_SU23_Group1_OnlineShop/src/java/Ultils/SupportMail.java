@@ -108,7 +108,7 @@ public class SupportMail {
         int port = 587;
         String from = userEmail;
         String subject = type;
-        String content = "Verify Your Email. http://localhost:8080/mywebsite/login/verifyEmail.do?email=" + userEmail + "&code=" + code;
+        String content = "Verify Your Email. http://localhost:9999/mywebsite/login/verifyEmail.do?email=" + userEmail + "&code=" + code;
 
         // Thiết lập các thuộc tính email
         Properties properties = new Properties();
