@@ -62,7 +62,7 @@ $(function () {
             return form.valid();
         },
         onFinished: function (event, currentIndex) {
-            alert("Good job!", "Submitted!", "success");
+            alert("h!", "Submitted!", "success");
         }
     });
 

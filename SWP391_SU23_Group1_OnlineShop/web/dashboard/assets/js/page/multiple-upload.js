@@ -2,45 +2,47 @@
 
 // DropzoneJS
 if (window.Dropzone) {
-  Dropzone.autoDiscover = false;
+    Dropzone.autoDiscover = false;
 }
 
 var dropzone = new Dropzone("#mydropzone", {
-  url: "#"
+    url: "#"
 });
 
-var minSteps = 6,
-  maxSteps = 60,
-  timeBetweenSteps = 100,
-  bytesPerStep = 100000;
+
 
 dropzone.uploadFiles = function (files) {
-  var self = this;
 
-  for (var i = 0; i < files.length; i++) {
+    var minSteps = 6,
+            maxSteps = 60,
+            timeBetweenSteps = 100,
+            bytesPerStep = 100000;
+    var self = this;
 
-    var file = files[i];
-    totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
+    for (var i = 0; i < files.length; i++) {
 
-    for (var step = 0; step < totalSteps; step++) {
-      var duration = timeBetweenSteps * (step + 1);
-      setTimeout(function (file, totalSteps, step) {
-        return function () {
-          file.upload = {
-            progress: 100 * (step + 1) / totalSteps,
-            total: file.size,
-            bytesSent: (step + 1) * file.size / totalSteps
-          };
+        var file = files[i];
+        let totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
 
-          self.emit('uploadprogress', file, file.upload.progress, file.upload.bytesSent);
-          if (file.upload.progress == 100) {
-            file.status = Dropzone.SUCCESS;
-            self.emit("success", file, 'success', null);
-            self.emit("complete", file);
-            self.processQueue();
-          }
-        };
-      }(file, totalSteps, step), duration);
+        for (var step = 0; step < totalSteps; step++) {
+            var duration = timeBetweenSteps * (step + 1);
+            setTimeout(function (file, totalSteps, step) {
+                return function () {
+                    file.upload = {
+                        progress: 100 * (step + 1) / totalSteps,
+                        total: file.size,
+                        bytesSent: (step + 1) * file.size / totalSteps
+                    };
+
+                    self.emit('uploadprogress', file, file.upload.progress, file.upload.bytesSent);
+                    if (file.upload.progress == 100) {
+                        file.status = Dropzone.SUCCESS;
+                        self.emit("success", file, 'success', null);
+                        self.emit("complete", file);
+                        self.processQueue();
+                    }
+                };
+            }(file, totalSteps, step), duration);
+        }
     }
-  }
 }
