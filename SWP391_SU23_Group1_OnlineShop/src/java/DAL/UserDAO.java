@@ -30,7 +30,6 @@ public class UserDAO extends DBContext {
                     + "	     ,r.[name]\n"
                     + "      ,r.[createAt] as 'roleCA'\n"
                     + "      ,r.[updateAt] as 'roleUA'\n"
-                    + "      ,r.[isActive]\n"
                     + "  FROM [dbo].[users] u inner join [dbo].[role] r\n"
                     + "  ON u.rid = r.id\n"
                     + "  WHERE email = ? and password = ?";
@@ -43,8 +42,7 @@ public class UserDAO extends DBContext {
 
             if (rs.next()) {
 
-                Role role = new Role(rs.getInt("rid"), rs.getString("name"), rs.getDate("roleCA"), rs.getDate("roleUA"),
-                        rs.getBoolean("isActive"));
+                Role role = new Role(rs.getInt("rid"), rs.getString("name"), rs.getDate("roleCA"), rs.getDate("roleUA"));
 
                 User user = new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"), rs.getString("fullname"),
                         rs.getString("avatar"), rs.getString("phone"), rs.getString("address"), rs.getInt("status"),
@@ -85,7 +83,6 @@ public class UserDAO extends DBContext {
         }
     }
 
-    //checkEmailExits
     public boolean checkEmailExits(String email) {
         System.out.println(email);
         try {
@@ -233,7 +230,6 @@ public class UserDAO extends DBContext {
                     + "	     ,r.[name]\n"
                     + "      ,r.[createAt] as 'roleCA'\n"
                     + "      ,r.[updateAt] as 'roleUA'\n"
-                    + "      ,r.[isActive]\n"
                     + "  FROM [dbo].[users] u inner join [dbo].[role] r\n"
                     + "  ON u.rid = r.id\n"
                     + "  WHERE email = ?";
@@ -245,8 +241,7 @@ public class UserDAO extends DBContext {
 
             if (rs.next()) {
 
-                Role role = new Role(rs.getInt("rid"), rs.getString("name"), rs.getDate("roleCA"), rs.getDate("roleUA"),
-                        rs.getBoolean("isActive"));
+                Role role = new Role(rs.getInt("rid"), rs.getString("name"), rs.getDate("roleCA"), rs.getDate("roleUA"));
 
                 User user = new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"), rs.getString("fullname"),
                         rs.getString("avatar"), rs.getString("phone"), rs.getString("address"), rs.getInt("status"),
@@ -297,7 +292,6 @@ public class UserDAO extends DBContext {
                     + "	     ,r.[name]\n"
                     + "      ,r.[createAt] as 'roleCA'\n"
                     + "      ,r.[updateAt] as 'roleUA'\n"
-                    + "      ,r.[isActive]\n"
                     + "  FROM [dbo].[users] u inner join [dbo].[role] r\n"
                     + "  ON u.rid = r.id";
 
@@ -307,8 +301,7 @@ public class UserDAO extends DBContext {
 
             while (rs.next()) {
 
-                Role role = new Role(rs.getInt("rid"), rs.getString("name"), rs.getDate("roleCA"), rs.getDate("roleUA"),
-                        rs.getBoolean("isActive"));
+                Role role = new Role(rs.getInt("rid"), rs.getString("name"), rs.getDate("roleCA"), rs.getDate("roleUA"));
 
                 User user = new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"), rs.getString("fullname"),
                         rs.getString("avatar"), rs.getString("phone"), rs.getString("address"), rs.getInt("status"),
@@ -342,7 +335,6 @@ public class UserDAO extends DBContext {
                     + "	     ,r.[name]\n"
                     + "      ,r.[createAt] as 'roleCA'\n"
                     + "      ,r.[updateAt] as 'roleUA'\n"
-                    + "      ,r.[isActive]\n"
                     + "  FROM [dbo].[users] u inner join [dbo].[role] r\n"
                     + "  ON u.rid = r.id\n"
                     + "  WHERE u.id = ?";
@@ -354,8 +346,7 @@ public class UserDAO extends DBContext {
 
             if (rs.next()) {
 
-                Role role = new Role(rs.getInt("rid"), rs.getString("name"), rs.getDate("roleCA"), rs.getDate("roleUA"),
-                        rs.getBoolean("isActive"));
+                Role role = new Role(rs.getInt("rid"), rs.getString("name"), rs.getDate("roleCA"), rs.getDate("roleUA"));
 
                 User user = new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"), rs.getString("fullname"),
                         rs.getString("avatar"), rs.getString("phone"), rs.getString("address"), rs.getInt("status"),

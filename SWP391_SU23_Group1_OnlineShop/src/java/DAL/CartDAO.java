@@ -291,9 +291,9 @@ public class CartDAO extends DBContext {
                     + "      ,p.[description]\n"
                     + "      ,p.[price]\n"
                     + "      ,p.[percent_discount]\n"
-                    + "      ,p.[quantity]\n"   
+                    + "      ,p.[quantity]\n"
                     + "      ,p.[category_id]\n"
-                    + "      ,p.[total_rating]\n"
+                    + "      ,p.[isActive]\n"
                     + "      ,p.[created_at]\n"
                     + "      ,p.[update_at] as 'updateAt'\n"
                     + "      ,c.[name] as 'categoryName'\n"
@@ -369,7 +369,7 @@ public class CartDAO extends DBContext {
 
                 Product product = new Product(pid, rs.getString("name"), rs.getString("thumbnail_url"),
                         rs.getString("description"), rs.getDouble("price"), rs.getFloat("percent_discount"), rs.getInt("quantity"),
-                        rs.getDate("created_at"), rs.getDate("updateAt"),
+                        rs.getDate("created_at"), rs.getDate("updateAt"), rs.getBoolean("isActive"),
                         category, image, color, size);
 
                 return product;

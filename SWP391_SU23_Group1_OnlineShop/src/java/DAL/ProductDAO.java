@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ProductDAO extends DBContext {
     //getAll
     public List<Product> getAll() {
@@ -29,8 +28,8 @@ public class ProductDAO extends DBContext {
                     + "      ,p.[percent_discount]\n"
                     + "      ,p.[quantity]\n"
                     + "      ,p.[category_id]\n"
-                    + "      ,p.[total_rating]\n"
                     + "      ,p.[created_at]\n"
+                    + "      ,p.[isActive]\n"
                     + "      ,p.[update_at] as 'updateAt'\n"
                     + "      ,c.[name] as 'categoryName'\n"
                     + "      ,c.[created_at] as 'cCreateAt'\n"
@@ -103,7 +102,7 @@ public class ProductDAO extends DBContext {
 
                 Product product = new Product(pid, rs.getString("name"), rs.getString("thumbnail_url"),
                         rs.getString("description"), rs.getDouble("price"), rs.getFloat("percent_discount"), rs.getInt("quantity"),
-                        rs.getDate("created_at"), rs.getDate("updateAt"),
+                        rs.getDate("created_at"), rs.getDate("updateAt"), rs.getBoolean("isActive"),
                         category, image, color, size);
 
                 list.add(product);
@@ -129,7 +128,7 @@ public class ProductDAO extends DBContext {
                     + "      ,p.[percent_discount]\n"
                     + "      ,p.[quantity]\n"
                     + "      ,p.[category_id]\n"
-                    + "      ,p.[total_rating]\n"
+                    + "      ,p.[isActive]\n"
                     + "      ,p.[created_at]\n"
                     + "      ,p.[update_at] as 'updateAt'\n"
                     + "      ,c.[name] as 'categoryName'\n"
@@ -207,7 +206,7 @@ public class ProductDAO extends DBContext {
 
                 Product product = new Product(pid, rs.getString("name"), rs.getString("thumbnail_url"),
                         rs.getString("description"), rs.getDouble("price"), rs.getFloat("percent_discount"), rs.getInt("quantity"),
-                        rs.getDate("created_at"), rs.getDate("updateAt"),
+                        rs.getDate("created_at"), rs.getDate("updateAt"), rs.getBoolean("isActive"),
                         category, image, color, size);
 
                 list.add(product);
@@ -219,7 +218,7 @@ public class ProductDAO extends DBContext {
         }
         return list;
     }
-    //getProductById
+
     public Product getProductByID(int id) {
 
         try {
@@ -232,7 +231,7 @@ public class ProductDAO extends DBContext {
                     + "      ,p.[percent_discount]\n"
                     + "      ,p.[quantity]\n"
                     + "      ,p.[category_id]\n"
-                    + "      ,p.[total_rating]\n"
+                    + "      ,p.[isActive]\n"
                     + "      ,p.[created_at]\n"
                     + "      ,p.[update_at] as 'updateAt'\n"
                     + "      ,c.[name] as 'categoryName'\n"
@@ -308,7 +307,7 @@ public class ProductDAO extends DBContext {
 
                 Product product = new Product(pid, rs.getString("name"), rs.getString("thumbnail_url"),
                         rs.getString("description"), rs.getDouble("price"), rs.getFloat("percent_discount"), rs.getInt("quantity"),
-                        rs.getDate("created_at"), rs.getDate("updateAt"),
+                        rs.getDate("created_at"), rs.getDate("updateAt"), rs.getBoolean("isActive"),
                         category, image, color, size);
 
                 return product;
@@ -346,7 +345,7 @@ public class ProductDAO extends DBContext {
         }
         return 0;
     }
-    
+
     public List<Product> getProductByPrice(int min, int max) {
         List<Product> list = new ArrayList<>();
 
@@ -360,7 +359,7 @@ public class ProductDAO extends DBContext {
                     + "      ,p.[percent_discount]\n"
                     + "      ,p.[quantity]\n"
                     + "      ,p.[category_id]\n"
-                    + "      ,p.[total_rating]\n"
+                    + "      ,p.[isActive]\n"
                     + "      ,p.[created_at]\n"
                     + "      ,p.[update_at] as 'updateAt'\n"
                     + "      ,c.[name] as 'categoryName'\n"
@@ -437,7 +436,7 @@ public class ProductDAO extends DBContext {
 
                 Product product = new Product(pid, rs.getString("name"), rs.getString("thumbnail_url"),
                         rs.getString("description"), rs.getDouble("price"), rs.getFloat("percent_discount"), rs.getInt("quantity"),
-                        rs.getDate("created_at"), rs.getDate("updateAt"),
+                        rs.getDate("created_at"), rs.getDate("updateAt"), rs.getBoolean("isActive"),
                         category, image, color, size);
 
                 list.add(product);
@@ -463,7 +462,7 @@ public class ProductDAO extends DBContext {
                     + "      ,p.[percent_discount]\n"
                     + "      ,p.[quantity]\n"
                     + "      ,p.[category_id]\n"
-                    + "      ,p.[total_rating]\n"
+                    + "      ,p.[isActive]\n"
                     + "      ,p.[created_at]\n"
                     + "      ,p.[update_at] as 'updateAt'\n"
                     + "      ,c.[name] as 'categoryName'\n"
@@ -540,7 +539,7 @@ public class ProductDAO extends DBContext {
 
                 Product product = new Product(pid, rs.getString("name"), rs.getString("thumbnail_url"),
                         rs.getString("description"), rs.getDouble("price"), rs.getFloat("percent_discount"), rs.getInt("quantity"),
-                        rs.getDate("created_at"), rs.getDate("updateAt"),
+                        rs.getDate("created_at"), rs.getDate("updateAt"), rs.getBoolean("isActive"),
                         category, image, color, size);
 
                 list.add(product);
@@ -566,7 +565,7 @@ public class ProductDAO extends DBContext {
                     + "       ,p.[percent_discount]\n"
                     + "       ,p.[quantity]\n"
                     + "       ,p.[category_id]\n"
-                    + "       ,p.[total_rating]\n"
+                    + "      ,p.[isActive]\n"
                     + "       ,p.[created_at]\n"
                     + "       ,p.[update_at] as 'updateAt'\n"
                     + "       ,c.[name] as 'categoryName'\n"
@@ -644,7 +643,7 @@ public class ProductDAO extends DBContext {
 
                 Product product = new Product(pid, rs.getString("name"), rs.getString("thumbnail_url"),
                         rs.getString("description"), rs.getDouble("price"), rs.getFloat("percent_discount"), rs.getInt("quantity"),
-                        rs.getDate("created_at"), rs.getDate("updateAt"),
+                        rs.getDate("created_at"), rs.getDate("updateAt"), rs.getBoolean("isActive"),
                         category, image, color, size);
 
                 list.add(product);
@@ -675,6 +674,183 @@ public class ProductDAO extends DBContext {
             System.out.println(e);
         }
         return -1;
+    }
+
+    public int getLastID() {
+        try {
+
+            String sql = "SELECT TOP(1) id FROM [dbo].[products] ORDER BY id DESC";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return -1;
+    }
+
+    public boolean add(Product p) {
+        try {
+
+            String sql = "INSERT INTO [dbo].[products]\n"
+                    + "([name] , [thumbnail_url], [description], [price], [percent_discount], [quantity]\n"
+                    + ", [category_id], [created_at], [update_at], [isActive])\n"
+                    + "VALUES	(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, p.getName());
+            st.setString(2, p.getThumbnail_url());
+            st.setString(3, p.getDescription());
+            st.setDouble(4, p.getPrice());
+            st.setFloat(5, p.getPercent_discount());
+            st.setInt(6, p.getQuantity());
+            st.setInt(7, p.getCategory().getId());
+            st.setDate(8, p.getCreateAt());
+            st.setDate(9, p.getUpdateAt());
+            st.setBoolean(10, p.isActive());
+
+            st.executeUpdate();
+
+            if (p.getImage() != null && !p.getImage().isEmpty()) {
+
+                for (Image item : p.getImage()) {
+                    String sql_image = "INSERT INTO [dbo].[product_image] ([image_url], [product_id], [created_at], [update_at])\n"
+                            + "VALUES(?, ?, ?, ?)";
+
+                    PreparedStatement st_image = connection.prepareStatement(sql_image);
+                    st_image.setString(1, item.getUrl());
+                    st_image.setInt(2, item.getProduct_id());
+                    st_image.setDate(3, item.getCreateAt());
+                    st_image.setDate(4, item.getUpdateAt());
+
+                    st_image.executeUpdate();
+                }
+            }
+
+            if (p.getColor() != null && !p.getColor().isEmpty()) {
+                for (Color item : p.getColor()) {
+                    String sql_color = "INSERT INTO [dbo].[product_color] ([color_id],[product_id],[created_at],[update_at])\n"
+                            + "VALUES	(?, ?, ?, ?)";
+
+                    PreparedStatement st_color = connection.prepareStatement(sql_color);
+                    st_color.setInt(1, item.getId());
+                    st_color.setInt(2, p.getId());
+                    st_color.setDate(3, item.getCreateAt());
+                    st_color.setDate(4, item.getUpdateAt());
+
+                    st_color.executeUpdate();
+                }
+            }
+
+            if (p.getSize() != null && !p.getSize().isEmpty()) {
+                for (Size item : p.getSize()) {
+                    String sql_size = "INSERT INTO [dbo].[product_size]([size_id],[product_id],[created_at],[update_at])\n"
+                            + "VALUES	(?, ?, ?, ?)";
+                    PreparedStatement st_size = connection.prepareStatement(sql_size);
+                    st_size.setInt(1, item.getId());
+                    st_size.setInt(2, p.getId());
+                    st_size.setDate(3, item.getCreateAt());
+                    st_size.setDate(4, item.getUpdateAt());
+
+                    st_size.executeUpdate();
+                }
+            }
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return false;
+        }
+
+    }
+
+    public boolean update(Product p) {
+        try {
+
+            String sql = "UPDATE [dbo].[products]\n"
+                    + "   SET [name] = ?\n"
+                    + "      ,[thumbnail_url] = ?\n"
+                    + "      ,[description] = ?\n"
+                    + "      ,[price] = ?\n"
+                    + "      ,[percent_discount] = ?\n"
+                    + "      ,[quantity] = ?\n"
+                    + "      ,[category_id] = ?\n"
+                    + "      ,[update_at] = ?\n"
+                    + "      ,[isActive] = ?\n"
+                    + " WHERE id = ?";
+
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, p.getName());
+            st.setString(2, p.getThumbnail_url());
+            st.setString(3, p.getDescription());
+            st.setDouble(4, p.getPrice());
+            st.setFloat(5, p.getPercent_discount());
+            st.setInt(6, p.getQuantity());
+            st.setInt(7, p.getCategory().getId());
+            st.setDate(8, p.getUpdateAt());
+            st.setBoolean(9, p.isActive());
+            st.setInt(10, p.getId());
+
+            st.executeUpdate();
+
+            if (p.getImage() != null && !p.getImage().isEmpty()) {
+
+                for (Image item : p.getImage()) {
+                    String sql_image = "INSERT INTO [dbo].[product_image] ([image_url], [product_id], [created_at], [update_at])\n"
+                            + "VALUES(?, ?, ?, ?)";
+
+                    PreparedStatement st_image = connection.prepareStatement(sql_image);
+                    st_image.setString(1, item.getUrl());
+                    st_image.setInt(2, p.getId());
+                    st_image.setDate(3, item.getCreateAt());
+                    st_image.setDate(4, item.getUpdateAt());
+
+                    st_image.executeUpdate();
+                }
+            }
+
+            if (p.getColor() != null && !p.getColor().isEmpty()) {
+                for (Color item : p.getColor()) {
+                    String sql_color = "UPDATE [dbo].[product_color]\n"
+                            + "   SET [color_id] = ?\n"
+                            + "      ,[update_at] = ?\n"
+                            + " WHERE id = ?";
+
+                    PreparedStatement st_color = connection.prepareStatement(sql_color);
+                    st_color.setInt(1, item.getId());
+                    st_color.setDate(2, item.getUpdateAt());
+                    st_color.setInt(3, p.getId());
+
+                    st_color.executeUpdate();
+                }
+            }
+
+            if (p.getSize() != null && !p.getSize().isEmpty()) {
+                for (Size item : p.getSize()) {
+                    String sql_size = "UPDATE [dbo].[product_size]\n"
+                            + "   SET [size_id] = ?\n"
+                            + "      ,[update_at] = ?\n"
+                            + " WHERE id = ?";
+                    PreparedStatement st_size = connection.prepareStatement(sql_size);
+                    st_size.setInt(1, item.getId());
+                    st_size.setDate(2, item.getUpdateAt());
+                    st_size.setInt(3, p.getId());
+
+                    st_size.executeUpdate();
+                }
+            }
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return false;
+        }
     }
 
 }

@@ -7,7 +7,6 @@ package DAL;
 import Models.Blog;
 import Ultils.Common;
 import Ultils.DBContext;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,14 +37,8 @@ public class BlogDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Blog blog = new Blog(rs.getInt("id"), 
-                        rs.getString("thumbnail_url"), 
-                        rs.getInt("user_id"), 
-                        rs.getString("title"),
-                        rs.getString("description"), 
-                        rs.getString("content"), 
-                        rs.getDate("created_at"), 
-                        rs.getDate("updateAt"),
+                Blog blog = new Blog(rs.getInt("id"), rs.getString("thumbnail_url"), rs.getInt("user_id"), rs.getString("title"),
+                        rs.getString("description"), rs.getString("content"), rs.getDate("created_at"), rs.getDate("updateAt"),
                         rs.getBoolean("isPublished"));
 
                 list.add(blog);
@@ -72,21 +65,16 @@ public class BlogDAO extends DBContext {
                     + "      ,[created_at]\n"
                     + "      ,[updateAt]\n"
                     + "      ,[isPublished]\n"
-                    + "  FROM [dbo].[posts]";
+                    + "  FROM [dbo].[posts]\n"
+                    + "  ORDER BY created_at DESC";
 
             PreparedStatement ps = connection.prepareStatement(sql);
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Blog blog = new Blog(rs.getInt("id"), 
-                        rs.getString("thumbnail_url"), 
-                        rs.getInt("user_id"), 
-                        rs.getString("title"),
-                        rs.getString("description"), 
-                        rs.getString("content"), 
-                        rs.getDate("created_at"), 
-                        rs.getDate("updateAt"),
+                Blog blog = new Blog(rs.getInt("id"), rs.getString("thumbnail_url"), rs.getInt("user_id"), rs.getString("title"),
+                        rs.getString("description"), rs.getString("content"), rs.getDate("created_at"), rs.getDate("updateAt"),
                         rs.getBoolean("isPublished"));
 
                 list.add(blog);
@@ -125,14 +113,8 @@ public class BlogDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Blog blog = new Blog(rs.getInt("id"), 
-                        rs.getString("thumbnail_url"), 
-                        rs.getInt("user_id"), 
-                        rs.getString("title"),
-                        rs.getString("description"), 
-                        rs.getString("content"), 
-                        rs.getDate("created_at"), 
-                        rs.getDate("updateAt"),
+                Blog blog = new Blog(rs.getInt("id"), rs.getString("thumbnail_url"), rs.getInt("user_id"), rs.getString("title"),
+                        rs.getString("description"), rs.getString("content"), rs.getDate("created_at"), rs.getDate("updateAt"),
                         rs.getBoolean("isPublished"));
 
                 list.add(blog);
@@ -177,7 +159,8 @@ public class BlogDAO extends DBContext {
                     + "      ,[updateAt]\n"
                     + "      ,[isPublished]\n"
                     + "  FROM [dbo].[posts]\n"
-                    + "  WHERE id= ? AND isPublished = 1";
+                    + "  WHERE id= ? AND isPublished = 1\n"
+                    + "  ORDER BY created_at DESC";
 
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
@@ -185,14 +168,8 @@ public class BlogDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                Blog blog = new Blog(rs.getInt("id"), 
-                        rs.getString("thumbnail_url"), 
-                        rs.getInt("user_id"), 
-                        rs.getString("title"),
-                        rs.getString("description"), 
-                        rs.getString("content"), 
-                        rs.getDate("created_at"), 
-                        rs.getDate("updateAt"),
+                Blog blog = new Blog(rs.getInt("id"), rs.getString("thumbnail_url"), rs.getInt("user_id"), rs.getString("title"),
+                        rs.getString("description"), rs.getString("content"), rs.getDate("created_at"), rs.getDate("updateAt"),
                         rs.getBoolean("isPublished"));
 
                 return blog;
@@ -226,14 +203,8 @@ public class BlogDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                Blog blog = new Blog(rs.getInt("id"), 
-                        rs.getString("thumbnail_url"), 
-                        rs.getInt("user_id"), 
-                        rs.getString("title"),
-                        rs.getString("description"), 
-                        rs.getString("content"), 
-                        rs.getDate("created_at"), 
-                        rs.getDate("updateAt"),
+                Blog blog = new Blog(rs.getInt("id"), rs.getString("thumbnail_url"), rs.getInt("user_id"), rs.getString("title"),
+                        rs.getString("description"), rs.getString("content"), rs.getDate("created_at"), rs.getDate("updateAt"),
                         rs.getBoolean("isPublished"));
 
                 return blog;
@@ -289,7 +260,6 @@ public class BlogDAO extends DBContext {
             ps.setDate(6, b.getCreateAt());
             ps.setDate(7, b.getUpdateAt());
             ps.setBoolean(8, b.isPublished());
-            
 
             ps.executeUpdate();
             return true;
@@ -298,6 +268,54 @@ public class BlogDAO extends DBContext {
             System.out.println(e);
             return false;
         }
+    }
+
+    public void uploadImage(int id, String uploadPath) {
+        try {
+
+            String sql = "UPDATE [dbo].[posts] SET [thumbnail_url] = ? WHERE id = ? ";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, uploadPath);
+            ps.setInt(2, id);
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public Blog getLastBlog() {
+        try {
+
+            String sql = "SELECT TOP(1) [id]\n"
+                    + "      ,[thumbnail_url]\n"
+                    + "      ,[user_id]\n"
+                    + "      ,[title]\n"
+                    + "      ,[description]\n"
+                    + "      ,[content]\n"
+                    + "      ,[created_at]\n"
+                    + "      ,[updateAt]\n"
+                    + "      ,[isPublished]\n"
+                    + "  FROM [dbo].[posts]\n"
+                    + "  ORDER BY ID DESC";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Blog blog = new Blog(rs.getInt("id"), rs.getString("thumbnail_url"), rs.getInt("user_id"), rs.getString("title"),
+                        rs.getString("description"), rs.getString("content"), rs.getDate("created_at"), rs.getDate("updateAt"),
+                        rs.getBoolean("isPublished"));
+
+                return blog;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
     }
 
     public List<Blog> getListByPage(List<Blog> list, int start, int end) {
