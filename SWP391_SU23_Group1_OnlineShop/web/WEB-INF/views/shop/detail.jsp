@@ -29,9 +29,9 @@
                                          src="${pageContext.request.contextPath}${data.thumbnail_url}" />
                                 </div>
                                 <div class="product-buttons">
-                                    <a href="https://www.youtube.com/watch?v=93A2jOW5Mog" class="btn popup-video" title="View Video">
+<!--                                    <a href="https://www.youtube.com/watch?v=93A2jOW5Mog" class="btn popup-video" title="View Video">
                                         <i class="icon anm anm-play-r" aria-hidden="true"></i>
-                                    </a>
+                                    </a>-->
                                     <a href="#" class="btn prlightbox" title="Zoom">
                                         <i class="icon anm anm-expand-l-arrows" aria-hidden="true"></i>
                                     </a>
