@@ -1,4 +1,4 @@
-<jsp:useBean class="DAL.CommonForJSP" id="common"/>
+<jsp:useBean class="Ultils.CommonForJSP" id="common"/>
 
 <div class="main-content">
     <section class="section">

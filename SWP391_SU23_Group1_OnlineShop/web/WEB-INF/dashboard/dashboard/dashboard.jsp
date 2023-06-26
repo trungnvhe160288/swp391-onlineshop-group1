@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean class="DAL.CartDAO" id="cartDao"/>
 <jsp:useBean class="DAL.UserDAO" id="ud"/>
-<jsp:useBean class="DAL.CommonForJSP" id="common"/>
+<jsp:useBean class="Ultils.CommonForJSP" id="common"/>
 <jsp:useBean class="DAL.ProductDAO" id="pd"/>
 
 <c:set var="month" value="${common.currentDate.month + 1}"/>
