@@ -109,7 +109,7 @@ public class ShopController extends HttpServlet {
 
         }
     }
-
+    //List product
     private List<Product> filter(HttpServletRequest request, HttpServletResponse response, List<Product> data) {
         ProductDAO pd = new ProductDAO();
         CategoryDAO cd = new CategoryDAO();
