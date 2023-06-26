@@ -4,13 +4,13 @@
  */
 package Ultils;
 
+import DAL.DAO;
 import Models.Color;
 import Models.Size;
 import java.sql.Date;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 

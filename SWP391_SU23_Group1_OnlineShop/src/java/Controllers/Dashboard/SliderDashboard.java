@@ -4,7 +4,7 @@
  */
 package Controllers.Dashboard;
 
-import DAL.Common;
+import Ultils.Common;
 import DAL.SliderDAO;
 import Models.Slider;
 import Ultils.SupportImage;

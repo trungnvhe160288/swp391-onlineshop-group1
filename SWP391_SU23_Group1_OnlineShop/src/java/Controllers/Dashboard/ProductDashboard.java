@@ -5,8 +5,7 @@ package Controllers.Dashboard;
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 import DAL.CategoryDAO;
-import DAL.Common;
-import DAL.DAO;
+import Ultils.Common;
 import DAL.ProductDAO;
 import Models.Category;
 import Models.Color;
@@ -21,7 +20,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -4,7 +4,7 @@ package Controllers.Dashboard;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-import DAL.Common;
+import Ultils.Common;
 import DAL.DAO;
 import Models.Role;
 import Ultils.SupportMessage;

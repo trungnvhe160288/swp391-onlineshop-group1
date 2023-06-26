@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean class="DAL.CommonForJSP" id="common"/>
+<jsp:useBean class="Ultils.CommonForJSP" id="common"/>
 
 
 <!DOCTYPE html>
