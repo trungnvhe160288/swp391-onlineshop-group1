@@ -21,6 +21,8 @@ public class Product {
     private int quantity;
     private Date createAt;
     private Date updateAt;
+    
+    private boolean active;
 
     private Category category;
     private List<Image> image;
@@ -30,7 +32,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(int id, String name, String thumbnail_url, String description, double price, float percent_discount, int quantity, Date createAt, Date updateAt, Category category, List<Image> image, List<Color> color, List<Size> size) {
+    public Product(int id, String name, String thumbnail_url, String description, double price, float percent_discount, int quantity, Date createAt, Date updateAt, boolean active, Category category, List<Image> image, List<Color> color, List<Size> size) {
         this.id = id;
         this.name = name;
         this.thumbnail_url = thumbnail_url;
@@ -40,15 +42,20 @@ public class Product {
         this.quantity = quantity;
         this.createAt = createAt;
         this.updateAt = updateAt;
+        this.active = active;
         this.category = category;
         this.image = image;
         this.color = color;
         this.size = size;
     }
 
-    
+    public boolean isActive() {
+        return active;
+    }
 
-   
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
     public int getId() {
         return id;
@@ -153,7 +160,6 @@ public class Product {
     public void setSize(List<Size> size) {
         this.size = size;
     }
-
     
     public String getPriceFormat() {
         Locale localeVN = new Locale("vi", "VN");
