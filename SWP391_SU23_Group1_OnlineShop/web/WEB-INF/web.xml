@@ -4,12 +4,58 @@
         <filter-name>LoginFilter</filter-name>
         <filter-class>filter.LoginFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>DashboardLoginFilter</filter-name>
+        <filter-class>filter.DashboardLoginFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AdminRoleFilter</filter-name>
+        <filter-class>filter.AdminRoleFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>MakertingRoleFilter</filter-name>
+        <filter-class>filter.MakertingRoleFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>SaleRoleFilter</filter-name>
+        <filter-class>filter.SaleRoleFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SaleRoleFilter</filter-name>
+        <url-pattern>/dashboard/order/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>MakertingRoleFilter</filter-name>
+        <url-pattern>/dashboard/blog/*</url-pattern>
+        <url-pattern>/dashboard/slider/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminRoleFilter</filter-name>
+        <url-pattern>/dashboard/product/*</url-pattern>
+        <url-pattern>/dashboard/category/*</url-pattern>
+        <url-pattern>/dashboard/size/*</url-pattern>
+        <url-pattern>/dashboard/color/*</url-pattern>
+        <url-pattern>/dashboard/user/*</url-pattern>
+        <url-pattern>/dashboard/role/*</url-pattern>
+
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>DashboardLoginFilter</filter-name>
+        <url-pattern>/dashboard/dashboard.ad</url-pattern>
+        <url-pattern>/dashboard/slider/*</url-pattern>
+        <url-pattern>/dashboard/blog/*</url-pattern>
+        <url-pattern>/dashboard/product/*</url-pattern>
+        <url-pattern>/dashboard/category/*</url-pattern>
+        <url-pattern>/dashboard/size/*</url-pattern>
+        <url-pattern>/dashboard/color/*</url-pattern>
+        <url-pattern>/dashboard/user/*</url-pattern>
+        <url-pattern>/dashboard/order/*</url-pattern>
+        <url-pattern>/dashboard/role/*</url-pattern>
+
+    </filter-mapping>
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
-        <url-pattern>/cart/detail.do</url-pattern>
         <url-pattern>/cart/checkout.do</url-pattern>
-        <url-pattern>/cart/myorder.do</url-pattern>
-        <url-pattern>/cart/orderdetail.do</url-pattern>
     </filter-mapping>
     <session-config>
         <session-timeout>
