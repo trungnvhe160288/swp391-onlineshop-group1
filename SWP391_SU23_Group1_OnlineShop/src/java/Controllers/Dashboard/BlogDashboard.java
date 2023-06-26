@@ -5,7 +5,7 @@
 package Controllers.Dashboard;
 
 import DAL.BlogDAO;
-import DAL.Common;
+import Ultils.Common;
 import Models.Blog;
 import Models.User;
 import Ultils.SupportImage;
