@@ -218,7 +218,7 @@ public class ProductDAO extends DBContext {
         }
         return list;
     }
-
+    //getProductByID
     public Product getProductByID(int id) {
 
         try {
