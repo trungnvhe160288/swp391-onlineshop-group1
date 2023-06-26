@@ -16,7 +16,7 @@
                                         <div class="slider-caption">
                                             <div class="slider-title">${item.title}</div>
                                             <div class="slider-description">${item.subTitle}</div>
-                                            <a href="${pageContext.request.contextPath}/dashboard/slider/detail.ad?id${item.id}" class="nav-link text-warning text-right">View Detail</a>
+                                            <a href="${pageContext.request.contextPath}/dashboard/slider/detail.ad?id=${item.id}" class="nav-link text-warning text-right">View Detail</a>
                                         </div>
                                     </div>
                                 </c:forEach>

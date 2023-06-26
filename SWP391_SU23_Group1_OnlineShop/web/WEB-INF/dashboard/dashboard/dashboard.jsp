@@ -226,6 +226,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="row">
             <div class="col-md-6 col-lg-12 col-xl-6">
                 <!--                             Support tickets 

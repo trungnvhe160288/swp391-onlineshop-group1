@@ -29,6 +29,11 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/dashboard/assets/bundles/owlcarousel2/dist/assets/owl.theme.default.min.css">
         <!-- Slider CSS -->
 
+        <!-- Product -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/dashboard/assets/bundles/dropzonejs/dropzone.css">
+
+        <!-- Product -->
+
         <!-- Template CSS -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/dashboard/assets/css/style.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/dashboard/assets/css/components.css">
@@ -172,12 +177,12 @@
                                         <a href="#" class="menu-toggle nav-link has-dropdown ${controller == '/dashboard/size' ? 'toggled' : ''}"><i data-feather="tag"></i><span>Sizes</span></a>
                                         <ul class="dropdown-menu" style='${controller == '/dashboard/size' ? 'display: block' : ''}'>
                                             <li><a class="nav-link" href="${pageContext.request.contextPath}/dashboard/size/listing.ad">Listing</a></li>
-                                            <li><a class="nav-link" href="${pageContext.request.contextPath}/dashboard/size/listing.ad">Add New</a></li>
+                                            <li><a class="nav-link" href="${pageContext.request.contextPath}/dashboard/size/add.ad">Add New</a></li>
                                         </ul>
                                     </li>
                                 </c:if>
 
-                                <c:if test="${account.role.id == 1 || account.role.id == 4}">
+                                <c:if test="${account.role.id == 4}">
                                     <li class="${controller == '/dashboard/order' ? 'active' : ''}">
                                         <a class="nav-link" href="${pageContext.request.contextPath}/dashboard/order/listing.ad"><i data-feather="shopping-cart"></i><span>Orders</span></a>
                                     </li>
@@ -197,7 +202,7 @@
                                         </ul>
                                     </li>
                                 </c:if>
-                                <c:if test="${account.role.id == 1 || account.role.id == 3}">
+                                <c:if test="${account.role.id == 3}">
                                     <li class="dropdown">
                                         <a href="#" class="menu-toggle nav-link has-dropdown ${controller == '/dashboard/blog' ? 'toggled' : ''}">
                                             <i data-feather="feather"></i>
@@ -210,7 +215,7 @@
                                     </li>
                                 </c:if>
                                 <li class="menu-header">Media</li>
-                                    <c:if test="${account.role.id == 1 || account.role.id == 3}">
+                                    <c:if test="${account.role.id == 3}">
                                     <li class="dropdown">
                                         <a href="#" class="menu-toggle nav-link has-dropdown ${controller == '/dashboard/slider' ? 'toggled' : ''}"><i data-feather="shopping-bag"></i><span>Sliders</span></a>
                                         <ul class="dropdown-menu" style="${controller == '/dashboard/slider' ? 'display: block' : ''}">
@@ -225,16 +230,6 @@
                 </div>
                 <!-- Main Content -->
                 <jsp:include page="/WEB-INF/dashboard/${controller}/${action}.jsp" />
-                <!-- Main Content -->
-
-
-                <footer class="main-footer">
-                    <div class="footer-left">
-                        <a href="templateshub.net">Mon's Shop</a></a>
-                    </div>
-                    <div class="footer-right">
-                    </div>
-                </footer>
             </div>
         </div>
 
@@ -335,6 +330,8 @@
             <span style='display: none'>${dashboard_toast__message}</span>
         </div>
 
+
+
         <!-- General JS Scripts -->
         <script src="${pageContext.request.contextPath}/dashboard/assets/js/app.min.js"></script>
         <!-- JS Libraies -->
@@ -353,6 +350,130 @@
         <script src="${pageContext.request.contextPath}/dashboard/assets/bundles/upload-preview/assets/js/jquery.uploadPreview.min.js"></script>
         <script src="${pageContext.request.contextPath}/dashboard/assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
         <script src="${pageContext.request.contextPath}/dashboard/assets/js/page/create-post.js"></script>
+
+        <script>
+            jQuery(document).ready(function () {
+                // click on next button
+                jQuery('.form-wizard-next-btn').click(function () {
+                    var parentFieldset = jQuery(this).parents('.wizard-fieldset');
+                    var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
+                    var next = jQuery(this);
+                    var nextWizardStep = true;
+                    parentFieldset.find('.wizard-required').each(function () {
+                        var thisValue = jQuery(this).val();
+
+                        var price = jQuery('#price').val();
+                        var percent = jQuery('#percent_discount').val();
+                        var quantity = jQuery('#quantity').val();
+
+                        if (!Number(price)) {
+                            jQuery('#price').siblings(".wizard-form-error").slideDown();
+                            nextWizardStep = false;
+                        } else {
+                            jQuery('#price').siblings(".wizard-form-error").slideUp();
+                        }
+
+                        if (!Number(percent)) {
+                            jQuery('#percent_discount').siblings(".wizard-form-error").slideDown();
+                            nextWizardStep = false;
+                        } else {
+                            jQuery('#percent_discount').siblings(".wizard-form-error").slideUp();
+                        }
+
+                        if (!Number(quantity)) {
+                            jQuery('#quantity').siblings(".wizard-form-error").slideDown();
+                            nextWizardStep = false;
+                        } else {
+                            jQuery('#quantity').siblings(".wizard-form-error").slideUp();
+                        }
+
+                        if (thisValue === "") {
+                            jQuery(this).siblings(".wizard-form-error").slideDown();
+                            nextWizardStep = false;
+                        } else {
+                            jQuery(this).siblings(".wizard-form-error").slideUp();
+                        }
+                    });
+                    if (nextWizardStep) {
+                        next.parents('.wizard-fieldset').removeClass("d-block", "400");
+                        currentActiveStep.removeClass('active').addClass('activated').next().addClass('active', "400");
+                        next.parents('.wizard-fieldset').next('.wizard-fieldset').addClass("d-block", "400");
+                        jQuery(document).find('.wizard-fieldset').each(function () {
+                            if (jQuery(this).hasClass('show')) {
+                                var formAtrr = jQuery(this).attr('data-tab-content');
+                                jQuery(document).find('.form-wizard-steps .form-wizard-step-item').each(function () {
+                                    if (jQuery(this).attr('data-attr') == formAtrr) {
+                                        jQuery(this).addClass('active');
+                                        var innerWidth = jQuery(this).innerWidth();
+                                        var position = jQuery(this).position();
+                                        jQuery(document).find('.form-wizard-step-move').css({"left": position.left, "width": innerWidth});
+                                    } else {
+                                        jQuery(this).removeClass('active');
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+                //click on previous button
+                jQuery('.form-wizard-previous-btn').click(function () {
+                    var counter = parseInt(jQuery(".wizard-counter").text());
+                    ;
+                    var prev = jQuery(this);
+                    var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
+                    prev.parents('.wizard-fieldset').removeClass("d-block", "400");
+                    prev.parents('.wizard-fieldset').prev('.wizard-fieldset').addClass("d-block", "400");
+                    currentActiveStep.removeClass('active').prev().removeClass('activated').addClass('active', "400");
+                    jQuery(document).find('.wizard-fieldset').each(function () {
+                        if (jQuery(this).hasClass('show')) {
+                            var formAtrr = jQuery(this).attr('data-tab-content');
+                            jQuery(document).find('.form-wizard-steps .form-wizard-step-item').each(function () {
+                                if (jQuery(this).attr('data-attr') == formAtrr) {
+                                    jQuery(this).addClass('active');
+                                    var innerWidth = jQuery(this).innerWidth();
+                                    var position = jQuery(this).position();
+                                    jQuery(document).find('.form-wizard-step-move').css({"left": position.left, "width": innerWidth});
+                                } else {
+                                    jQuery(this).removeClass('active');
+                                }
+                            });
+                        }
+                    });
+                });
+                //click on form submit button
+                jQuery(document).on("click", ".form-wizard .form-wizard-submit", function () {
+                    var parentFieldset = jQuery(this).parents('.wizard-fieldset');
+                    var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
+                    parentFieldset.find('.wizard-required').each(function () {
+                        var thisValue = jQuery(this).val();
+                        if (thisValue == "") {
+                            jQuery(this).siblings(".wizard-form-error").slideDown();
+                        } else {
+                            jQuery(this).siblings(".wizard-form-error").slideUp();
+                        }
+                    });
+                });
+                // focus on input field check empty or not
+                jQuery(".form-control").on('focus', function () {
+                    var tmpThis = jQuery(this).val();
+                    if (tmpThis === '') {
+                        jQuery(this).parent().addClass("focus-input");
+                    } else if (tmpThis !== '') {
+                        jQuery(this).parent().addClass("focus-input");
+                    }
+                }).on('blur', function () {
+                    var tmpThis = jQuery(this).val();
+                    if (tmpThis === '') {
+                        jQuery(this).parent().removeClass("focus-input");
+                        jQuery(this).siblings('.wizard-form-error').slideDown("3000");
+                    } else if (tmpThis !== '') {
+                        jQuery(this).parent().addClass("focus-input");
+                        jQuery(this).siblings('.wizard-form-error').slideUp("3000");
+                    }
+                });
+            });
+
+        </script>
         <!-- Add -->
 
         <!-- Toast -->
@@ -425,6 +546,8 @@
         <script src="${pageContext.request.contextPath}/dashboard/assets/js/scripts.js"></script>
         <!-- Custom JS File -->
         <script src="${pageContext.request.contextPath}/dashboard/assets/js/custom.js"></script>
+
+
     </body>
 
 

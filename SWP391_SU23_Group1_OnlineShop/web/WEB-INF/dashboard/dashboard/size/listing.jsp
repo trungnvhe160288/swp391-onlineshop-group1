@@ -26,7 +26,7 @@
                                             <td>${item.id}</td>
                                             <td>${item.name}</td>
                                             <td>${common.getDateFormat(item.createAt, 'dd-MM-yyyy')}</td>
-                                            <td><a href="#" class="btn btn-primary">Detail</a></td>
+                                            <td><a href="${pageContext.request.contextPath}/dashboard/size/detail.ad?id=${item.id}" class="btn btn-primary">Detail</a></td>
                                         </tr>
                                     </c:forEach>
                                 </table>

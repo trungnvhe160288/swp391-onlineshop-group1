@@ -2,6 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean class="Ultils.CommonForJSP" id="common"/>
 <jsp:useBean class="DAL.BlogDAO" id="bd"/>
+<jsp:useBean class="DAL.UserDAO" id="ud"/>
 
 
 
@@ -27,13 +28,13 @@
                 <div class="blog--list-view">
                     <div class="article"> 
                         <!-- Article Image --> 
-                        <a class="article_featured-image" href="#">
+                        <a class="article_featured-image" href="#!">
                             <img class="blur-up lazyload" data-src="${pageContext.request.contextPath}${data.thumbnail_url}" src="${pageContext.request.contextPath}${data.thumbnail_url}" alt="blog thum"></a> 
                         <h1>
                             <a href="blog-left-sidebar.html">${data.title}</a>
                         </h1>
                         <ul class="publish-detail">                      
-                            <li><i class="anm anm-user-al" aria-hidden="true"></i>  User</li>
+                            <li><i class="anm anm-user-al" aria-hidden="true"></i>  ${ud.getUserByID(data.user_id).fullName}</li>
                             <li><i class="icon anm anm-clock-r"></i> <time datetime="2017-05-02">${common.getDateFormat(data.createAt, 'dd-MM-yyyy')}</time></li>
 
                         </ul>
@@ -79,7 +80,10 @@
             <!--Sidebar-->
             <div class="col-12 col-sm-12 col-md-3 col-lg-3 sidebar">
                 <div class="sidebar_tags">
+
                     <div class="sidebar_widget">
+                        
+
                         <c:set var="recent" value="${bd.getRecentBlog()}"/>
                         <div class="widget-title"><h2>Recent Posts</h2></div>
                         <div class="widget-content">
