@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean class="Ultils.CommonForJSP" id="common"/>
+<jsp:useBean class="DAL.CommonForJSP" id="common"/>
 
 
 <!DOCTYPE html>
@@ -204,7 +204,7 @@
                                     <div class="total">
                                         <c:if test="${cart.items.isEmpty()}">
                                             <div class="total-in d-flex justify-content-center" style='border: unset'>
-                                                <label class="text-center">You Don't Have Any Product In Cart</label>
+                                                <label class="text-center">No Have Any Product In Cart</label>
                                             </div>
                                         </c:if>
                                         <c:if test="${!cart.items.isEmpty()}">
@@ -494,12 +494,12 @@
                                         <li><a href="#">Women</a></li>
                                         <li><a href="#">Men</a></li>
                                         <li><a href="#">Kids</a></li>
-                                        <li><a href="#">Accessories</a></li>
-                                        <li><a href="#">Shoes</a></li>
+                                        <li><a href="#">Sportswear</a></li>
+                                        <li><a href="#">Sale</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-3 col-lg-3 footer-links">
-                                    <h4 class="h4">Information</h4>
+                                    <h4 class="h4">Informations</h4>
                                     <ul>
                                         <li><a href="#">About us</a></li>
                                         <li><a href="#">Careers</a></li>
@@ -522,13 +522,13 @@
                                     <h4 class="h4">Contact Us</h4>
                                     <ul class="addressFooter">
                                         <li><i class="icon anm anm-map-marker-al"></i>
-                                            <p>No 1, Thach Hoa Commune, Thach That District, Hanoi Province</p>
+                                            <p>Đất Thổ Cư Hòa Lạc, Km29, ĐCT08, Thạch Hoà, Thạch Thất, Hà Nội</p>
                                         </li>
                                         <li class="phone"><i class="icon anm anm-phone-s"></i>
-                                            <p>+84 987654321</p>
+                                            <p>0838456798</p>
                                         </li>
                                         <li class="email"><i class="icon anm anm-envelope-l"></i>
-                                            <p>monsa.admin@gmail.com</p>
+                                            <p>email@yousite.com</p>
                                         </li>
                                     </ul>
                                 </div>
