@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean class="DAL.DAO"  id="dao"/>
 <jsp:useBean class="DAL.CategoryDAO"  id="cd"/>
-<jsp:useBean class="DAL.CommonForJSP" id="common"/>
+<jsp:useBean class="Ultils.CommonForJSP" id="common"/>
 
 
 <style>
