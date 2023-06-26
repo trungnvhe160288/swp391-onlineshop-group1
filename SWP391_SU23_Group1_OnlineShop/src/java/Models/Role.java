@@ -12,17 +12,15 @@ public class Role {
     private String name;
     private Date createAt;
     private Date updateAt;
-    private Boolean active;
 
     public Role() {
     }
 
-    public Role(int id, String name, Date createAt, Date updateAt, Boolean active) {
+    public Role(int id, String name, Date createAt, Date updateAt) {
         this.id = id;
         this.name = name;
         this.createAt = createAt;
         this.updateAt = updateAt;
-        this.active = active;
     }
 
     public int getId() {
@@ -56,14 +54,4 @@ public class Role {
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
     }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-    
-    
 }

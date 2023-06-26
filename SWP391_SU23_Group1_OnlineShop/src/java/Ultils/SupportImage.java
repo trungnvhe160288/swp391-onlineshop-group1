@@ -14,34 +14,37 @@ import java.io.InputStream;
 
 public class SupportImage {
 
-    public static void uploadImage(HttpServletRequest request, HttpServletResponse response, String urlPath, String newName) throws IOException, ServletException {
+    public static String uploadImage(HttpServletRequest request, HttpServletResponse response, String urlPath, String newName) throws IOException, ServletException {
         Part file = request.getPart("upload_image");
 
         String imageFileName = file.getSubmittedFileName(); // lấy ra file ảnh đã chọn
-
         System.out.println("Image Selected: " + imageFileName);
+        String uploadName = "";
 
-        System.out.println("urlPath: " + urlPath);
-        System.out.println("newName: " + newName);
+        if (!imageFileName.isEmpty()) {
+            String[] image_split = imageFileName.split("\\.");
 
-        String uploadPath = request.getContextPath() + urlPath;
+            uploadName = newName + "." + image_split[1];
 
-        System.out.println("UploadPath: " + uploadPath);
-        try {
-            FileOutputStream fos = new FileOutputStream(uploadPath);
-            InputStream is = file.getInputStream();
+            String uploadPath = "D:/SU23/Java/Group1_Online_Shop/web" + urlPath + uploadName;
 
-            byte[] data = new byte[is.available()];
-            is.read(data);
-            fos.write(data);
-            fos.close();
+            System.out.println("uploadPath: " + uploadPath);
+            System.out.println("uploadName: " + uploadName);
 
-            SupportMessage.sendToastToDashboard(request.getSession(), 1, "UpLoad Image", "Successful !");
+            try {
+                FileOutputStream fos = new FileOutputStream(uploadPath);
+                InputStream is = file.getInputStream();
 
-        } catch (IOException e) {
-            System.out.println(e);
-            SupportMessage.sendToastToDashboard(request.getSession(), 0, "UpLoad Image", "Something Wrong !");
+                byte[] data = new byte[is.available()];
+                is.read(data);
+                fos.write(data);
+                fos.close();
 
+            } catch (IOException e) {
+                System.out.println(e);
+                return "";
+            }
         }
+        return uploadName;
     }
 }
