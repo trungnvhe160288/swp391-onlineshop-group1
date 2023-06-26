@@ -147,7 +147,7 @@ public class CartDAO extends DBContext {
 
         return list;
     }
-    
+    //getAll
     public List<Order> getAll() {
         List<Order> list = new ArrayList<>();
 
