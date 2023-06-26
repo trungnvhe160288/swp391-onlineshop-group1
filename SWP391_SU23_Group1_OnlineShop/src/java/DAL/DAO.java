@@ -5,6 +5,7 @@
 package DAL;
 
 import Models.Color;
+import Models.Image;
 import Models.Role;
 import Models.Size;
 import Ultils.DBContext;

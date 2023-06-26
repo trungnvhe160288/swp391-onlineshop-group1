@@ -6,6 +6,7 @@ package Controllers.Dashboard;
 
 import Ultils.Common;
 import DAL.DAO;
+import Models.Color;
 import Models.Size;
 import Ultils.SupportMessage;
 import java.io.IOException;
@@ -18,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author phanh
+ * @author trung
  */
 @WebServlet(name = "SizeDashboard", urlPatterns = {"/dashboard/size"})
 public class SizeDashboard extends HttpServlet {
