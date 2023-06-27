@@ -156,7 +156,6 @@ public class UserDAO extends DBContext {
             ps.setString(3, email);
             ps.setDate(4, Common.getCurrentDate());
             ps.setBoolean(5, true);
-
             ps.executeUpdate();
 
             return true;
