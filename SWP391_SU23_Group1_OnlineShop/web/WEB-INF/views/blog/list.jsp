@@ -5,7 +5,6 @@
 <jsp:useBean class="DAL.UserDAO" id="ud"/>
 <jsp:useBean class="DAL.ProductDAO" id="pd"/>
 
-
 <div id="page-content">
     <!--Page Title-->
     <div class="page section-header text-center mb-0">
