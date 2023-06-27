@@ -121,9 +121,11 @@ public class LoginFilter implements Filter {
         try {
             chain.doFilter(request, response);
         } catch (Throwable t) {
-            // If an exception is thrown somewhere down the filter chain,
-            // we still want to execute our after processing, and then
-            // rethrow the problem after that.
+            
+            // Nếu một Exception được Throwable đâu đó trong chuỗi lọc, 
+            // chúng tôi vẫn muốn thực hiện sau khi xử lý xong, 
+            // và sau đó rethrow nó.
+            
             problem = t;
             t.printStackTrace();
         }
