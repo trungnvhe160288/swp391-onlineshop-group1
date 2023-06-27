@@ -43,7 +43,6 @@ public class ErrorController extends HttpServlet {
                 request.setAttribute("controller", "error");
                 request.setAttribute("action", "404");
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
-
         }
     } 
 
