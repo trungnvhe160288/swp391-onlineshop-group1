@@ -13,7 +13,6 @@
         </div>
     </div>
     <!--End Collection Banner-->
-
     <div class="container-fluid mt-5">
         <div class="row">
             <!--Sidebar-->
