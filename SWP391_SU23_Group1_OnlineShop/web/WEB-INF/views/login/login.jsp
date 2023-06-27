@@ -41,8 +41,8 @@
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 main-col offset-md-3">
                 <div class="mb-4">
                     <form method="POST" action="" id="CustomerLoginForm" accept-charset="UTF-8" class="contact-form">	
-
                         <div id="white-frame">
+                            <!-- Page Title -->
                             <div class="page section-header text-center" style="position: relative;">
                                 <div class="page-title" style="text-align:center">
                                     <div class="wrapper">
@@ -50,6 +50,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- End Page Title -->
                             <div class="row">
                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                     <div class="form-group">
