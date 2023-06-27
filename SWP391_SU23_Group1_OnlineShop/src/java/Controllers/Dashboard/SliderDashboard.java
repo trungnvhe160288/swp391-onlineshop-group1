@@ -105,9 +105,7 @@ public class SliderDashboard extends HttpServlet {
         String actived = request.getParameter("actived");
 
         SliderDAO dao = new SliderDAO();
-
         Slider slider = dao.getLastSlider();
-
         int id = slider.getId() + 1;
         String url = "";
 
@@ -127,9 +125,8 @@ public class SliderDashboard extends HttpServlet {
         //
 
         Slider newSlider = new Slider(id, url, title, subTitle, Common.getCurrentDate(), Common.getCurrentDate(), actived.equalsIgnoreCase("true"));
-
         boolean status = dao.add(newSlider);
-
+        
         if (status) {
             SupportMessage.sendToastToDashboard(request.getSession(), 1, "ADD Silder", "Successful !");
         } else {
