@@ -31,7 +31,6 @@
         padding: 25px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
-
 </style>
 
 <div id="page-content">
