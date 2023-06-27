@@ -26,7 +26,7 @@
         transform: translate(-50%, -60%);
         z-index: 9999;
         width: 600px;
-        height: 500px;
+        height: 470px;
         background-color: white;
         border-radius: 5px;
         padding: 25px;
