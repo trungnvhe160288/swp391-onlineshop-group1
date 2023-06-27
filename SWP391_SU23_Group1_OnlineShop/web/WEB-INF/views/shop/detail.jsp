@@ -14,7 +14,6 @@
             </div>
         </div>
         <!--End Breadcrumb-->
-
         <div id="ProductSection-product-template" class="product-template__container prstyle1 container product-right-sidebar">
             <!--product-single-->
             <div class="product-single">
