@@ -43,6 +43,7 @@ public class FrontController extends HttpServlet {
 //        System.out.println("ServletPath: " + url);
 //        System.out.println("Controller: " + controller);
 //        System.out.println("Action: " + action);
+
         request.setAttribute("controller", controller);
         request.setAttribute("action", action);
 
