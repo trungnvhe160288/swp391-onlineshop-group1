@@ -21,7 +21,6 @@
             </c:forEach>
         </div>
     </div>
-
     <!--Image Banners-->
     <div class="section imgBanners">
         <div class="imgBnrOuter">
