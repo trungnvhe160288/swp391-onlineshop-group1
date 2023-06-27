@@ -4,7 +4,7 @@
 
 
 
-<div id="page-content">
+<div id="page-content" style="min-height: 70vh">
     <!--Page Title-->
     <div class="page section-header text-center">
         <div class="page-title">
