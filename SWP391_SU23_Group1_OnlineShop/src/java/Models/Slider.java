@@ -84,8 +84,5 @@ public class Slider {
     public void setActive(boolean active) {
         this.active = active;
     }
-    
-    
-    
-    
+      
 }
