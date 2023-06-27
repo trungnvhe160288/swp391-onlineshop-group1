@@ -25,7 +25,7 @@ public class Order {
 
     public Order() {
     }
-
+    //Order
     public Order(int id, int uid, int status, String fullName, String email, String phone, String address, String note, Date createAt, Date updateAt, List<OrderLine> orderLine) {
         this.id = id;
         this.uid = uid;

@@ -180,7 +180,7 @@ public class BlogDAO extends DBContext {
         }
         return null;
     }
-
+    //getBlogById
     public Blog getBlogByID(int id) {
 
         try {
