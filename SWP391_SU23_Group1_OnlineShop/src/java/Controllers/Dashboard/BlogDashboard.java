@@ -22,6 +22,48 @@ import java.util.List;
 
 @WebServlet(name = "BlogDashboard", urlPatterns = {"/dashboard/blog"})
 public class BlogDashboard extends HttpServlet {
+    
+    //Process for edit blog
+    private void edit(HttpServletRequest request, HttpServletResponse response, int id) {
+        BlogDAO bd = new BlogDAO();
+
+        String title = request.getParameter("title");
+        String published = request.getParameter("published");
+        String description = request.getParameter("description");
+        String content = request.getParameter("content");
+
+        Blog blog = bd.getBlogByID(id);
+
+        if (blog != null) {
+            blog.setTitle(title);
+            blog.setPublished(published.equalsIgnoreCase("true"));
+            blog.setDescription(description);
+            blog.setContent(content);
+            blog.setUpdateAt(Common.getCurrentDate());
+
+            bd.update(blog);
+
+            SupportMessage.sendToastToDashboard(request.getSession(), 1, "Update Blog", "Successful !");
+        } else {
+            SupportMessage.sendToastToDashboard(request.getSession(), 0, "Update Blog", "Something Wrong !");
+        }
+
+        request.getSession().setAttribute("active", "edit");
+
+    }
+
+    //process detail blog 
+    private void getDetailBlogByID(HttpServletRequest request, HttpServletResponse response) {
+        //Call BlogDAO 
+        BlogDAO bd = new BlogDAO();
+
+        String xID = request.getParameter("id");
+        int id = Common.parseInt(xID);
+
+        Blog blog = bd.getBlogByID(id);
+
+        request.setAttribute("data", blog);
+    }
 
     //process pagination for blog dashboard
     private void pagination(HttpServletRequest request, HttpServletResponse response) {
