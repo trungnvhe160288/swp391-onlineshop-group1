@@ -45,7 +45,7 @@ public class BlogDashboard extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
                 break;
             case "detail":
-                getDetailBlogByID(request, response);
+                getDetailBlogByID(request, response);// call get detail blog
                 request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
                 break;
             default:
@@ -168,7 +168,9 @@ public class BlogDashboard extends HttpServlet {
 
     }
 
+    //process detail blog 
     private void getDetailBlogByID(HttpServletRequest request, HttpServletResponse response) {
+        //Call BlogDAO 
         BlogDAO bd = new BlogDAO();
 
         String xID = request.getParameter("id");
