@@ -83,7 +83,7 @@ public class BlogDashboard extends HttpServlet {
             case "upload":
                 String xId_raw = request.getParameter("id");
                 int xId = Common.parseInt(xId_raw);
-                upload(request, response, xId);
+                upload(request, response, xId);//call upload funtion
                 response.sendRedirect(request.getContextPath() + "/dashboard/blog/detail.ad?id=" + xId);
                 break;
             default:
