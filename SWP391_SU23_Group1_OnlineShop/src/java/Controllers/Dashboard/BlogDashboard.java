@@ -71,7 +71,7 @@ public class BlogDashboard extends HttpServlet {
         int id;
         switch (action) {
             case "add":
-                add(request, response);
+                add(request, response);//call add funtion 
                 request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
                 break;
             case "edit":
