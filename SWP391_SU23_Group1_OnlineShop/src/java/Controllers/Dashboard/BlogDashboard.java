@@ -185,6 +185,7 @@ public class BlogDashboard extends HttpServlet {
         BlogDAO bd = new BlogDAO();
         List<Blog> data = bd.getAll();
         
+        //Process redirect pagination
         String xpage = request.getParameter("page");
 
         int page = (xpage == null) ? 1 : Common.parseInt(xpage);
@@ -193,9 +194,10 @@ public class BlogDashboard extends HttpServlet {
         int numberOfPage = ((size % numberPerPage == 0) ? (size / numberPerPage) : (size / numberPerPage + 1));
         int start = (page - 1) * numberPerPage;
         int end = Math.min(page * numberPerPage, size);
-
+        //Call BlogDAO to get list need to show
         List<Blog> listByPage = bd.getListByPage(data, start, end);
-
+        
+        //Set data for view 
         request.setAttribute("page", page);
         request.setAttribute("numberOfPage", numberOfPage);
         request.setAttribute("start", start + 1);
