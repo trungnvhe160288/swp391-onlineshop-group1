@@ -23,6 +23,39 @@ import java.util.List;
 @WebServlet(name = "BlogDashboard", urlPatterns = {"/dashboard/blog"})
 public class BlogDashboard extends HttpServlet {
     
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = (String) request.getAttribute("action");
+        switch (action) {
+            case "listing":
+                pagination(request, response); // call process pagination
+                request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
+                break;
+            case "add":
+                request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
+                break;
+            case "detail":
+                getDetailBlogByID(request, response);// call get detail blog
+                request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
+                break;
+            default:
+                //Show error page
+                request.setAttribute("controller", "error");
+                request.setAttribute("action", "404");
+                request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
+        }
+    }
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
