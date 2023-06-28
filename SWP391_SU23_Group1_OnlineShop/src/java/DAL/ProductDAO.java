@@ -319,7 +319,7 @@ public class ProductDAO extends DBContext {
         }
         return null;
     }
-
+    //getListPage
     public List<Product> getListByPage(List<Product> list, int start, int end) {
         List<Product> arr = new ArrayList<>();
         for (int i = start; i < end; i++) {
