@@ -107,7 +107,8 @@ public class BlogDashboard extends HttpServlet {
         }
 
     }
-
+    
+    //process add button onview
     private void add(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         BlogDAO bd = new BlogDAO();
 
