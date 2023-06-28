@@ -38,7 +38,7 @@ public class BlogDashboard extends HttpServlet {
         String action = (String) request.getAttribute("action");
         switch (action) {
             case "listing":
-                pagination(request, response);
+                pagination(request, response); // call process pagination
                 request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
                 break;
             case "add":
@@ -139,6 +139,7 @@ public class BlogDashboard extends HttpServlet {
 
     }
 
+    
     private void edit(HttpServletRequest request, HttpServletResponse response, int id) {
         BlogDAO bd = new BlogDAO();
 
@@ -177,12 +178,13 @@ public class BlogDashboard extends HttpServlet {
 
         request.setAttribute("data", blog);
     }
-
+    
+    //process pagination for blog dashboard
     private void pagination(HttpServletRequest request, HttpServletResponse response) {
+        //Call BlogDAO 
         BlogDAO bd = new BlogDAO();
-
         List<Blog> data = bd.getAll();
-
+        
         String xpage = request.getParameter("page");
 
         int page = (xpage == null) ? 1 : Common.parseInt(xpage);
