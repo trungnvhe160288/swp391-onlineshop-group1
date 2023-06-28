@@ -71,19 +71,19 @@ public class BlogDashboard extends HttpServlet {
         int id;
         switch (action) {
             case "add":
-                add(request, response);
+                add(request, response);//call add funtion 
                 request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
                 break;
             case "edit":
                 String id_raw = request.getParameter("id");
                 id = Common.parseInt(id_raw);
-                edit(request, response, id);
+                edit(request, response, id);//call edit funtion
                 response.sendRedirect(request.getContextPath() + "/dashboard/blog/detail.ad?id=" + id);
                 break;
             case "upload":
                 String xId_raw = request.getParameter("id");
                 int xId = Common.parseInt(xId_raw);
-                upload(request, response, xId);
+                upload(request, response, xId);//call upload funtion
                 response.sendRedirect(request.getContextPath() + "/dashboard/blog/detail.ad?id=" + xId);
                 break;
             default:
