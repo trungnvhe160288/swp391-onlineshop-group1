@@ -23,6 +23,44 @@ import java.util.List;
 @WebServlet(name = "BlogDashboard", urlPatterns = {"/dashboard/blog"})
 public class BlogDashboard extends HttpServlet {
     
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = (String) request.getAttribute("action");
+        int id;
+        switch (action) {
+            case "add":
+                add(request, response);
+                request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
+                break;
+            case "edit":
+                String id_raw = request.getParameter("id");
+                id = Common.parseInt(id_raw);
+                edit(request, response, id);
+                response.sendRedirect(request.getContextPath() + "/dashboard/blog/detail.ad?id=" + id);
+                break;
+            case "upload":
+                String xId_raw = request.getParameter("id");
+                int xId = Common.parseInt(xId_raw);
+                upload(request, response, xId);
+                response.sendRedirect(request.getContextPath() + "/dashboard/blog/detail.ad?id=" + xId);
+                break;
+            default:
+                //Show error page
+                request.setAttribute("controller", "error");
+                request.setAttribute("action", "404");
+                request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
+        }
+    }
+    
     private void upload(HttpServletRequest request, HttpServletResponse response, int id) throws IOException, ServletException {
         String uploadPath = "/images/blog/";
         String fileName = "blog_" + id;
