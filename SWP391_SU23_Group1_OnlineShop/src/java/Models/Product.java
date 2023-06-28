@@ -10,6 +10,7 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
+//Product
 public class Product {
 
     private int id;
@@ -28,7 +29,7 @@ public class Product {
     private List<Image> image;
     private List<Color> color;
     private List<Size> size;
-
+    
     public Product() {
     }
 
