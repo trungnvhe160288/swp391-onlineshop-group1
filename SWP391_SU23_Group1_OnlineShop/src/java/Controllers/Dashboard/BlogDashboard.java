@@ -77,7 +77,7 @@ public class BlogDashboard extends HttpServlet {
             case "edit":
                 String id_raw = request.getParameter("id");
                 id = Common.parseInt(id_raw);
-                edit(request, response, id);
+                edit(request, response, id);//call edit funtion
                 response.sendRedirect(request.getContextPath() + "/dashboard/blog/detail.ad?id=" + id);
                 break;
             case "upload":
