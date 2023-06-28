@@ -12,7 +12,7 @@ public final class Cart {
     public Cart() {
         items = new ArrayList<>();
     }
-
+    //Cart
     public Cart(String txt, List<Product> list) {
         items = new ArrayList<>();
         try {
