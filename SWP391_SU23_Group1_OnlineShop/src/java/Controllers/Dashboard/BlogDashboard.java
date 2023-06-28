@@ -23,6 +23,51 @@ import java.util.List;
 @WebServlet(name = "BlogDashboard", urlPatterns = {"/dashboard/blog"})
 public class BlogDashboard extends HttpServlet {
     
+    private void upload(HttpServletRequest request, HttpServletResponse response, int id) throws IOException, ServletException {
+        String uploadPath = "/images/blog/";
+        String fileName = "blog_" + id;
+        String uploadName = SupportImage.uploadImage(request, response, uploadPath, fileName);
+        if (!uploadName.isEmpty()) {
+            BlogDAO bd = new BlogDAO();
+            bd.uploadImage(id, "/images/blog/" + uploadName);
+            SupportMessage.sendToastToDashboard(request.getSession(), 1, "UpLoad Image", "Successful !");
+        } else {
+            SupportMessage.sendToastToDashboard(request.getSession(), 0, "UpLoad Image", "Failed !");
+        }
+
+    }
+    
+    //process add button onview
+    private void add(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        BlogDAO bd = new BlogDAO();
+
+        String title = request.getParameter("title");
+        String published = request.getParameter("published");
+        String description = request.getParameter("description");
+        String content = request.getParameter("content");
+        Blog lastBlog = bd.getLastBlog();
+        int id = lastBlog.getId() + 1;
+        //upload image
+        String newName = "blog_" + id;
+        String uploadPath = "/images/blog/";
+        String uploadName = SupportImage.uploadImage(request, response, uploadPath, newName);
+        String thumbnail_url = uploadPath + uploadName;
+        //
+        HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("account");
+
+        Blog blog = new Blog(id, thumbnail_url, u.getId(), title, description, content, Common.getCurrentDate(), Common.getCurrentDate(), published.equalsIgnoreCase("true"));
+
+        boolean flag = bd.add(blog);
+
+        if (flag) {
+            SupportMessage.sendToastToDashboard(session, 1, "Add Blog", "Successful !");
+        } else {
+            SupportMessage.sendToastToDashboard(session, 0, "Add Blog", "Faild !");
+        }
+
+    }
+    
     //Process for edit blog
     private void edit(HttpServletRequest request, HttpServletResponse response, int id) {
         BlogDAO bd = new BlogDAO();
