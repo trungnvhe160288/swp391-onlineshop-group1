@@ -220,7 +220,7 @@
                                         <a href="#" class="menu-toggle nav-link has-dropdown ${controller == '/dashboard/slider' ? 'toggled' : ''}"><i data-feather="shopping-bag"></i><span>Sliders</span></a>
                                         <ul class="dropdown-menu" style="${controller == '/dashboard/slider' ? 'display: block' : ''}">
                                             <li><a class="nav-link" href="${pageContext.request.contextPath}/dashboard/slider/listing.ad">Listing</a></li>
-                                            <li><a class="nav-link" href="#">Add New</a></li>
+                                            <li><a class="nav-link" href="${pageContext.request.contextPath}/dashboard/slider/add.ad">Add New</a></li>
                                         </ul>
                                     </li>
                                 </c:if>
