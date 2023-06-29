@@ -162,7 +162,7 @@ public class ShopController extends HttpServlet {
 
         return sorting(request, response, data);
     }
-
+    //ListProduct
     private List<Product> sorting(HttpServletRequest request, HttpServletResponse response, List<Product> data) {
         String sort = request.getParameter("sortBy");
 
