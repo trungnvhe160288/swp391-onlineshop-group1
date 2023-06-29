@@ -74,6 +74,7 @@ public class BlogController extends HttpServlet {
     
     // Process pagination 
     private void pagination(HttpServletRequest request, HttpServletResponse response) {
+        //Call BlogDAO
         BlogDAO bd = new BlogDAO();
         List<Blog> data = search(request, response); // call search method 
         String xpage = request.getParameter("page");
