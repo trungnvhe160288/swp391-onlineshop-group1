@@ -94,7 +94,7 @@ public class ProductDAO extends DBContext {
                         + "  WHERE ps.[product_id] = ?";
                 PreparedStatement st3 = connection.prepareStatement(sql3);
                 st3.setInt(1, pid);
-
+                //getData
                 ResultSet rs3 = st3.executeQuery();
                 while (rs3.next()) {
                     size.add(new Size(rs3.getInt("id"), rs3.getString("name"), rs3.getDate("created_at"), rs3.getDate("updateAt")));
