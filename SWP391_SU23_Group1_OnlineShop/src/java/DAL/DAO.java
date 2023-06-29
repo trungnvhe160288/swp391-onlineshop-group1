@@ -72,7 +72,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
-
+    //getAllRole
     public List<Role> getAllRole() {
         List<Role> list = new ArrayList<>();
 

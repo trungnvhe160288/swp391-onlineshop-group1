@@ -22,7 +22,7 @@ import java.util.List;
 
 @WebServlet(name = "BlogDashboard", urlPatterns = {"/dashboard/blog"})
 public class BlogDashboard extends HttpServlet {
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -55,7 +55,7 @@ public class BlogDashboard extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
         }
     }
-
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -71,19 +71,19 @@ public class BlogDashboard extends HttpServlet {
         int id;
         switch (action) {
             case "add":
-                add(request, response);
+                add(request, response);//call add funtion 
                 request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
                 break;
             case "edit":
                 String id_raw = request.getParameter("id");
                 id = Common.parseInt(id_raw);
-                edit(request, response, id);
+                edit(request, response, id);//call edit funtion
                 response.sendRedirect(request.getContextPath() + "/dashboard/blog/detail.ad?id=" + id);
                 break;
             case "upload":
                 String xId_raw = request.getParameter("id");
                 int xId = Common.parseInt(xId_raw);
-                upload(request, response, xId);
+                upload(request, response, xId);//call upload funtion
                 response.sendRedirect(request.getContextPath() + "/dashboard/blog/detail.ad?id=" + xId);
                 break;
             default:
@@ -93,7 +93,7 @@ public class BlogDashboard extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
         }
     }
-
+    
     private void upload(HttpServletRequest request, HttpServletResponse response, int id) throws IOException, ServletException {
         String uploadPath = "/images/blog/";
         String fileName = "blog_" + id;
@@ -138,8 +138,8 @@ public class BlogDashboard extends HttpServlet {
         }
 
     }
-
     
+    //Process for edit blog
     private void edit(HttpServletRequest request, HttpServletResponse response, int id) {
         BlogDAO bd = new BlogDAO();
 
@@ -180,7 +180,7 @@ public class BlogDashboard extends HttpServlet {
 
         request.setAttribute("data", blog);
     }
-    
+
     //process pagination for blog dashboard
     private void pagination(HttpServletRequest request, HttpServletResponse response) {
         //Call BlogDAO 
@@ -219,5 +219,4 @@ public class BlogDashboard extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
