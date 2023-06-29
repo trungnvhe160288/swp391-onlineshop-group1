@@ -60,7 +60,7 @@ public class BlogController extends HttpServlet {
 
         }
     }
-
+    //get detail blog
     private List<Blog> search(HttpServletRequest request, HttpServletResponse response) {
         BlogDAO bd = new BlogDAO();
 
@@ -74,6 +74,7 @@ public class BlogController extends HttpServlet {
     
     // Process pagination 
     private void pagination(HttpServletRequest request, HttpServletResponse response) {
+        //Call BlogDAO
         BlogDAO bd = new BlogDAO();
         List<Blog> data = search(request, response); // call search method 
         String xpage = request.getParameter("page");
@@ -113,14 +114,14 @@ public class BlogController extends HttpServlet {
 
         switch (action) {
             case "list":
-                pagination(request, response);
+                pagination(request, response); //call pagination funtion
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response); 
                 break;
             case "detail":
                 String id_raw = request.getParameter("id");
                 int id = Common.parseInt(id_raw);
 
-                Blog b = bd.getBlogByIDAndPublished(id);
+                Blog b = bd.getBlogByIDAndPublished(id);//call getBlogByIDAndPublished to get data
                 request.setAttribute("data", b);
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 break;
