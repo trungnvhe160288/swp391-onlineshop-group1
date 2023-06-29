@@ -60,7 +60,7 @@ public class BlogController extends HttpServlet {
 
         }
     }
-
+    //get detail blog
     private List<Blog> search(HttpServletRequest request, HttpServletResponse response) {
         BlogDAO bd = new BlogDAO();
 
