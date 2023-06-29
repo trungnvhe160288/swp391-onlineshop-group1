@@ -10,7 +10,7 @@ public class OrderLine {
     private int sizeID;
 
     private Product product;
-
+    //OrderLine
     public OrderLine() {
     }
 
