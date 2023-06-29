@@ -96,7 +96,6 @@ public class RoleDashboard extends HttpServlet {
 
                 response.sendRedirect(request.getContextPath() + "/dashboard/role/detail.ad?id=" + id);
                 break;
-
             case "add":
                 if (dao.checkNameRoleExist(name)) {
                     request.setAttribute("name", name);
