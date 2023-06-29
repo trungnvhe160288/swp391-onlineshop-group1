@@ -6,4 +6,6 @@ SWP391_SU23_Group1_OnlineShop/build.xml
 SWP391_SU23_Group1_OnlineShop/src/java/Ultils/DBContext.java
 SWP391_SU23_Group1_OnlineShop/src/java/Ultils/SupportMail.java
 SWP391_SU23_Group1_OnlineShop/src/java/Ultils/SupportImage.java
+SWP391_SU23_Group1_OnlineShop/web/images/*
+
 
