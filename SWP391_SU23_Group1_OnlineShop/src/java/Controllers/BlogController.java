@@ -120,7 +120,7 @@ public class BlogController extends HttpServlet {
                 String id_raw = request.getParameter("id");
                 int id = Common.parseInt(id_raw);
 
-                Blog b = bd.getBlogByIDAndPublished(id);
+                Blog b = bd.getBlogByIDAndPublished(id);//call getBlogByIDAndPublished to get data
                 request.setAttribute("data", b);
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 break;
