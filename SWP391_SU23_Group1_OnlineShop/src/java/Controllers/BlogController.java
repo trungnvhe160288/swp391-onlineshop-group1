@@ -113,7 +113,7 @@ public class BlogController extends HttpServlet {
 
         switch (action) {
             case "list":
-                pagination(request, response);
+                pagination(request, response); //call pagination funtion
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response); 
                 break;
             case "detail":
