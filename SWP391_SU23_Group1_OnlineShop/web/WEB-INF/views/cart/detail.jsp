@@ -15,7 +15,7 @@
         </div>
     </div>
     <!--End Page Title-->
-
+    <><!-- container -->
     <div class="container">
         <div class="row">
             <c:if test="${cart.items.isEmpty()}">
