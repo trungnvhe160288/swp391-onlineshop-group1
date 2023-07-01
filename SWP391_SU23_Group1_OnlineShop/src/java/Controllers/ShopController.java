@@ -211,7 +211,7 @@ public class ShopController extends HttpServlet {
         }
         return data;
     }
-
+    //search
     private List<Product> search(HttpServletRequest request, HttpServletResponse response) {
         ProductDAO pd = new ProductDAO();
 
