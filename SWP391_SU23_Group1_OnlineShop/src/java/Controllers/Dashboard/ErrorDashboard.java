@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author phanh
+ * @author lenovo
  */
 @WebServlet(name = "ErrorDashboard", urlPatterns = {"/dashboard/error"})
 public class ErrorDashboard extends HttpServlet {
