@@ -6,7 +6,6 @@ package Controllers.Dashboard;
  */
 import DAL.CategoryDAO;
 import Ultils.Common;
-import DAL.DAO;
 import DAL.ProductDAO;
 import Models.Category;
 import Models.Color;
@@ -21,7 +20,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
