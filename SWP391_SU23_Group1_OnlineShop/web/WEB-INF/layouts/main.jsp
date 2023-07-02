@@ -238,6 +238,7 @@
                 </div>
             </div>
             <!--End Header-->
+        
             <!--Mobile Menu-->
             <div class="mobile-nav-wrapper" role="navigation">
                 <div class="closemobileMenu"><i class="icon anm anm-times-l pull-right"></i> Close Menu</div>
@@ -413,12 +414,14 @@
                     </li>
                 </ul>
             </div>
+          
             <!--End Mobile Menu-->
             <div id="toast"></div>
             <span id="message" hidden>${toast__message}</span>
 
             <!--Body Content-->
             <jsp:include page="/WEB-INF/views/${controller}/${action}.jsp" />
+         
             <!--End Body Content-->
 
             <!--Footer-->
