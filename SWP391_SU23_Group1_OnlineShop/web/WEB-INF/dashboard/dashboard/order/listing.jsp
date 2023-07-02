@@ -41,7 +41,7 @@
                                                     <c:forEach begin="${0}" end="${item.orderLine.size() > 3 ? 2 : item.orderLine.size() - 1}" var="i">
                                                         <c:set var="line" value="${item.orderLine.get(i)}"/>
                                                         <img alt="image" src="${pageContext.request.contextPath}${line.product.thumbnail_url}" width="45" height="45">
-                                                        
+
                                                     </c:forEach>
                                                     <c:if test="${item.orderLine.size() > 3}">
                                                         More
