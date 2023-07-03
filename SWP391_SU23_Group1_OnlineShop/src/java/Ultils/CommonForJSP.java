@@ -6,6 +6,7 @@ package Ultils;
 
 import DAL.DAO;
 import Models.Color;
+import Models.Comment;
 import Models.Size;
 import java.sql.Date;
 import java.text.NumberFormat;
@@ -86,6 +87,21 @@ public class CommonForJSP {
         return false;
     }
 
-    
+    public float takeTotalRating(int pid){
+        List<Comment> list = new CommentDAO().getCommentByProductId(pid);
+        
+        int total = 0;
+        for (Comment item : list) {
+            total += item.getRate();
+        }
+        
+        int result = 0;
+        if(!list.isEmpty()){
+            result =  total / list.size();
+        }
+        return result;
+        
+        
+    }
 
 }
