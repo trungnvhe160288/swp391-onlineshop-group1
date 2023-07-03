@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.List;
 
+//MyWebsiteController
 @WebServlet(name = "MyWebsiteController", urlPatterns = {"/mywebsite"})
 public class MyWebsiteController extends HttpServlet {
 
