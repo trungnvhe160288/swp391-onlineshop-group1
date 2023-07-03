@@ -13,17 +13,29 @@ public class Image {
     private int product_id;
     private Date createAt;
     private Date updateAt;
+    private boolean status;
 
     public Image() {
     }
 
-    public Image(int id, String url, int product_id, Date createAt, Date updateAt) {
+    public Image(int id, String url, int product_id, Date createAt, Date updateAt, boolean status) {
         this.id = id;
         this.url = url;
         this.product_id = product_id;
         this.createAt = createAt;
         this.updateAt = updateAt;
+        this.status = status;
     }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    
 
     public int getId() {
         return id;
