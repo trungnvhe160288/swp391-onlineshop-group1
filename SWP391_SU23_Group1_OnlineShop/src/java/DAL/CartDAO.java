@@ -324,15 +324,16 @@ public class CartDAO extends DBContext {
                         + "      ,[product_id]\n"
                         + "      ,[created_at]\n"
                         + "      ,[update_at]\n"
+                        + "      ,[status]\n"
                         + "  FROM [dbo].[product_image]\n"
-                        + "  WHERE [product_id] = ?";
+                        + "  WHERE [product_id] = ? and status = 1";
                 PreparedStatement st1 = connection.prepareStatement(sql1);
                 st1.setInt(1, pid);
 
                 ResultSet rs1 = st1.executeQuery();
                 while (rs1.next()) {
                     image.add(new Image(rs1.getInt("id"), rs1.getString("image_url"), pid,
-                            rs1.getDate("created_at"), rs1.getDate("update_at")));
+                            rs1.getDate("created_at"), rs1.getDate("update_at"), rs1.getBoolean("status")));
                 }
 
                 String sql2 = "SELECT c.[id]\n"
