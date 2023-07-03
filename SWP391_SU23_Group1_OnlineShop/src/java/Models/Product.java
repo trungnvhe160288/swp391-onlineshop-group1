@@ -32,7 +32,8 @@ public class Product {
     
     public Product() {
     }
-
+    
+    //Product
     public Product(int id, String name, String thumbnail_url, String description, double price, float percent_discount, int quantity, Date createAt, Date updateAt, boolean active, Category category, List<Image> image, List<Color> color, List<Size> size) {
         this.id = id;
         this.name = name;
