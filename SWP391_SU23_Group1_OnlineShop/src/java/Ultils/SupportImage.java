@@ -40,11 +40,14 @@ public class SupportImage {
                 fos.write(data);
                 fos.close();
 
+                return uploadName;
             } catch (IOException e) {
                 System.out.println(e);
                 return "";
             }
+        }else {
+            return "";
         }
-        return uploadName;
+
     }
 }
