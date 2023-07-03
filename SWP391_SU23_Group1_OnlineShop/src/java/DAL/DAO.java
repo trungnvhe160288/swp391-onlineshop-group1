@@ -391,5 +391,139 @@ public class DAO extends DBContext {
         return -1;
     }
 
-    
+    public List<Image> getAllImages() {
+        List<Image> list = new ArrayList<>();
+
+        try {
+
+            String sql = "SELECT [id]\n"
+                    + "      ,[image_url]\n"
+                    + "      ,[product_id]\n"
+                    + "      ,[created_at]\n"
+                    + "      ,[update_at]\n"
+                    + "      ,[status]\n"
+                    + "  FROM [dbo].[product_image]";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Image i = new Image(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), rs.getDate(5), rs.getBoolean(6));
+                list.add(i);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public boolean updateStatus(int id, boolean status) {
+        try {
+
+            String sql = "UPDATE [dbo].[product_image]\n"
+                    + "   SET [update_at] = ?\n"
+                    + "      ,[status] = ?\n"
+                    + " WHERE id = ?";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setDate(1, Common.getCurrentDate());
+            ps.setBoolean(2, status);
+            ps.setInt(3, id);
+
+            ps.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return false;
+
+        }
+    }
+
+    public Image getImageById(int id) {
+        try {
+
+            String sql = "SELECT [id]\n"
+                    + "      ,[image_url]\n"
+                    + "      ,[product_id]\n"
+                    + "      ,[created_at]\n"
+                    + "      ,[update_at]\n"
+                    + "      ,[status]\n"
+                    + "  FROM [dbo].[product_image]\n"
+                    + " WHERE id = ?";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Image i = new Image(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), rs.getDate(5), rs.getBoolean(6));
+                return i;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+
+        }
+        return null;
+    }
+
+    public boolean updateImage(Image image) {
+        try {
+
+            String sql = "UPDATE [dbo].[product_image]\n"
+                    + "   SET [update_at] = ?\n"
+                    + "      ,[image_url] = ?\n"
+                    + " WHERE id = ?";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setDate(1, image.getUpdateAt());
+            ps.setString(2, image.getUrl());
+            ps.setInt(3, image.getId());
+
+            ps.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return false;
+
+        }
+
+    }
+
+    public boolean addImage(Image image) {
+        try {
+
+            String sql = "INSERT INTO [dbo].[product_image]\n"
+                    + "           ([image_url]\n"
+                    + "           ,[product_id]\n"
+                    + "           ,[created_at]\n"
+                    + "           ,[update_at]\n"
+                    + "           ,[status])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, image.getUrl());
+            ps.setInt(2, image.getProduct_id());
+            ps.setDate(3, image.getCreateAt());
+            ps.setDate(4, image.getUpdateAt());
+            ps.setBoolean(5, image.isStatus());
+
+            ps.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return false;
+
+        }
+    }
 }

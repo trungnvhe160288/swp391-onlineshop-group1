@@ -3,7 +3,7 @@
 <jsp:useBean class="DAL.CategoryDAO"  id="cd"/>
 
 <style>
-    
+
     .wizard-content-left {
         background-blend-mode: darken;
         background-color: rgba(0, 0, 0, 0.45);

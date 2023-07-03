@@ -9,11 +9,13 @@
         <meta charset="UTF-8">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
         <title>Mon'sa - Dashboard Page</title>
+       
         <!-- General CSS Files -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/dashboard/assets/css/app.min.css">
 
         <!-- Toast CSS -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/dashboard/assets/bundles/izitoast/css/iziToast.min.css">
+     
         <!-- Toast CSS -->
 
         <!-- List, Add CSS -->
@@ -22,11 +24,13 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/dashboard/assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/dashboard/assets/bundles/datatables/datatables.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/dashboard/assets/bundles/jquery-selectric/selectric.css">
+      
         <!-- List, Add CSS -->
 
         <!-- Slider CSS -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/dashboard/assets/bundles/owlcarousel2/dist/assets/owl.carousel.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/dashboard/assets/bundles/owlcarousel2/dist/assets/owl.theme.default.min.css">
+     
         <!-- Slider CSS -->
 
         <!-- Product -->
@@ -334,6 +338,7 @@
 
         <!-- General JS Scripts -->
         <script src="${pageContext.request.contextPath}/dashboard/assets/js/app.min.js"></script>
+      
         <!-- JS Libraies -->
         <script src="${pageContext.request.contextPath}/dashboard/assets/bundles/apexcharts/apexcharts.min.js"></script>
 
@@ -342,6 +347,7 @@
         <script src="${pageContext.request.contextPath}/dashboard/assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
         <script src="${pageContext.request.contextPath}/dashboard/assets/bundles/jquery-ui/jquery-ui.min.js"></script>
         <script src="${pageContext.request.contextPath}/dashboard/assets/js/page/datatables.js"></script>
+        
         <!-- List -->
 
         <!-- Add -->
@@ -476,6 +482,7 @@
         </script>
         <!-- Add -->
 
+        
         <!-- Toast -->
         <script src="${pageContext.request.contextPath}/dashboard/assets/bundles/izitoast/js/iziToast.min.js"></script>
         <script src="${pageContext.request.contextPath}/dashboard/assets/js/page/toastr.js"></script>
@@ -548,6 +555,4 @@
 
     </body>
 
-
-    <!-- index.html  21 Nov 2019 03:47:04 GMT -->
 </html>

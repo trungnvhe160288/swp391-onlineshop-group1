@@ -6,7 +6,6 @@ import Models.Image;
 import Models.Product;
 import Models.Size;
 import Ultils.DBContext;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -56,15 +55,16 @@ public class ProductDAO extends DBContext {
                         + "      ,[product_id]\n"
                         + "      ,[created_at]\n"
                         + "      ,[update_at]\n"
+                        + "      ,[status]\n"
                         + "  FROM [dbo].[product_image]\n"
-                        + "  WHERE [product_id] = ?";
+                        + "  WHERE [product_id] = ? and status = 1";
                 PreparedStatement st1 = connection.prepareStatement(sql1);
                 st1.setInt(1, pid);
 
                 ResultSet rs1 = st1.executeQuery();
                 while (rs1.next()) {
                     image.add(new Image(rs1.getInt("id"), rs1.getString("image_url"), pid,
-                            rs1.getDate("created_at"), rs1.getDate("update_at")));
+                            rs1.getDate("created_at"), rs1.getDate("update_at"), rs1.getBoolean("status")));
                 }
 
                 String sql2 = "SELECT c.[id]\n"
@@ -94,7 +94,7 @@ public class ProductDAO extends DBContext {
                         + "  WHERE ps.[product_id] = ?";
                 PreparedStatement st3 = connection.prepareStatement(sql3);
                 st3.setInt(1, pid);
-                //getData
+
                 ResultSet rs3 = st3.executeQuery();
                 while (rs3.next()) {
                     size.add(new Size(rs3.getInt("id"), rs3.getString("name"), rs3.getDate("created_at"), rs3.getDate("updateAt")));
@@ -160,15 +160,16 @@ public class ProductDAO extends DBContext {
                         + "      ,[product_id]\n"
                         + "      ,[created_at]\n"
                         + "      ,[update_at]\n"
+                        + "      ,[status]\n"
                         + "  FROM [dbo].[product_image]\n"
-                        + "  WHERE [product_id] = ?";
+                        + "  WHERE [product_id] = ? and status = 1";
                 PreparedStatement st1 = connection.prepareStatement(sql1);
                 st1.setInt(1, pid);
 
                 ResultSet rs1 = st1.executeQuery();
                 while (rs1.next()) {
                     image.add(new Image(rs1.getInt("id"), rs1.getString("image_url"), pid,
-                            rs1.getDate("created_at"), rs1.getDate("update_at")));
+                            rs1.getDate("created_at"), rs1.getDate("update_at"), rs1.getBoolean("status")));
                 }
 
                 String sql2 = "SELECT c.[id]\n"
@@ -218,7 +219,7 @@ public class ProductDAO extends DBContext {
         }
         return list;
     }
-    //getProductByID
+
     public Product getProductByID(int id) {
 
         try {
@@ -261,15 +262,16 @@ public class ProductDAO extends DBContext {
                         + "      ,[product_id]\n"
                         + "      ,[created_at]\n"
                         + "      ,[update_at]\n"
+                        + "      ,[status]\n"
                         + "  FROM [dbo].[product_image]\n"
-                        + "  WHERE [product_id] = ?";
+                        + "  WHERE [product_id] = ? and status = 1";
                 PreparedStatement st1 = connection.prepareStatement(sql1);
                 st1.setInt(1, pid);
 
                 ResultSet rs1 = st1.executeQuery();
                 while (rs1.next()) {
                     image.add(new Image(rs1.getInt("id"), rs1.getString("image_url"), pid,
-                            rs1.getDate("created_at"), rs1.getDate("update_at")));
+                            rs1.getDate("created_at"), rs1.getDate("update_at"), rs1.getBoolean("status")));
                 }
 
                 String sql2 = "SELECT c.[id]\n"
@@ -390,15 +392,16 @@ public class ProductDAO extends DBContext {
                         + "      ,[product_id]\n"
                         + "      ,[created_at]\n"
                         + "      ,[update_at]\n"
+                        + "      ,[status]\n"
                         + "  FROM [dbo].[product_image]\n"
-                        + "  WHERE [product_id] = ?";
+                        + "  WHERE [product_id] = ? and status = 1";
                 PreparedStatement st1 = connection.prepareStatement(sql1);
                 st1.setInt(1, pid);
 
                 ResultSet rs1 = st1.executeQuery();
                 while (rs1.next()) {
                     image.add(new Image(rs1.getInt("id"), rs1.getString("image_url"), pid,
-                            rs1.getDate("created_at"), rs1.getDate("update_at")));
+                            rs1.getDate("created_at"), rs1.getDate("update_at"), rs1.getBoolean("status")));
                 }
 
                 String sql2 = "SELECT c.[id]\n"
@@ -493,15 +496,16 @@ public class ProductDAO extends DBContext {
                         + "      ,[product_id]\n"
                         + "      ,[created_at]\n"
                         + "      ,[update_at]\n"
+                        + "      ,[status]\n"
                         + "  FROM [dbo].[product_image]\n"
-                        + "  WHERE [product_id] = ?";
+                        + "  WHERE [product_id] = ? and status = 1";
                 PreparedStatement st1 = connection.prepareStatement(sql1);
                 st1.setInt(1, pid);
 
                 ResultSet rs1 = st1.executeQuery();
                 while (rs1.next()) {
                     image.add(new Image(rs1.getInt("id"), rs1.getString("image_url"), pid,
-                            rs1.getDate("created_at"), rs1.getDate("update_at")));
+                            rs1.getDate("created_at"), rs1.getDate("update_at"), rs1.getBoolean("status")));
                 }
 
                 String sql2 = "SELECT c.[id]\n"
@@ -597,15 +601,16 @@ public class ProductDAO extends DBContext {
                         + "      ,[product_id]\n"
                         + "      ,[created_at]\n"
                         + "      ,[update_at]\n"
+                        + "      ,[status]\n"
                         + "  FROM [dbo].[product_image]\n"
-                        + "  WHERE [product_id] = ?";
+                        + "  WHERE [product_id] = ? and status = 1";
                 PreparedStatement st1 = connection.prepareStatement(sql1);
                 st1.setInt(1, pid);
 
                 ResultSet rs1 = st1.executeQuery();
                 while (rs1.next()) {
                     image.add(new Image(rs1.getInt("id"), rs1.getString("image_url"), pid,
-                            rs1.getDate("created_at"), rs1.getDate("update_at")));
+                            rs1.getDate("created_at"), rs1.getDate("update_at"), rs1.getBoolean("status")));
                 }
 
                 String sql2 = "SELECT c.[id]\n"
@@ -716,22 +721,6 @@ public class ProductDAO extends DBContext {
             st.setBoolean(10, p.isActive());
 
             st.executeUpdate();
-
-            if (p.getImage() != null && !p.getImage().isEmpty()) {
-
-                for (Image item : p.getImage()) {
-                    String sql_image = "INSERT INTO [dbo].[product_image] ([image_url], [product_id], [created_at], [update_at])\n"
-                            + "VALUES(?, ?, ?, ?)";
-
-                    PreparedStatement st_image = connection.prepareStatement(sql_image);
-                    st_image.setString(1, item.getUrl());
-                    st_image.setInt(2, item.getProduct_id());
-                    st_image.setDate(3, item.getCreateAt());
-                    st_image.setDate(4, item.getUpdateAt());
-
-                    st_image.executeUpdate();
-                }
-            }
 
             if (p.getColor() != null && !p.getColor().isEmpty()) {
                 for (Color item : p.getColor()) {
