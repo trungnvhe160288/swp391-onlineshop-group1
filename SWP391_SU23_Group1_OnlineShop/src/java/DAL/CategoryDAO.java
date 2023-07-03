@@ -7,7 +7,6 @@ package DAL;
 import Models.Category;
 import Ultils.Common;
 import Ultils.DBContext;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

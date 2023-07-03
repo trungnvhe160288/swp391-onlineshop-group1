@@ -6,7 +6,6 @@ package DAL;
 
 import Models.Slider;
 import Ultils.DBContext;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
