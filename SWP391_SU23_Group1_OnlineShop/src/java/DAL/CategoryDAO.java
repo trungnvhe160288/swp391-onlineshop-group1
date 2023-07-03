@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+//Getall
 public class CategoryDAO extends DBContext {
 
     public List<Category> getAll() {
