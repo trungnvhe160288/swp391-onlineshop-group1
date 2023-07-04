@@ -384,6 +384,7 @@ public class CartDAO extends DBContext {
         return null;
     }
 
+    //update status
     public void updateStatus(int id, int status) {
         try {
 
