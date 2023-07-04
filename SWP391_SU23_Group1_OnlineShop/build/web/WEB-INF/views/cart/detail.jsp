@@ -4,7 +4,6 @@
 <jsp:useBean class="DAL.DAO" id="dao"/>
 
 
-
 <div id="page-content">
     <!--Page Title-->
     <div class="page section-header text-center">
@@ -15,7 +14,7 @@
         </div>
     </div>
     <!--End Page Title-->
-
+    <><!-- container -->
     <div class="container">
         <div class="row">
             <c:if test="${cart.items.isEmpty()}">
