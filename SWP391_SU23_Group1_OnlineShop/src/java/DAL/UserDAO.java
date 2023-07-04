@@ -212,6 +212,7 @@ public class UserDAO extends DBContext {
         return null;
     }
 
+    //get account by email
     public User getAccountByEmail(String email) {
         try {
 
