@@ -8,6 +8,7 @@ import Models.Color;
 import Models.Image;
 import Models.Role;
 import Models.Size;
+import Ultils.Common;
 import Ultils.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class DAO extends DBContext {
 
+    //get all color
     public List<Color> getAllColor() {
         List<Color> list = new ArrayList<>();
 
