@@ -134,7 +134,6 @@
 
                                         <button class="btn" value="Place order" type="submit">Place Order</button>
 
-
                                     </div>
                                 </div>
                             </div>
