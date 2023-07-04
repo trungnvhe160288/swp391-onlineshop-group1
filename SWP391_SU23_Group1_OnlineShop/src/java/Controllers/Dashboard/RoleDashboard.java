@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author phanh
+ * @author lenovo
  */
 @WebServlet(urlPatterns = {"/dashboard/role"})
 public class RoleDashboard extends HttpServlet {
@@ -131,6 +131,5 @@ public class RoleDashboard extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }
