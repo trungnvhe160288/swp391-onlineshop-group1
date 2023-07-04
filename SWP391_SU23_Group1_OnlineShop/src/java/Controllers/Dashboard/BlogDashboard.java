@@ -22,7 +22,7 @@ import java.util.List;
 
 @WebServlet(name = "BlogDashboard", urlPatterns = {"/dashboard/blog"})
 public class BlogDashboard extends HttpServlet {
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -55,7 +55,7 @@ public class BlogDashboard extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
         }
     }
-    
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -93,7 +93,7 @@ public class BlogDashboard extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
         }
     }
-    
+
     private void upload(HttpServletRequest request, HttpServletResponse response, int id) throws IOException, ServletException {
         String uploadPath = "/images/blog/";
         String fileName = "blog_" + id;
@@ -107,7 +107,7 @@ public class BlogDashboard extends HttpServlet {
         }
 
     }
-    
+
     //process add button onview
     private void add(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         BlogDAO bd = new BlogDAO();
@@ -138,7 +138,7 @@ public class BlogDashboard extends HttpServlet {
         }
 
     }
-    
+
     //Process for edit blog
     private void edit(HttpServletRequest request, HttpServletResponse response, int id) {
         BlogDAO bd = new BlogDAO();
@@ -186,7 +186,7 @@ public class BlogDashboard extends HttpServlet {
         //Call BlogDAO 
         BlogDAO bd = new BlogDAO();
         List<Blog> data = bd.getAll();
-        
+
         //Process redirect pagination
         String xpage = request.getParameter("page");
 
@@ -198,7 +198,7 @@ public class BlogDashboard extends HttpServlet {
         int end = Math.min(page * numberPerPage, size);
         //Call BlogDAO to get list need to show
         List<Blog> listByPage = bd.getListByPage(data, start, end);
-        
+
         //Set data for view 
         request.setAttribute("page", page);
         request.setAttribute("numberOfPage", numberOfPage);
