@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAO extends DBContext {
+
     //getAll
     public List<Product> getAll() {
         List<Product> list = new ArrayList<>();
@@ -220,6 +221,7 @@ public class ProductDAO extends DBContext {
         return list;
     }
 
+    //get product by id
     public Product getProductByID(int id) {
 
         try {
@@ -321,6 +323,7 @@ public class ProductDAO extends DBContext {
         }
         return null;
     }
+
     //getListPage
     public List<Product> getListByPage(List<Product> list, int start, int end) {
         List<Product> arr = new ArrayList<>();
