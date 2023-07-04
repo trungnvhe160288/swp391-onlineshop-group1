@@ -105,6 +105,7 @@ public class CartController extends HttpServlet {
             SupportMessage.sendToast(session, 1, "Cancel Success !");
         }
     }
+
     //getMyOrder
     private void getMyOrder(HttpServletRequest request, HttpServletResponse response) {
         CartDAO cd = new CartDAO();
@@ -118,7 +119,7 @@ public class CartController extends HttpServlet {
             request.setAttribute("data", data);
         }
     }
-    
+
     // getOrderDetail
     private void getOrderDetail(HttpServletRequest request, HttpServletResponse response) {
         CartDAO cd = new CartDAO();
@@ -136,6 +137,7 @@ public class CartController extends HttpServlet {
         }
     }
 
+    //checkOut
     private void checkout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         ProductDAO pd = new ProductDAO();
         List<Product> prods = pd.getAll();
