@@ -11,7 +11,6 @@
         </div>
     </div>
     <!--End Page Title-->
-
     <div class="container">
         <c:if test="${cart.items.isEmpty()}">
             <h3 class="text-center">You Don't Have Any Product In Cart</h3>
@@ -50,9 +49,8 @@
                                         <input name="address" value="${account.address}" id="input-address-1" type="text">
                                     </div>
                                 </div>
-
                             </fieldset>
-
+                                    
                             <fieldset>
                                 <div class="row">
                                     <div class="form-group col-md-12 col-lg-12 col-xl-12">
@@ -63,12 +61,10 @@
                             </fieldset>
                         </div>
                     </div>
-
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                         <div class="your-order-payment">
                             <div class="your-order">
                                 <h2 class="order-title mb-4">Your Order</h2>
-
                                 <div class="table-responsive-sm order-table"> 
                                     <table class="bg-white table table-bordered table-hover text-center">
                                         <thead>
@@ -107,9 +103,7 @@
                                     </table>
                                 </div>
                             </div>
-
                             <hr />
-
                             <div class="your-payment">
                                 <h2 class="payment-title mb-3">payment method</h2>
                                 <div class="payment-method">
@@ -133,8 +127,6 @@
                                     <div class="order-button-payment">
 
                                         <button class="btn" value="Place order" type="submit">Place Order</button>
-
-
                                     </div>
                                 </div>
                             </div>
