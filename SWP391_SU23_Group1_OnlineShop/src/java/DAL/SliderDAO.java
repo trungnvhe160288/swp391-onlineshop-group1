@@ -44,7 +44,7 @@ public class SliderDAO extends DBContext {
         }
         return list;
     }
-
+    //getSliderByID
     public Slider getSliderById(int id) {
 
         try {
