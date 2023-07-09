@@ -7,6 +7,7 @@ package Models;
 
 import java.sql.Date;
 
+//slider
 public class Slider {
     private int id;
     private String url;
