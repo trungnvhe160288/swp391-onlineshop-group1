@@ -127,7 +127,7 @@ public class DAO extends DBContext {
         }
         return null;
     }
-
+    //getColorByID
     public Color getColorById(int id) {
 
         try {
