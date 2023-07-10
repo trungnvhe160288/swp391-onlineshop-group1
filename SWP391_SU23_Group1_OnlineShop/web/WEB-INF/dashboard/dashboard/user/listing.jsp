@@ -28,7 +28,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         <c:forEach items="${user}" var="item">
                                             <tr>
                                                 <td>
