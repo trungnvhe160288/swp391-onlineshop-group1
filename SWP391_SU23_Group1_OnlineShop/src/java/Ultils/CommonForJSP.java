@@ -4,6 +4,7 @@
  */
 package Ultils;
 
+import DAL.CommentDAO;
 import DAL.DAO;
 import Models.Color;
 import Models.Comment;
