@@ -6,10 +6,10 @@ package Controllers.Dashboard;
  */
 import DAL.CategoryDAO;
 import Ultils.Common;
-import DAL.DAO;
 import DAL.ProductDAO;
 import Models.Category;
 import Models.Color;
+import Models.Image;
 import Models.Product;
 import Models.Size;
 import Ultils.SupportImage;

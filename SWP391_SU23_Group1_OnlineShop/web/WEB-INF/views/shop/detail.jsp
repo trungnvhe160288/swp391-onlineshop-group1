@@ -2,6 +2,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean class="DAL.ProductDAO" id="pd"/>
 <jsp:useBean class="Ultils.CommonForJSP" id="common"/>
+<jsp:useBean class="DAL.CommentDAO" id="cd"/>
+
+<c:set var="comments" value="${cd.getCommentByProductId(data.id)}"/>
+<c:set var="avgRating" value="${common.takeTotalRating(data.id)}"/>
 
 
 <div id="page-content">
@@ -14,6 +18,7 @@
             </div>
         </div>
         <!--End Breadcrumb-->
+
         <div id="ProductSection-product-template" class="product-template__container prstyle1 container product-right-sidebar">
             <!--product-single-->
             <div class="product-single">
@@ -79,12 +84,15 @@
                                         <span class="" style='color: ${data.quantity > 0 ? 'green' : 'red'}'>${data.quantity > 0 ? 'In Stock' : 'Sold Out'}</span> <span class="outstock hide">Unavailable</span> </div>
                                     <div class="product-review">
                                         <a class="reviewLink" href="#tab2">
-                                            <i class="font-13 fa fa-star"></i>
-                                            <i class="font-13 fa fa-star"></i>
-                                            <i class="font-13 fa fa-star"></i>
-                                            <i class="font-13 fa fa-star-o"></i>
-                                            <i class="font-13 fa fa-star-o"></i>
-                                            <span class="spr-badge-caption">6 reviews</span>
+                                            <c:forEach begin="1" end="5" var="i">
+                                                <c:if test="${i <= avgRating}">
+                                                    <i class="font-13 fa fa-star"></i>
+                                                </c:if>
+                                                <c:if test="${i > avgRating}">
+                                                    <i class="font-13 fa fa-star-o"></i>
+                                                </c:if>
+                                            </c:forEach>
+                                            <span class="spr-badge-caption">${comments.size()} reviews</span>
                                         </a>
                                     </div>
                                 </div>
@@ -186,13 +194,24 @@
                                         <p>${data.description}</p>
                                     </div>
                                 </div>
-
-                                <div id="tab2" class="tab-content">
+                                <div id="tab2" class="${active == 'doReview' ? 'active' : 'tab-content'}">
                                     <div id="shopify-product-reviews">
                                         <div class="spr-container">
                                             <div class="spr-header clearfix">
                                                 <div class="spr-summary">
-                                                    <span class="product-review"><a class="reviewLink"><i class="font-13 fa fa-star"></i><i class="font-13 fa fa-star"></i><i class="font-13 fa fa-star"></i><i class="font-13 fa fa-star-o"></i><i class="font-13 fa fa-star-o"></i> </a><span class="spr-summary-actions-togglereviews">Based on 6 reviews456</span></span>
+                                                    <span class="product-review">
+                                                        <a class="reviewLink">
+                                                            <c:forEach begin="1" end="5" var="i">
+                                                                <c:if test="${i <= avgRating}">
+                                                                    <i class="font-13 fa fa-star"></i>
+                                                                </c:if>
+                                                                <c:if test="${i > avgRating}">
+                                                                    <i class="font-13 fa fa-star-o"></i>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                        </a>
+                                                        <span class="spr-summary-actions-togglereviews">Total Review: ${comments.size()}</span>
+                                                    </span>
                                                     <span class="spr-summary-actions">
                                                         <a href="#" class="spr-summary-actions-newreview btn">Write a review</a>
                                                     </span>
