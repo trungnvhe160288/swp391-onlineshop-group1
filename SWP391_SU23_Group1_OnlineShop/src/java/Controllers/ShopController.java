@@ -1,15 +1,18 @@
 package Controllers;
 
 import DAL.CategoryDAO;
+import DAL.CommentDAO;
 import Ultils.Common;
 import DAL.DAO;
 import DAL.ProductDAO;
 import Models.Cart;
 import Models.Category;
 import Models.Color;
+import Models.Comment;
 import Models.Item;
 import Models.Product;
 import Models.Size;
+import Models.User;
 import Ultils.SupportConvert;
 import Ultils.SupportMessage;
 import java.io.IOException;
@@ -101,13 +104,45 @@ public class ShopController extends HttpServlet {
                 addToCart(request, response, session);
                 response.sendRedirect(request.getContextPath() + "/shop/list.do");
                 break;
+            case "review":
+                review(request, response);
+                break;
             default:
                 //Show error page
                 request.setAttribute("controller", "error");
                 request.setAttribute("action", "error");
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
-
         }
+    }
+
+    private void review(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String rate_raw = request.getParameter("rate");
+        String content = request.getParameter("content");
+        String pid_raw = request.getParameter("pid");
+
+        int rate = Common.parseInt(rate_raw);
+        int pid = Common.parseInt(pid_raw);
+        HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("account");
+
+        if (u != null) {
+            Comment c = new Comment(-1, content, name, email, rate, Common.getCurrentDate(), Common.getCurrentDate(), true, u.getId(), pid);
+            CommentDAO dao = new CommentDAO();
+
+            boolean status = dao.add(c);
+
+            if (status) {
+                SupportMessage.sendToast(session, 1, "Review Successful!");
+            } else {
+                SupportMessage.sendToast(session, 0, "Something Wrong !");
+            }
+        }
+        
+        session.setAttribute("active", "doReview");
+        response.sendRedirect(request.getContextPath()+"/shop/detail.do?id=" + pid_raw);
+
     }
     //List product
     private List<Product> filter(HttpServletRequest request, HttpServletResponse response, List<Product> data) {
@@ -162,7 +197,7 @@ public class ShopController extends HttpServlet {
 
         return sorting(request, response, data);
     }
-    //ListProduct
+    //Sort product
     private List<Product> sorting(HttpServletRequest request, HttpServletResponse response, List<Product> data) {
         String sort = request.getParameter("sortBy");
 
