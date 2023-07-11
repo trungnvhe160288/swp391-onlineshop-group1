@@ -26,7 +26,7 @@
           <div class="page-inner">
             <h1>500</h1>
             <div class="page-description">
-              Whoopps, You No Have Permission To Access this page
+              Whoopps, You Have No Permission To Access this page
             </div>
             <div class="page-search">
               <form>
