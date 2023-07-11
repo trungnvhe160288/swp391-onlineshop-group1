@@ -451,11 +451,15 @@
                                                     <a class="grid-view-item__title" href="${pageContext.request.contextPath}/shop/detail.do?id=${item.id}">${item.name}</a>
                                                     <div class="grid-view-item__meta"><span class="product-price__price"><span class="money">${common.getPriceFormat(data.lastPrice)}</span></span></div>
                                                     <div class="product-review">
-                                                        <i class="font-13 fa fa-star"></i>
-                                                        <i class="font-13 fa fa-star"></i>
-                                                        <i class="font-13 fa fa-star"></i>
-                                                        <i class="font-13 fa fa-star"></i>
-                                                        <i class="font-13 fa fa-star"></i>
+                                                        <c:set var="avgRating" value="${common.takeTotalRating(item.id)}"/>
+                                                        <c:forEach begin="1" end="5" var="i">
+                                                            <c:if test="${i <= avgRating}">
+                                                                <i class="font-13 fa fa-star"></i>
+                                                            </c:if>
+                                                            <c:if test="${i > avgRating}">
+                                                                <i class="font-13 fa fa-star-o"></i>
+                                                            </c:if>
+                                                        </c:forEach>
                                                     </div>
                                                 </div>
                                             </div>
@@ -581,85 +585,31 @@
         <div style="padding-left: 30px;"><img src="${pageContext.request.contextPath}/assets/images/size.jpg" alt=""></div>
     </div>
 </div>
+<script>
+    function changeStar(id) {
+        document.getElementById('rating').value = Number(id);
 
-<div class="hide">
-    <div id="productInquiry">
-        <div class="contact-form form-vertical">
-            <div class="page-title">
-                <h3>Camelia Reversible Jacket</h3>
-            </div>
-            <form method="post" action="#" id="contact_form" class="contact-form">
-                <input type="hidden" name="form_type" value="contact" />
-                <input type="hidden" name="utf8" value="✓" />
-                <div class="formFeilds">
-                    <input type="hidden" name="contact[product name]" value="Camelia Reversible Jacket">
-                    <input type="hidden" name="contact[product link]"
-                           value="/products/camelia-reversible-jacket-black-red">
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                            <input type="text" id="ContactFormName" name="contact[name]" placeholder="Name"
-                                   value="" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                            <input type="email" id="ContactFormEmail" name="contact[email]" placeholder="Email"
-                                   autocapitalize="off" value="" required>
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                            <input required type="tel" id="ContactFormPhone" name="contact[phone]"
-                                   pattern="[0-9\-]*" placeholder="Phone Number" value="">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                            <textarea required rows="10" id="ContactFormMessage" name="contact[body]"
-                                      placeholder="Message"></textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                            <input type="submit" class="btn" value="Send Message">
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="pswp__bg"></div>
-    <div class="pswp__scroll-wrap">
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-        <div class="pswp__ui pswp__ui--hidden">
-            <div class="pswp__top-bar">
-                <div class="pswp__counter"></div><button class="pswp__button pswp__button--close"
-                                                         title="Close (Esc)"></button><button class="pswp__button pswp__button--share"
-                                                     title="Share"></button><button class="pswp__button pswp__button--fs"
-                                               title="Toggle fullscreen"></button><button class="pswp__button pswp__button--zoom"
-                                                           title="Zoom in/out"></button>
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div><button class="pswp__button pswp__button--arrow--left"
-                          title="Previous (arrow left)"></button><button class="pswp__button pswp__button--arrow--right"
-                          title="Next (arrow right)"></button>
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-        </div>
-    </div>
-</div>
+        const elg = document.getElementById("star_" + id);
+        if (elg.classList.contains('unselected')) {
+            for (var i = 1; i <= id; i++) {
+                const el = document.getElementById("star_" + i);
+                el.classList.remove('fa-star-o');
+                el.classList.remove('unselected');
+                el.classList.add('font-13');
+                el.classList.add('fa');
+                el.classList.add('fa-star');
+                el.classList.add('selected');
+            }
+        } else if (elg.classList.contains('selected')) {
+            for (var i = 5; i > id; i--) {
+                const el = document.getElementById("star_" + i);
+                el.classList.remove('fa-star');
+                el.classList.remove('selected');
+                el.classList.add('font-13');
+                el.classList.add('fa');
+                el.classList.add('fa-star-o');
+                el.classList.add('unselected');
+            }
+        }
+    }
+</script>
