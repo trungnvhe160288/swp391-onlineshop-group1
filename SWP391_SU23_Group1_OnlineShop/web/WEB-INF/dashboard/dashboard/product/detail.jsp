@@ -301,7 +301,7 @@
 
                                             <div class="form-wizard-header">
                                                 <p>Fill all form field to go next step</p>
-                                                <ul class="list-unstyled form-wizard-steps clearfix">
+                                                <ul class="list-unstyled form-wizard-steps clearfix d-flex justify-content-center">
                                                     <li class="active"><span>1</span></li>
                                                     <li><span>2</span></li>
                                                     <li><span>3</span></li>
@@ -432,7 +432,7 @@
                                                             <div class="upload-container relative flex items-center justify-between w-full">
                                                                 <div class="drop-area w-full rounded-md border-2 border-dotted border-gray-200 transition-all text-center">
                                                                     <label for="file-input" class="block w-full h-full text-gray-500 p-4 text-sm cursor-pointer">Drop your image here or click to browse</label>
-                                                                    <input name="thumbnail_image" type="file" id="file-input" accept="image/*" value="${data.thumbnail_url}" class="hidden" />
+                                                                    <input name="upload_image" type="file" id="file-input" accept="image/*" value="${data.thumbnail_url}" class="hidden" />
                                                                     <!-- Image upload input -->
                                                                     <div class="preview-container items-center justify-center flex-col flex">
                                                                         <div class="preview-image bg-cover bg-center rounded-md" style="width: 300px; height: 300px; background-image: url(${pageContext.request.contextPath}${data.thumbnail_url})"></div>
@@ -448,30 +448,60 @@
                                                         <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
                                                     </div>
                                                 </fieldset>	
-                                                <fieldset class="wizard-fieldset" >
-                                                    <h5>Product Images</h5>
-                                                    <div class="container my-5">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group mt-5 focus-input">
-                                                                    <label for="">Choose Images</label>
-                                                                    <input type="file" class="form-control" name="product_image"  value="" accept="image/'" multiple id="upload-img" />
-                                                                </div>
-                                                                <div class="img-thumbs " id="img-preview">
-                                                                    <c:forEach items="${data.image}" var="item">
-                                                                        <div class="wrapper-thumb">
-                                                                            <img src="${pageContext.request.contextPath}${item.url}" class="img-preview-thumb">
-                                                                            <span class="remove-btn">x</span>
-                                                                        </div>
-                                                                    </c:forEach>
-
+                                                <fieldset class="wizard-fieldset">
+                                                    <c:set var="comments" value="${comDao.getCommentByProductId(data.id)}"/>
+                                                    <div class="d-flex align-items-center justify-content-center ">
+                                                        <div class="container">
+                                                            <div class="row justify-content-center mb-4">
+                                                                <div class="col-lg-8">
+                                                                    <h5>${comments.size()} Comments</h5>
                                                                 </div>
                                                             </div>
+                                                            <div class="row justify-content-center mb-4">
+                                                                <div class="col-lg-8">
+                                                                    <div class="comments">
+                                                                        <c:forEach items="${comments}" var="item">
+                                                                            <c:set var="user" value="${ud.getUserByID(item.uid)}"/>
+                                                                            <div class="comment d-flex">
+                                                                                <div class="flex-shrink-0">
+                                                                                    <div class="avatar avatar-sm rounded-circle">
+                                                                                        <img class="avatar-img" src="${pageContext.request.contextPath}${user.avatar}" alt="">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="flex-shrink-1 ms-2 ms-sm-3">
+                                                                                    <div class="comment-meta d-flex">
+                                                                                        <h6 class="me-2">${user.fullName}</h6>
+                                                                                        <span class="product-review spr-starratings spr-review-header-starratings">
+                                                                                            <span class="reviewLink">
+                                                                                                <c:forEach begin="1" end="5" var="i">
+                                                                                                    <c:if test="${i <= item.rate}">
+                                                                                                        <i class="font-13 fa fa-star text-warning"></i>
+                                                                                                    </c:if>
+                                                                                                    <c:if test="${i > item.rate}">
+                                                                                                        <i class="font-13 fa fa-star-o text-secondary"></i>
+                                                                                                    </c:if>
+                                                                                                </c:forEach>
+                                                                                            </span>
+                                                                                        </span>
+                                                                                        <span class="text-muted">At: ${common.getDateFormat(item.createDate, 'dd-MM-yyyy')}</span>
+                                                                                    </div>
+                                                                                    <div class="comment-body">
+
+
+                                                                                        <span>Content: ${item.content}</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </c:forEach>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                     </div>
                                                     <div class="form-group clearfix">
                                                         <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
-                                                        <button href="#!" onclick="document.form[0].submit()" class="form-wizard-submit float-right">Submit</button>
+                                                        <button onclick="document.form[0].submit()" class="form-wizard-submit float-right">Submit</button>
                                                     </div>
                                                 </fieldset>
                                             </form>
@@ -555,70 +585,3 @@
     }
 </script>
 
-<script>
-    var imgUpload = document.getElementById('upload-img')
-            , imgPreview = document.getElementById('img-preview')
-            , imgUploadForm = document.getElementById('form-upload')
-            , totalFiles
-            , previewTitle
-            , previewTitleText
-            , img;
-
-    imgUpload.addEventListener('change', previewImgs, true);
-
-    function previewImgs(event) {
-        totalFiles = imgUpload.files.length;
-
-        if (!!totalFiles) {
-            imgPreview.classList.remove('img-thumbs-hidden');
-        }
-
-        for (var i = 0; i < totalFiles; i++) {
-            wrapper = document.createElement('div');
-            wrapper.classList.add('wrapper-thumb');
-            removeBtn = document.createElement("span");
-            nodeRemove = document.createTextNode('x');
-            removeBtn.classList.add('remove-btn');
-            removeBtn.appendChild(nodeRemove);
-            img = document.createElement('img');
-            img.src = URL.createObjectURL(event.target.files[i]);
-            img.classList.add('img-preview-thumb');
-            wrapper.appendChild(img);
-            wrapper.appendChild(removeBtn);
-            imgPreview.appendChild(wrapper);
-
-            $('.remove-btn').click(function () {
-                $(this).parent('.wrapper-thumb').remove();
-            });
-        }
-    }
-
-//    function loadImage(event) {
-//        totalFiles = ${data.image.size() - 1};
-//
-//        if (!!totalFiles) {
-//            imgPreview.classList.remove('img-thumbs-hidden');
-//        }
-//
-//        for (var i = 0; i < totalFiles; i++) {
-//            wrapper = document.createElement('div');
-//            wrapper.classList.add('wrapper-thumb');
-//            removeBtn = document.createElement("span");
-//            nodeRemove = document.createTextNode('x');
-//            removeBtn.classList.add('remove-btn');
-//            removeBtn.appendChild(nodeRemove);
-//            img = document.createElement('img');
-//            img.src = `${pageContext.request.contextPath}${data.image.get(i).url}`;
-//            img.classList.add('img-preview-thumb');
-//            wrapper.appendChild(img);
-//            wrapper.appendChild(removeBtn);
-//            imgPreview.appendChild(wrapper);
-//
-//            $('.remove-btn').click(function () {
-//                $(this).parent('.wrapper-thumb').remove();
-//            });
-//        }
-//    }
-//
-//    document.addEventListener('load', loadImage, true);
-</script>
