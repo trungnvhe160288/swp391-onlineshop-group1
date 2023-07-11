@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author phanh
+ * @author trung
  */
 @WebServlet(name = "CategoryDashboard", urlPatterns = {"/dashboard/category"})
 public class CategoryDashboard extends HttpServlet {

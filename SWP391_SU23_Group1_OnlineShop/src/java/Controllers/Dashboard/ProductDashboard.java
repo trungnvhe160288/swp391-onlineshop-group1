@@ -6,12 +6,13 @@ package Controllers.Dashboard;
  */
 import DAL.CategoryDAO;
 import Ultils.Common;
+import DAL.DAO;
 import DAL.ProductDAO;
 import Models.Category;
 import Models.Color;
-import Models.Image;
 import Models.Product;
 import Models.Size;
+import Ultils.SupportImage;
 import Ultils.SupportMessage;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -19,7 +20,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -122,9 +122,10 @@ public class ProductDashboard extends HttpServlet {
         Category c = cd.getCategoryByID(categoryid);
         Product p = pd.getProductByID(id);
 
-        String thumbnail_image = "/images/product/" + c.getName().toLowerCase() + "/product_thumbnail_" + p.getId() + ".jpg";
-        String uploadPath = "/images/product/" + c.getName().toLowerCase();
-        List<Image> image = upload(request, uploadPath, p.getId());
+        String uploadPath = "/images/product/";
+        String thubnail_image = "product_thumbnail_" + id;
+        String thumbnail_url = SupportImage.uploadImage(request, respons, uploadPath, thubnail_image);
+
         List<Color> color = getColor(colors);
         List<Size> size = getSize(sizes);
 
@@ -138,20 +139,16 @@ public class ProductDashboard extends HttpServlet {
         p.setSize(size);
         p.setUpdateAt(Common.getCurrentDate());
         p.setCategory(c);
-
-        System.out.println(image);
-
-        if (image != null && !image.isEmpty()) {
-            p.setThumbnail_url(thumbnail_image);
-            p.setImage(image);
+        if (!thumbnail_url.isEmpty()) {
+            p.setThumbnail_url(uploadPath + thumbnail_url);
         }
 
         boolean status = pd.update(p);
 
         if (status) {
-            SupportMessage.sendToastToDashboard(request.getSession(), 1, "ADD Product", "Successful !");
+            SupportMessage.sendToastToDashboard(request.getSession(), 1, "Update Product", "Successful !");
         } else {
-            SupportMessage.sendToastToDashboard(request.getSession(), 0, "ADD Product", "Failed !");
+            SupportMessage.sendToastToDashboard(request.getSession(), 0, "Update Product", "Failed !");
         }
 
     }

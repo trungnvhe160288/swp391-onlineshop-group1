@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author trung
+ * @author linh
  */
 @WebServlet(name = "SizeDashboard", urlPatterns = {"/dashboard/size"})
 public class SizeDashboard extends HttpServlet {

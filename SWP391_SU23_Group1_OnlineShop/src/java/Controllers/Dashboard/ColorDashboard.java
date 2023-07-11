@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author phanh
+ * @author linh
  */
 @WebServlet(name = "ColorDashboard", urlPatterns = {"/dashboard/color"})
 public class ColorDashboard extends HttpServlet {
