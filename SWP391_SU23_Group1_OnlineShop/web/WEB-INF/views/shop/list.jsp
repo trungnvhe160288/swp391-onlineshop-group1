@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean class="DAL.DAO" id="dao"/>
 <jsp:useBean class="DAL.CategoryDAO" id="cd"/>
-
+<jsp:useBean class="Ultils.CommonForJSP" id="common"/>
 
 
 <div id="page-content">
@@ -189,7 +189,7 @@
                                             <div class="product-details hoverDetails text-center mobile">
                                                 <!-- product name -->
                                                 <div class="product-name">
-                                                    <a href="#">${item.name}</a>
+                                                    <a href="${pageContext.request.contextPath}/shop/detail.do?id=${item.id}">${item.name}</a>
                                                 </div>
                                                 <!-- End product name -->
                                                 <!-- product price -->
@@ -199,11 +199,15 @@
                                                 </div>
                                                 <!-- End product price -->
                                                 <div class="product-review">
-                                                    <i class="font-13 fa fa-star"></i>
-                                                    <i class="font-13 fa fa-star"></i>
-                                                    <i class="font-13 fa fa-star"></i>
-                                                    <i class="font-13 fa fa-star-o"></i>
-                                                    <i class="font-13 fa fa-star-o"></i>
+                                                    <c:set var="avgRating" value="${common.takeTotalRating(item.id)}"/>
+                                                    <c:forEach begin="1" end="5" var="i">
+                                                        <c:if test="${i <= avgRating}">
+                                                            <i class="font-13 fa fa-star"></i>
+                                                        </c:if>
+                                                        <c:if test="${i > avgRating}">
+                                                            <i class="font-13 fa fa-star-o"></i>
+                                                        </c:if>
+                                                    </c:forEach>
                                                 </div>
                                                 <!-- product button -->
                                                 <div class="button-set">
