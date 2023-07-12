@@ -256,7 +256,7 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    public void changePass(User u) {
+    public boolean changePass(User u) {
         System.out.println(u.getPassword());
         try {
 
@@ -267,10 +267,11 @@ public class UserDAO extends DBContext {
             ps.setString(2, u.getEmail());
 
             ps.executeUpdate();
-
+            return true;
         } catch (SQLException e) {
             System.out.println(e);
         }
+        return false;
     }
 
     public List<User> getAllUser() {
