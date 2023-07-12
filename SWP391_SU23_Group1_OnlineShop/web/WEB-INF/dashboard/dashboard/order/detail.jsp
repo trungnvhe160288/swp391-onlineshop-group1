@@ -17,7 +17,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <address>
-                                        <strong>Orderer:</strong><br>
+                                        <strong style="font-size: 2em">Ordered Person</strong><br>
                                         <c:set var="orderder" value="${ud.getUserByID(order.uid)}"/>
 
                                         ${orderder.fullName},<br>
