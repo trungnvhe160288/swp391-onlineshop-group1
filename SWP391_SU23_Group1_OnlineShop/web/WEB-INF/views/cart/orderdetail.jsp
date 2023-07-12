@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean class="Ultils.CommonForJSP" id="common" />
+<jsp:useBean class="DAL.DAO" id="dao" />
+
 
 
 <div id="page-content">
@@ -87,8 +89,8 @@
                                             <td class="text-left">${item.product.name}</td>
                                             <td>${common.getPriceFormat(item.product.lastPrice)}</td>
                                             <td>${item.quantity}</td>
-                                            <td>${item.colorID}</td>
-                                            <td>${item.sizeID}</td>
+                                            <td><span class="money" style="background-color: ${dao.getColorById(item.colorID).bgr_hex}; border: 1px solid #000; margin: auto 0.25rem; padding: 0.25rem 0.75rem"></span></td>
+                                            <td>${dao.getSizeByID(item.sizeID).name}</td>
 
                                             <td>${common.getPriceFormat(item.totalPrice)}</td>
                                         </tr>
