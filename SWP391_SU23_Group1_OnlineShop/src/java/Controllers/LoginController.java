@@ -37,6 +37,7 @@ public class LoginController extends HttpServlet {
             case "login":
             case "register":
             case "forgot":
+            case "changepass":
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 break;
             case "logout":
@@ -83,11 +84,40 @@ public class LoginController extends HttpServlet {
             case "verifyEmail":
                 getNewCode(request, response);
                 break;
+            case "changepass":
+                changePass(request, response);
+                break;
             default:
                 //Show error page
                 request.setAttribute("controller", "error");
                 request.setAttribute("action", "error");
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+        }
+    }
+
+    private void changePass(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String newPassword = request.getParameter("newpass");
+
+        HttpSession session = request.getSession();
+
+        User u = (User) session.getAttribute("account");
+
+        if (u != null) {
+            u.setPassword(newPassword);
+            UserDAO ud = new UserDAO();
+
+            boolean status = ud.changePass(u);
+
+            if (status) {
+                SupportMessage.sendToast(session, 1, "Change Password successful !");
+                response.sendRedirect(request.getContextPath() + "/index.do");
+            } else {
+                SupportMessage.sendToast(session, 0, "Something wrong !");
+                
+                request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+
+            }
+
         }
     }
 
