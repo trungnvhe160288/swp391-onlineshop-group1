@@ -76,7 +76,7 @@
                                                                             <form action="${pageContext.request.contextPath}/dashboard/user/detail.ad" method="POST">
                                                                                 <input type="hidden" name="id" value="${data.id}">
                                                                                 <div class="col-sm-12">
-                                                                                    <select class="form-control selectric " name="status" id="changeStatus" onchange="this.form.submit()">
+                                                                                    <select ${data.role.id == 1 ? 'disabled' : ''} class="form-control selectric " name="status" id="changeStatus" onchange="this.form.submit()">
                                                                                         <option value="-1" ${data.status == -1 ? 'selected' : ''} class="text-danger">Block</option>
                                                                                         <option value="0" ${data.status == 0 ? 'selected' : ''} class="text-warning">Not Verify</option>
                                                                                         <option value="1" ${data.status == 1 ? 'selected' : ''} class="text-success">Active</option>
