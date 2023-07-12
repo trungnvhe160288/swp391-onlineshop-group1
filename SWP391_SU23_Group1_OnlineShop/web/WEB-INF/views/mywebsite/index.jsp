@@ -1,4 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>\
+<jsp:useBean class="DAL.BlogDAO" id="blogDAO" />
 
 <div id="page-content">
     <div class="slideshow slideshow-wrapper pb-section sliderFull">
@@ -29,7 +30,7 @@
                     <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                         <div class="img-bnr">
                             <div class="inner center">
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/shop/list.do">
                                     <img data-src="${pageContext.request.contextPath}/assets/images/collection/modern1.jpg" src="${pageContext.request.contextPath}/assets/images/collection/modern1.jpg" alt="Cap" title="Cap" class="blur-up lazyload" />
                                     <span class="ttl">Cap</span>
                                 </a>
@@ -37,7 +38,7 @@
                         </div>
                         <div class="img-bnr">
                             <div class="inner center">
-                                <a href="#">
+                                <a href="${pageContext.request.contextPath}/shop/list.do">
                                     <img data-src="${pageContext.request.contextPath}/assets/images/collection/modern2.jpg" src="${pageContext.request.contextPath}/assets/images/collection/modern2.jpg" alt="Sweaters" title="Sweaters" class="blur-up lazyload" />
                                     <span class="ttl">Sweaters</span>
                                 </a>
@@ -46,7 +47,7 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="inner center">
-                            <a href="#">
+                            <a href="${pageContext.request.contextPath}/shop/list.do">
                                 <img data-src="${pageContext.request.contextPath}/assets/images/collection/modern3.jpg" src="${pageContext.request.contextPath}/assets/images/collection/modern3.jpg" alt="Tops" title="Tops" class="blur-up lazyload" />
                                 <span class="ttl">Tops</span>
                             </a>
@@ -54,13 +55,13 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                         <div class="inner center">
-                            <a href="#">
+                            <a href="${pageContext.request.contextPath}/shop/list.do">
                                 <img data-src="${pageContext.request.contextPath}/assets/images/collection/modern4.jpg" src="${pageContext.request.contextPath}/assets/images/collection/modern4.jpg" alt="Jeans" title="Jeans" class="blur-up lazyload" />
                                 <span class="ttl">Jeans</span>
                             </a>
                         </div>
                         <div class="inner center">
-                            <a href="#">
+                            <a href="${pageContext.request.contextPath}/shop/list.do">
                                 <img data-src="${pageContext.request.contextPath}/assets/images/collection/modern5.jpg" src="${pageContext.request.contextPath}/assets/images/collection/modern5.jpg" alt="Shoes" title="Shoes" class="blur-up lazyload" />
                                 <span class="ttl">Shoes</span>
                             </a>
@@ -92,7 +93,7 @@
                     </p>
                     <h3 class="h4"><a href="#">NEW-SEASON SUITS</a></h3>
                     <div class="rte-setting"><p>Suitability game strong</p></div>
-                    <a href="#" class="btn no-border">Shop The Edit</a>
+                    <a href="${pageContext.request.contextPath}/shop/list.do" class="btn no-border">Shopping</a>
                 </div>
                 <!--End Featured Item-->
                 <!--Featured Item-->
@@ -104,7 +105,7 @@
                     </p>
                     <h3 class="h4"><a href="#">STANDOUT SEQUINS</a></h3>
                     <div class="rte-setting"><p>Studio 2018</p></div>
-                    <a href="#" class="btn no-border">Shop Now</a>
+                    <a href="${pageContext.request.contextPath}/shop/list.do" class="btn no-border">Shop Now</a>
                 </div>
                 <!--End Featured Item-->
                 <!--Featured Item-->
@@ -116,7 +117,7 @@
                     </p>
                     <h3 class="h4"><a href="#">COLD-WEATHER ACCESSORIES</a></h3>
                     <div class="rte-setting"><p>Coats are only the beginning</p></div>
-                    <a href="#" class="btn no-border">Shop The Edit</a>
+                    <a href="${pageContext.request.contextPath}/shop/list.do" class="btn no-border">Shopping</a>
                 </div>
                 <!--End Featured Item-->
             </div>
@@ -136,48 +137,33 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                    <div class="wrap-blog">
-                        <a href="blog-left-sidebar.html" class="article__grid-image">
-                            <img src="${pageContext.request.contextPath}/assets/images/blog/post-img1.jpg" alt="It's all about how you wear" title="It's all about how you wear" class="blur-up lazyloaded"/>
-                        </a>
-                        <div class="article__grid-meta article__grid-meta--has-image">
-                            <div class="wrap-blog-inner">
-                                <h2 class="h3 article__title">
-                                    <a href="blog-left-sidebar.html">It's all about how you wear</a>
-                                </h2>
-                                <span class="article__date">May 02, 2017</span>
-                                <div class="rte article__grid-excerpt">
-                                    I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account...
+                <c:set var="latest" value="${blogDAO.getTopXBlogAndPublished(2)}"/>
+                <c:forEach items="${latest}" var="item">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="wrap-blog">
+                            <a href="${pageContext.request.contextPath}/blog/detail.do?id=${item.id}" class="article__grid-image">
+                                <img src="${pageContext.request.contextPath}${item.thumbnail_url}" alt="It's all about how you wear" title="It's all about how you wear" class="blur-up lazyloaded"/>
+                            </a>
+                            <div class="article__grid-meta article__grid-meta--has-image">
+                                <div class="wrap-blog-inner">
+                                    <h2 class="h3 article__title">
+                                        <a href="${pageContext.request.contextPath}/blog/detail.do?id=${item.id}">${item.title}</a>
+                                    </h2>
+                                    <span class="article__date">May 02, 2017</span>
+                                    <div class="rte article__grid-excerpt">
+                                        ${item.description}
+
+                                    </div>
+                                    <ul class="list--inline article__meta-buttons">
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/blog/detail.do?id=${item.id}">Read more</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <ul class="list--inline article__meta-buttons">
-                                    <li><a href="blog-article.html">Read more</a></li>
-                                </ul>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                    <div class="wrap-blog">
-                        <a href="blog-left-sidebar.html" class="article__grid-image">
-                            <img src="${pageContext.request.contextPath}/assets/images/blog/post-img2.jpg" alt="27 Days of Spring Fashion Recap" title="27 Days of Spring Fashion Recap" class="blur-up lazyloaded"/>
-                        </a>
-                        <div class="article__grid-meta article__grid-meta--has-image">
-                            <div class="wrap-blog-inner">
-                                <h2 class="h3 article__title">
-                                    <a href="blog-right-sidebar.html">27 Days of Spring Fashion Recap</a>
-                                </h2>
-                                <span class="article__date">May 02, 2017</span>
-                                <div class="rte article__grid-excerpt">
-                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab...
-                                </div>
-                                <ul class="list--inline article__meta-buttons">
-                                    <li><a href="blog-article.html">Read more</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
         </div>
     </div>
