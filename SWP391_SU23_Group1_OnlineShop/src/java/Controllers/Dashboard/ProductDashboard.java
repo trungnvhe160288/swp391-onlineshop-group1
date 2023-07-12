@@ -9,7 +9,6 @@ import Ultils.Common;
 import DAL.ProductDAO;
 import Models.Category;
 import Models.Color;
-import Models.Image;
 import Models.Product;
 import Models.Size;
 import Ultils.SupportImage;
@@ -173,13 +172,13 @@ public class ProductDashboard extends HttpServlet {
         List<Color> color = getColor(colors);
         List<Size> size = getSize(sizes);
 
-        String thumbnail_image = "/images/product/" + category.getName().toLowerCase() + "/product_thumbnail_" + id + ".jpg";
-        String uploadPath = "/images/product/" + category.getName().toLowerCase();
-        List<Image> image = upload(request, uploadPath, id);
+        String uploadPath = "/images/product/";
+        String thubnail_image = "product_thumbnail_" + id;
+        String thumbnail_url = uploadPath + SupportImage.uploadImage(request, respons, uploadPath, thubnail_image);
 
-        Product p = new Product(id, name, thumbnail_image, description, Common.parseDouble(price), Common.parseFloat(percent_discount),
+        Product p = new Product(id, name, thumbnail_url, description, Common.parseDouble(price), Common.parseFloat(percent_discount),
                 Common.parseInt(quantity), Common.getCurrentDate(), Common.getCurrentDate(), actived.equalsIgnoreCase("true"),
-                category, image, color, size);
+                category, new ArrayList<>(), color, size);
 
         boolean status = pd.add(p);
 
@@ -208,8 +207,6 @@ public class ProductDashboard extends HttpServlet {
         }
         return list;
     }
-
-
 
     /**
      * Returns a short description of the servlet.
