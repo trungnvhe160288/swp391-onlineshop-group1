@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean class="Ultils.CommonForJSP" id="common"/>
+<jsp:useBean class="DAL.ProductDAO" id="productDAO" />
 
 
 <!DOCTYPE html>
@@ -30,6 +31,18 @@
         <!-- Main Style CSS -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/responsive.css">
+        
+        <style>
+            .hidden-text-1 {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-height: 25px;
+                -webkit-line-clamp: 1;
+                height: 25px;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+            }
+        </style>
 
     </head>
 
@@ -52,7 +65,7 @@
             <div class="top-header">
                 <div class="container-fluid">
                     <div class="row d-flex justify-content-end">
-                        <div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right float-right">
+                        <div class="col text-right float-right">
                             <span class="user-menu d-block d-lg-none">
                                 <i class="anm anm-user-al" aria-hidden="true"></i>
                             </span>
@@ -78,6 +91,9 @@
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/cart/detail.do">My Cart</a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/login/changepass.do">Change Pass</a>
                                     </li>
                                     <c:if test="${account.role.id != 2}">
                                         <li>
@@ -130,24 +146,15 @@
                                         <div class="megamenu style4">
                                             <ul class="grid grid--uniform mmWrapper">
                                                 <c:forEach items="${category}" var="item">
+                                                    <c:set var="product" value="${productDAO.getProductTopXSoldByCategoryID(item.id)}"/>
                                                     <li class="grid__item lvl-1 col-md-3 col-lg-3">
                                                         <a href="#" class="site-nav lvl-1">${item.name}</a>
                                                         <ul class="subLinks">
-                                                            <li class="lvl-2">
-                                                                <a href="#!" class="site-nav lvl-2">Left Sidebar</a>
-                                                            </li>
-                                                            <li class="lvl-2">
-                                                                <a href="#!" class="site-nav lvl-2">Right Sidebar</a>
-                                                            </li>
-                                                            <li class="lvl-2">
-                                                                <a href="#!" class="site-nav lvl-2">Fullwidth</a>
-                                                            </li>
-                                                            <li class="lvl-2">
-                                                                <a href="#!" class="site-nav lvl-2">3 items per row</a>
-                                                            </li>
-                                                            <li class="lvl-2">
-                                                                <a href="#!" class="site-nav lvl-2">4 items per row</a>
-                                                            </li>
+                                                            <c:forEach items="${product}" var="p">
+                                                                <li class="lvl-2">
+                                                                    <a href="${pageContext.request.contextPath}/shop/detail.do?id=${p.id}" class="site-nav lvl-2 hidden-text-1">${p.name}</a>
+                                                                </li>
+                                                            </c:forEach>
                                                         </ul>
                                                     </li>
                                                 </c:forEach>
