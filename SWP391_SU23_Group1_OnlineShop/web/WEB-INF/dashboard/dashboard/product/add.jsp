@@ -299,11 +299,10 @@
 
                                             <div class="form-wizard-header">
                                                 <p>Fill all form field to go next step</p>
-                                                <ul class="list-unstyled form-wizard-steps clearfix">
+                                                <ul class="list-unstyled form-wizard-steps clearfix d-flex justify-content-center">
                                                     <li class="active"><span>1</span></li>
                                                     <li><span>2</span></li>
                                                     <li><span>3</span></li>
-                                                    <li><span>4</span></li>
                                                 </ul>
                                             </div>
                                             <form action="${pageContext.request.contextPath}/dashboard/product/add.ad" method="POST" role="form" id="form-upload"  enctype="multipart/form-data">
@@ -426,7 +425,7 @@
                                                             <div class="upload-container relative flex items-center justify-between w-full">
                                                                 <div class="drop-area w-full rounded-md border-2 border-dotted border-gray-200 transition-all text-center">
                                                                     <label for="file-input" class="block w-full h-full text-gray-500 p-4 text-sm cursor-pointer">Drop your image here or click to browse</label>
-                                                                    <input name="thumbnail_image" type="file" id="file-input" accept="image/*" class="hidden" />
+                                                                    <input name="upload_image" type="file" id="file-input" accept="image/*" class="hidden" />
                                                                     <!-- Image upload input -->
                                                                     <div class="preview-container hidden items-center justify-center flex-col">
                                                                         <div class="preview-image bg-cover bg-center rounded-md" style="width: 300px; height: 300px"></div>
@@ -439,29 +438,9 @@
                                                     </div>
                                                     <div class="form-group clearfix">
                                                         <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
-                                                        <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
+                                                        <button onclick="document.form[0].submit()" class="form-wizard-submit float-right">Submit</button>
                                                     </div>
                                                 </fieldset>	
-                                                <fieldset class="wizard-fieldset" >
-                                                    <h5>Product Images</h5>
-                                                    <div class="container my-5">
-                                                        <h3 class="text-center">Multiple Upload Images and Remove Button </h3>
-                                                        <div class="row">
-                                                            <div class="col">
-
-                                                                <div class="form-group mt-5">
-                                                                    <label for="">Choose Images</label>
-                                                                    <input type="file" class="form-control" name="product_image" accept="image/'" multiple id="upload-img" />
-                                                                </div>
-                                                                <div class="img-thumbs img-thumbs-hidden" id="img-preview"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group clearfix">
-                                                        <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
-                                                        <button href="#!" onclick="document.form[0].submit()" class="form-wizard-submit float-right">Submit</button>
-                                                    </div>
-                                                </fieldset>
                                             </form>
                                         </div>
                                     </div>
