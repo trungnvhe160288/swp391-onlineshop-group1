@@ -65,7 +65,7 @@
                                             <span class="money"  style="background-color: ${itemColor.bgr_hex}; border: 1px solid #000; padding: 5px 10px"></span>
                                         </td>
                                         <td class="cart__price-wrapper cart-flex-item">
-                                            <span class="money">${item.sizeID}</span>
+                                            <span class="money">${dao.getSizeByID(item.sizeID).name}</span>
                                         </td>
                                         <td class="cart__update-wrapper cart-flex-item text-right">
                                             <form action="${pageContext.request.contextPath}/cart/process.do" method="get">
