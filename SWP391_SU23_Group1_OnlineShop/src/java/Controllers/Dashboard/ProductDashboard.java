@@ -209,30 +209,7 @@ public class ProductDashboard extends HttpServlet {
         return list;
     }
 
-    private List<Image> upload(HttpServletRequest request, String uploadPath, int id) throws IOException, ServletException {
-        List<Image> image = new ArrayList<>();
 
-        int i = -1;
-        for (Part part : request.getParts()) {
-
-            String submited = part.getSubmittedFileName();
-
-            if (submited != null) {
-                i++;
-                if (i == 0) {
-                    String thumbnail_image = "product_thumbnail_" + id + ".jpg";
-                    part.write("D:/SU23/Java/Group1_Online_Shop/web" + uploadPath + "/" + thumbnail_image);
-                    System.out.println("selected: " + submited);
-                } else {
-                    String url = uploadPath + "/" + "product_image_" + id + "_" + i + ".jpg";
-                    part.write("D:/SU23/Java/Group1_Online_Shop/web" + url);
-                    image.add(new Image(-1, url, id, Common.getCurrentDate(), Common.getCurrentDate()));
-                }
-            }
-        }
-
-        return image;
-    }
 
     /**
      * Returns a short description of the servlet.
