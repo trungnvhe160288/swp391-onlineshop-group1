@@ -107,7 +107,7 @@ public class LoginDashboard extends HttpServlet {
 
         if (session.getAttribute("account") != null) {
             session.removeAttribute("account");
-            SupportMessage.sendToastToDashboard(session, 1, "Logout ", "Login Successfull !");
+            SupportMessage.sendToastToDashboard(session, 1, "Logout ", "Logout Successfull !");
             response.sendRedirect(request.getContextPath() + "/dashboard/dashboard.ad");
         }
     }
