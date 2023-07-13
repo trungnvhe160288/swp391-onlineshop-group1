@@ -79,7 +79,7 @@ public class RoleDashboard extends HttpServlet {
 
                 Role role = dao.getRoleById(id);
 
-                if (dao.checkNameColorExist(name) && !name.equals(role.getName())) {
+                if (dao.checkNameRoleExist(name) && !name.equals(role.getName())) {
                     session.setAttribute("message", "Role Name Was Exist !");
                     SupportMessage.sendToastToDashboard(session, 0, "Update Role", "Failed !");
 
@@ -100,7 +100,7 @@ public class RoleDashboard extends HttpServlet {
                 if (dao.checkNameRoleExist(name)) {
                     request.setAttribute("name", name);
                     request.setAttribute("message", "Role Name Was Exist !");
-                    SupportMessage.sendToastToDashboard(session, 0, "Add Color", "Failed !");
+                    SupportMessage.sendToastToDashboard(session, 0, "Add Role Name", "Failed !");
                     request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
                 } else {
                     Role newRole = new Role(-1, name, Common.getCurrentDate(), Common.getCurrentDate());
