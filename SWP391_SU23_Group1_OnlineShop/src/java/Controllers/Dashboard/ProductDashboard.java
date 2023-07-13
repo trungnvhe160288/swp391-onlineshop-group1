@@ -9,6 +9,7 @@ import Ultils.Common;
 import DAL.ProductDAO;
 import Models.Category;
 import Models.Color;
+import Models.Image;
 import Models.Product;
 import Models.Size;
 import Ultils.SupportImage;

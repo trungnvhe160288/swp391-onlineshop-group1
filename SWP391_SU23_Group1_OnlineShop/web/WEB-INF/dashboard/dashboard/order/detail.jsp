@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="col-md-6 text-md-right">
                                     <address>
-                                        <strong>Receiver:</strong><br>
+                                        <strong style="font-size: 2em">Receiver</strong><br>
                                         ${order.fullName},<br>
                                         ${order.address},<br>
                                         ${order.phone},<br>
@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <address>
-                                        <strong>Note:</strong><br>
+                                        <strong style="font-size: 2em">Note</strong><br>
                                         <p>${order.note}</p>
                                     </address>
                                 </div>
