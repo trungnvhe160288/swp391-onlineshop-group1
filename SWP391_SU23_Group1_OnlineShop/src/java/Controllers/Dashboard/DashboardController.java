@@ -5,12 +5,16 @@
 
 package Controllers.Dashboard;
 
+import DAL.CartDAO;
+import Ultils.Common;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.Date;
 
 /**
  *
@@ -30,7 +34,17 @@ public class DashboardController extends HttpServlet {
     throws ServletException, IOException {
         String action = (String) request.getAttribute("action");
         switch (action) {
-            case "dashboard": 
+            case "dashboard":
+                Date date = Common.getCurrentDate();
+                String year_raw = request.getParameter("year");
+                int year = (year_raw == null) ? date.getYear() + 1900 : Integer.parseInt(year_raw);
+                
+                CartDAO cd = new CartDAO();
+                System.out.println(cd.getRevenueByYear(year));
+                
+                request.setAttribute("chart", cd.getRevenueByYear(year));
+                request.setAttribute("selectedYear", year);
+                        
                 request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
                 break;
             default:
