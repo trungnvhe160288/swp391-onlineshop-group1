@@ -75,6 +75,31 @@ public class CommentDAO extends DBContext {
         return list;
     }
 
+    public int getTotalCommentByMonthAndYear(int month, int year) {
+
+        try {
+
+            String sql = "SELECT COUNT(*)\n"
+                    + "  FROM [dbo].[Comment]\n"
+                    + "  where MONTH([createDate]) = ? AND YEAR([createDate]) = ?";
+
+            PreparedStatement st = connection.prepareStatement(sql);
+
+            st.setInt(1, month);
+            st.setInt(2, year);
+
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+
     public boolean add(Comment c) {
 
         try {
