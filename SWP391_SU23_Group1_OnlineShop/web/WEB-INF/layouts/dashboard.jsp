@@ -67,42 +67,6 @@
                         </ul>
                     </div>
                     <ul class="navbar-nav navbar-right">
-                        <li class="dropdown dropdown-list-toggle">
-                            <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg">
-                                <i data-feather="bell" class="bell"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
-                                <div class="dropdown-header">
-                                    Notifications
-                                    <div class="float-right">
-                                        <a href="#">Mark All As Read</a>
-                                    </div>
-                                </div>
-                                <div class="dropdown-list-content dropdown-list-icons">
-                                    <a href="#" class="dropdown-item dropdown-item-unread">
-                                        <span class="dropdown-item-icon bg-primary text-white">
-                                            <i class="fas fa-code"></i>
-                                        </span>
-                                        <span class="dropdown-item-desc">
-                                            Template update is available now!
-                                            <span class="time">2 Min Ago</span>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="dropdown-item">
-                                        <span class="dropdown-item-icon bg-info text-white">
-                                            <i class="far fa-user"></i>
-                                        </span>
-                                        <span class="dropdown-item-desc">
-                                            <b>You</b> and <b>Dedik Sugiharto</b> are now friends 
-                                            <span class="time">10 Hours Ago</span>
-                                        </span>
-                                    </a>  
-                                </div>
-                                <div class="dropdown-footer text-center">
-                                    <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-                                </div>
-                            </div>
-                        </li>
                         <li class="dropdown">
                             <a href="#!" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                                 <img alt="image" src="${pageContext.request.contextPath}/dashboard/assets/img/user.png" class="user-img-radious-style">
@@ -112,11 +76,6 @@
                                 <div class="dropdown-title">Hello, ${account.role.name}</div>
                                 <a href="#!" class="dropdown-item has-icon">
                                     <i class="far fa-user"></i> Profile
-                                </a>
-                                <a href="#!" class="dropdown-item has-icon">
-                                    <i class="fas fa-bolt"></i> Activities
-                                </a> <a href="#" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
-                                    Settings
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a href="${pageContext.request.contextPath}/dashboard/login/logout.ad" class="dropdown-item has-icon text-danger">
@@ -143,9 +102,6 @@
                             </li>
                             <c:if test="${account.role.id == 1 || account.role.id == 3 || account.role.id == 4}">
                                 <c:if test="${account.role.id == 1}">
-                                    <li class="${controller == '/dashboard/statistic' ? 'active' : ''}">
-                                        <a class="nav-link" href="${pageContext.request.contextPath}/dashboard/statistic/listing.ad"><i data-feather="bar-chart"></i><span>Statistic</span></a>
-                                    </li>
                                     <li class="dropdown">
                                         <a href="#" class="menu-toggle nav-link has-dropdown ${controller == '/dashboard/role' ? 'toggled' : ''}"><i data-feather="command"></i><span>Role</span></a>
                                         <ul class="dropdown-menu" style='${controller == '/dashboard/role' ? 'display: block' : ''}'>
@@ -154,13 +110,17 @@
                                         </ul>
                                     </li>
                                 </c:if>
+                                <c:if test="${account.role.id == 1}">
                                 <li class="menu-header">Product Managements</li>
+                                </c:if>
                                     <c:if test="${account.role.id == 1}">
                                     <li class="dropdown">
                                         <a href="#!" class="menu-toggle nav-link has-dropdown ${controller == '/dashboard/product' ? 'toggled' : ''}"><i data-feather="copy"></i><span>Products</span></a>
                                         <ul class="dropdown-menu" style='${controller == '/dashboard/product' ? 'display: block' : ''}'>
                                             <li><a class="nav-link" href="${pageContext.request.contextPath}/dashboard/product/listing.ad">Listing</a></li>
                                             <li><a class="nav-link" href="${pageContext.request.contextPath}/dashboard/product/add.ad">Add New</a></li>
+                                            <li><a class="nav-link" href="${pageContext.request.contextPath}/dashboard/image/listing.ad">Listing Images </a></li>
+                                            <li><a class="nav-link" href="${pageContext.request.contextPath}/dashboard/image/add.ad">Add New Image</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown ">
@@ -192,8 +152,9 @@
                                     </li>
                                 </c:if> 
 
-
+                                <c:if test="${account.role.id == 1 || account.role.id == 3}">
                                 <li class="menu-header">Community</li>
+                                </c:if>
                                     <c:if test="${account.role.id == 1}">
                                     <li class="dropdown">
                                         <a href="#~" class="menu-toggle nav-link has-dropdown ${controller == '/dashboard/user' ? 'toggled' : ''}">
@@ -218,8 +179,8 @@
                                         </ul>
                                     </li>
                                 </c:if>
-                                <li class="menu-header">Media</li>
-                                    <c:if test="${account.role.id == 3}">
+                                <c:if test="${account.role.id == 3}">
+                                    <li class="menu-header">Media</li>
                                     <li class="dropdown">
                                         <a href="#" class="menu-toggle nav-link has-dropdown ${controller == '/dashboard/slider' ? 'toggled' : ''}"><i data-feather="shopping-bag"></i><span>Sliders</span></a>
                                         <ul class="dropdown-menu" style="${controller == '/dashboard/slider' ? 'display: block' : ''}">
@@ -338,7 +299,7 @@
 
         <!-- General JS Scripts -->
         <script src="${pageContext.request.contextPath}/dashboard/assets/js/app.min.js"></script>
-      
+
         <!-- JS Libraies -->
         <script src="${pageContext.request.contextPath}/dashboard/assets/bundles/apexcharts/apexcharts.min.js"></script>
 
@@ -347,12 +308,12 @@
         <script src="${pageContext.request.contextPath}/dashboard/assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
         <script src="${pageContext.request.contextPath}/dashboard/assets/bundles/jquery-ui/jquery-ui.min.js"></script>
         <script src="${pageContext.request.contextPath}/dashboard/assets/js/page/datatables.js"></script>
-        
+
         <!-- List -->
 
         <!-- Add -->
         <script src="${pageContext.request.contextPath}/dashboard/assets/bundles/summernote/summernote-bs4.js"></script>
-        <script src="${pageContext.request.contextPath}/dashboard/assets/bundles/jquery-selectric/jquery.selectric.min.js"></script>
+        <!--<script src="${pageContext.request.contextPath}/dashboard/assets/bundles/jquery-selectric/jquery.selectric.min.js"></script>-->
         <script src="${pageContext.request.contextPath}/dashboard/assets/bundles/upload-preview/assets/js/jquery.uploadPreview.min.js"></script>
         <script src="${pageContext.request.contextPath}/dashboard/assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
         <script src="${pageContext.request.contextPath}/dashboard/assets/js/page/create-post.js"></script>
@@ -482,7 +443,7 @@
         </script>
         <!-- Add -->
 
-        
+
         <!-- Toast -->
         <script src="${pageContext.request.contextPath}/dashboard/assets/bundles/izitoast/js/iziToast.min.js"></script>
         <script src="${pageContext.request.contextPath}/dashboard/assets/js/page/toastr.js"></script>
