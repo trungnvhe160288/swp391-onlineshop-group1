@@ -180,6 +180,43 @@ public class BlogDAO extends DBContext {
         }
         return null;
     }
+    
+    public List<Blog> getTopXBlogAndPublished(int x) {
+        List<Blog> list = new ArrayList<>();
+
+        try {
+
+            String sql = "SELECT TOP(?) [id]\n"
+                    + "      ,[thumbnail_url]\n"
+                    + "      ,[user_id]\n"
+                    + "      ,[title]\n"
+                    + "      ,[description]\n"
+                    + "      ,[content]\n"
+                    + "      ,[created_at]\n"
+                    + "      ,[updateAt]\n"
+                    + "      ,[isPublished]\n"
+                    + "  FROM [dbo].[posts]\n"
+                    + "  WHERE isPublished = 1\n"
+                    + "  ORDER BY created_at DESC";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, x);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Blog blog = new Blog(rs.getInt("id"), rs.getString("thumbnail_url"), rs.getInt("user_id"), rs.getString("title"),
+                        rs.getString("description"), rs.getString("content"), rs.getDate("created_at"), rs.getDate("updateAt"),
+                        rs.getBoolean("isPublished"));
+
+                list.add(blog);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
 
     public Blog getBlogByID(int id) {
 
