@@ -490,6 +490,33 @@ public class CartDAO extends DBContext {
         return -1;
     }
 
+    public List<Double> getRevenueByYear(int year) {
+        List<Double> list = new ArrayList<>();
+        try {
+
+            for (int i = 1; i <= 12; i++) {
+                String sql = "SELECT SUM(od.total_price) as 'totalRevenue' FROM (SELECT total_price FROM (SELECT [id] FROM [dbo].[orders] WHERE MONTH(created_at) = ? and YEAR(created_at) = ? and status = 1) \n"
+                        + "as o inner join order_detail od\n"
+                        + "on o.id = od.order_id) as od";
+
+                PreparedStatement st = connection.prepareStatement(sql);
+                st.setInt(1, i);
+                st.setInt(2, year);
+
+                ResultSet rs = st.executeQuery();
+
+                if (rs.next()) {
+                    list.add(rs.getDouble("totalRevenue"));
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return list;
+    }
+
     public double getTotalRevenueByMonths(int month, int year) {
         try {
 
