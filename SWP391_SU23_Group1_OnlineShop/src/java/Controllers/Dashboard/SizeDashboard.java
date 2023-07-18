@@ -104,6 +104,7 @@ public class SizeDashboard extends HttpServlet {
         String name = request.getParameter("name");
 
         DAO dao = new DAO();
+        //getSizeByID
         Size size = dao.getSizeByID(id);
         HttpSession session = request.getSession();
 
