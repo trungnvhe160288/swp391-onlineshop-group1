@@ -48,6 +48,7 @@ public class OrderDashboard extends HttpServlet {
                 String xID = request.getParameter("id");
                 int id = Common.parseInt(xID);
 
+                //getOrderByID
                 Order order = cd.getOrderByID(id);
                 request.setAttribute("order", order);
                 request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
