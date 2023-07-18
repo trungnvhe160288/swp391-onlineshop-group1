@@ -70,6 +70,7 @@ public class ImageDashboardController extends HttpServlet {
                 break;
             case "image":
                 int id = Common.parseInt(request.getParameter("id"));
+                //getImageByID
                 request.setAttribute("data", new DAO().getImageById(id));
                 request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
                 break;
