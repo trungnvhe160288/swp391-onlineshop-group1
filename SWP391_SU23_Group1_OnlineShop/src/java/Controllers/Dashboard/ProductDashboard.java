@@ -47,6 +47,7 @@ public class ProductDashboard extends HttpServlet {
 
         switch (action) {
             case "listing":
+                //getAll
                 request.setAttribute("data", pd.getAll());
                 request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
                 break;
