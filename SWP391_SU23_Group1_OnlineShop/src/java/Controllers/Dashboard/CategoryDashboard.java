@@ -46,6 +46,7 @@ public class CategoryDashboard extends HttpServlet {
                 int id = Common.parseInt(id_raw);
 
                 CategoryDAO cd = new CategoryDAO();
+                //getCategoryByID
                 Category c = cd.getCategoryByID(id);
 
                 request.setAttribute("data", c);
