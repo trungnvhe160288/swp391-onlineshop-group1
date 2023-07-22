@@ -143,6 +143,29 @@ public class UserDAO extends DBContext {
         }
 
     }
+    
+    public void updateUserProfile(int id, String name, String phone, String address, String email) {
+        try {
+
+            String sql = "UPDATE [dbo].[Users]\n"
+                    + "   SET [fullname] = ?, [phone] = ? \n"
+                    +", [address] = ?, [email] = ? \n"
+                    + " WHERE [id] = ?";
+
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1,name);
+            st.setString(2, phone);
+            st.setString(3, address);
+            st.setString(4, email);
+            st.setInt(5, id);
+
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }
 
     public boolean saveOTP(String code, String type, String email) {
         try {
