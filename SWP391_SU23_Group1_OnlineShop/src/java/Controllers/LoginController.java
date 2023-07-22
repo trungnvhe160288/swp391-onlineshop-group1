@@ -37,13 +37,6 @@ public class LoginController extends HttpServlet {
             case "login":
             case "register":
             case "forgot":
-            case "userProfile":
-                String id_raw = request.getParameter("id");
-                int id = Common.parseInt(id_raw);
-
-                request.setAttribute("data", ud.getUserByID(id));
-                request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
-                break;
             case "changepass":
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 break;
@@ -53,6 +46,14 @@ public class LoginController extends HttpServlet {
                 break;
             case "verifyEmail":
                 verifyEmail(request, response, ud);
+                request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+                break;
+            case "userProfile":
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("account");
+
+                int id = user.getId();
+                request.setAttribute("data", ud.getUserByID(id));
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 break;
             default:
