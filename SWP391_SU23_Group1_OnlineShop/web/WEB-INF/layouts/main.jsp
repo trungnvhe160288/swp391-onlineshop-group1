@@ -84,7 +84,7 @@
 
                                 <c:if test="${account != null}">
                                     <li>
-                                        <a href="#!">Hello, ${account.fullName}</a>
+                                        <a href="${pageContext.request.contextPath}/login/userProfile.do">Hello, ${account.fullName}</a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/cart/myorder.do">My Order</a>
