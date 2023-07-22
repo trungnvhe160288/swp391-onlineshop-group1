@@ -31,27 +31,6 @@
                     </div>
                 </form>
             </div>
-            <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-                <div class="open-hours">
-                    <strong>Opening Hours</strong><br>
-                    Mon - Sat : 9am - 11pm<br>
-                    Sunday: 11am - 5pm
-                </div>
-                <hr />
-                <ul class="addressFooter">
-                    <li><i class="icon anm anm-map-marker-al"></i>
-                        <p>55 Gallaxy Enque, 2568 steet, 23568 NY</p>
-                    </li>
-                    <li class="phone"><i class="icon anm anm-phone-s"></i>
-                        <p>(440) 000 000 0000</p>
-                    </li>
-                    <li class="email"><i class="icon anm anm-envelope-l"></i>
-                        <p>sales@yousite.com</p>
-                    </li>
-                </ul>
-                <hr />
-
-            </div>
         </div>
     </div>
 
