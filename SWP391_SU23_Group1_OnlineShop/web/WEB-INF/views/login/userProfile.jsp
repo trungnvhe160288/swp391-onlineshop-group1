@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean class="DAL.UserDAO" id="ud"/>
+<%--<jsp:useBean class="DAL.UserDAO" id="ud"/>--%>
 
 
 
@@ -18,7 +18,7 @@
                 <form action="${pageContext.request.contextPath}/login/userProfile.do" method="POST">
                     <div class="form-group">
                         <label  for="name">Full Name</label>
-                        <input  type="text" id="fullname" name="fullname" value="${data.name}">
+                        <input  type="text" id="fullname" name="fullname" value="${data.fullName}">
                     </div>
                     <div class="form-group">
                         <label for="email">Phone</label>

@@ -108,17 +108,18 @@ public class LoginController extends HttpServlet {
 
     private void userProfile(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         UserDAO ud = new UserDAO();
-        String id_raw = request.getParameter("id");
-        int id = Common.parseInt(id_raw);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
+
+        int id = user.getId();
         String name = request.getParameter("fullname");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
         String email = request.getParameter("email");
 
         ud.updateUserProfile(id, name, phone, address, email);
-        HttpSession session = request.getSession();
 
-        SupportMessage.sendToastToDashboard(session, 1, "Update Profile", "Successful !");
+        SupportMessage.sendToast(session, 1," Update Profile Successful !");
 
         response.sendRedirect(request.getContextPath() + "/login/userProfile.do?id=" + id);
     }
