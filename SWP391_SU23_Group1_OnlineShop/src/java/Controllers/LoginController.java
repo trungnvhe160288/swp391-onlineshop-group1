@@ -37,6 +37,13 @@ public class LoginController extends HttpServlet {
             case "login":
             case "register":
             case "forgot":
+            case "userProfile":
+                String id_raw = request.getParameter("id");
+                int id = Common.parseInt(id_raw);
+
+                request.setAttribute("data", ud.getUserByID(id));
+                request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+                break;
             case "changepass":
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 break;
@@ -87,12 +94,32 @@ public class LoginController extends HttpServlet {
             case "changepass":
                 changePass(request, response);
                 break;
+            case "userProfile":
+                userProfile(request, response);
+                break;
             default:
                 //Show error page
                 request.setAttribute("controller", "error");
                 request.setAttribute("action", "error");
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
         }
+    }
+
+    private void userProfile(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        UserDAO ud = new UserDAO();
+        String id_raw = request.getParameter("id");
+        int id = Common.parseInt(id_raw);
+        String name = request.getParameter("fullname");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String email = request.getParameter("email");
+
+        ud.updateUserProfile(id, name, phone, address, email);
+        HttpSession session = request.getSession();
+
+        SupportMessage.sendToastToDashboard(session, 1, "Update Profile", "Successful !");
+
+        response.sendRedirect(request.getContextPath() + "/login/userProfile.do?id=" + id);
     }
 
     private void changePass(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -113,7 +140,7 @@ public class LoginController extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/index.do");
             } else {
                 SupportMessage.sendToast(session, 0, "Something wrong !");
-                
+
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
 
             }
@@ -129,7 +156,7 @@ public class LoginController extends HttpServlet {
         SupportMail.sendMail(email, 2);
 
         SupportMessage.sendToast(session, 1, "New Password Was Send To Your Email !");
-        
+
         request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
 
     }
@@ -142,7 +169,7 @@ public class LoginController extends HttpServlet {
         SupportMail.sendMail(email, 1);
 
         SupportMessage.sendToast(session, 1, "New Code Send To Your Email !");
-        
+
         request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
     }
 
