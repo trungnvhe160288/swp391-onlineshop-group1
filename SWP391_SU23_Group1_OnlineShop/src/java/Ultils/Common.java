@@ -4,14 +4,11 @@
  */
 package Ultils;
 
-import Models.Color;
-import Models.Size;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,7 +31,7 @@ public class Common {
         byte[] passwordByte = convert.digest();
         return DatatypeConverter.printHexBinary(passwordByte);
     }
-    
+
     public static Date getCurrentDate() {
         LocalDate curDate = java.time.LocalDate.now();
         return Date.valueOf(curDate.toString());
@@ -51,7 +48,7 @@ public class Common {
 
         return n;
     }
-    
+
     public static float parseFloat(String x) {
         float n = 0;
 
@@ -63,7 +60,7 @@ public class Common {
 
         return n;
     }
-    
+
     public static double parseDouble(String x) {
         double n = 0;
 
@@ -81,10 +78,8 @@ public class Common {
         NumberFormat vn = NumberFormat.getInstance(localeVN);
         return vn.format(price);
     }
-    
-    public static int getRandomNumber(int min, int max){
-        return (int)Math.floor(Math.random() * (max - min + 1)) + min;
+
+    public static int getRandomNumber(int min, int max) {
+        return (int) Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    
-    
 }
