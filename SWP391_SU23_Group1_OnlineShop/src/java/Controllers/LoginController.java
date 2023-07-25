@@ -32,12 +32,14 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
 
         String action = (String) request.getAttribute("action");
+
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account");
         UserDAO ud = new UserDAO();
         switch (action) {
             case "login":
             case "register":
             case "forgot":
-            case "changepass":
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 break;
             case "logout":
@@ -48,10 +50,8 @@ public class LoginController extends HttpServlet {
                 verifyEmail(request, response, ud);
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
                 break;
+            case "changepass":
             case "userProfile":
-                HttpSession session = request.getSession();
-                User user = (User) session.getAttribute("account");
-
                 int id = user.getId();
                 request.setAttribute("data", ud.getUserByID(id));
                 request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
@@ -115,38 +115,48 @@ public class LoginController extends HttpServlet {
         String name = request.getParameter("fullname");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
-        String email = request.getParameter("email");
 
-        ud.updateUserProfile(id, name, phone, address, email);
+        try {
+            // Update user profile
+            ud.updateUserProfile(id, name, phone, address);
 
-        SupportMessage.sendToast(session, 1," Update Profile Successful !");
-
-        response.sendRedirect(request.getContextPath() + "/login/userProfile.do?id=" + id);
+            SupportMessage.sendToast(session, 3, "Update Profile Successful !");
+            response.sendRedirect(request.getContextPath() + "/login/userProfile.do?id=" + id);
+        } catch (Exception e) {
+            // Handle unexpected exceptions
+            e.printStackTrace();
+            SupportMessage.sendToast(session, 0, "An unexpected error occurred. Please try again later.");
+            request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
+        }
     }
 
     private void changePass(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String oldPassword = request.getParameter("oldpass");
         String newPassword = request.getParameter("newpass");
 
         HttpSession session = request.getSession();
-
         User u = (User) session.getAttribute("account");
 
         if (u != null) {
-            u.setPassword(newPassword);
-            UserDAO ud = new UserDAO();
+            if (u.getPassword().equals(oldPassword)) {
+                u.setPassword(newPassword);
+                UserDAO ud = new UserDAO();
+                boolean status = ud.changePass(u);
 
-            boolean status = ud.changePass(u);
-
-            if (status) {
-                SupportMessage.sendToast(session, 1, "Change Password successful !");
-                response.sendRedirect(request.getContextPath() + "/index.do");
+                if (status) {
+                    // Password change successful
+                    SupportMessage.sendToast(session, 1, "Change Password successful !");
+                    response.sendRedirect(request.getContextPath() + "/index.do");
+                } else {
+                    // Password change failed due to unexpected error
+                    SupportMessage.sendToast(session, 0, "Failed to change password. Please try again.");
+                    response.sendRedirect(request.getContextPath() + "/index.do");
+                }
             } else {
-                SupportMessage.sendToast(session, 0, "Something wrong !");
-
-                request.getRequestDispatcher("/WEB-INF/layouts/main.jsp").forward(request, response);
-
+                // Old password provided by the user is incorrect
+                SupportMessage.sendToast(session, 0, "Incorrect old password. Please try again.");
+                response.sendRedirect(request.getContextPath() + "/index.do");
             }
-
         }
     }
 
@@ -188,6 +198,7 @@ public class LoginController extends HttpServlet {
             switch (status) {
                 case 1:
                     session.setAttribute("account", user);
+                    System.out.println(user.getPassword());
                     SupportMessage.sendToast(session, 1, "Login Successfull !");
                     response.sendRedirect(request.getContextPath() + "/index.do");
                     break;
@@ -271,11 +282,6 @@ public class LoginController extends HttpServlet {
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
