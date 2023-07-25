@@ -130,11 +130,12 @@ public class LoginController extends HttpServlet {
     }
 
     private void changePass(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String oldPassword = request.getParameter("oldpass");
+        String oldPassword = Common.convertPassToMD5(request.getParameter("oldpass"));
         String newPassword = request.getParameter("newpass");
 
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("account");
+        System.out.println(u.getPassword());
 
         if (u != null) {
             if (u.getPassword().equals(oldPassword)) {
@@ -148,7 +149,7 @@ public class LoginController extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/index.do");
                 } else {
                     // Password change failed due to unexpected error
-                    SupportMessage.sendToast(session, 0, "Unexpected error happened. Please try again.");
+                    SupportMessage.sendToast(session, 0, "Unexpected error . Please try again.");
                     response.sendRedirect(request.getContextPath() + "/index.do");
                 }
             } else {
@@ -197,7 +198,7 @@ public class LoginController extends HttpServlet {
             switch (status) {
                 case 1:
                     session.setAttribute("account", user);
-                    System.out.println(user.getPassword());
+               
                     SupportMessage.sendToast(session, 1, "Login Successfull !");
                     response.sendRedirect(request.getContextPath() + "/index.do");
                     break;
