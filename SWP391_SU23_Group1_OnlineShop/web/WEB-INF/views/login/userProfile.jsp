@@ -12,7 +12,24 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-12 col-sm-12 col-md-8 col-lg-8 mb-4">
+            <div class="col-4">
+                <form action="${pageContext.request.contextPath}/login/userProfile.do" method="POST">
+                    <div class="col-12">
+                        <div class="card-body">
+                            <div class="author-box-center">
+                                <img style="height: 15rem; width: 15rem" alt="image" src="${pageContext.request.contextPath}${data.avatar}" class="rounded-circle author-box-picture">
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 offset-md-2">
+                        <input type="submit" class="btn" value="Update avatar" style="margin-bottom: 10px; border-radius: 4px;">
+                    </div>
+
+                </form>
+            </div>
+            <div class="col-8">
                 <form action="${pageContext.request.contextPath}/login/userProfile.do" method="POST" id="profileForm">
                     <div class="form-group">
                         <label for="email">Email</label>
@@ -34,7 +51,7 @@
                         <input type="text" id="address" name="address" value="${data.address}">
                     </div>
                     <div class="form-group">
-                        <input type="submit" class="btn" id="editProfileBtn" value="Edit Profile" style="margin-bottom: 10px; border-radius: 4px;" disabled>
+                        <input type="submit" class="btn" id="editProfileBtn" value="Edit Profile" style="margin-bottom: 10px; margin-left: 300px; border-radius: 4px;" disabled>
                     </div>
                 </form>
             </div>
@@ -94,8 +111,8 @@
                 addError("address", "Please enter your address.");
                 return;
             }
-            
-             // Additional fullName validation for length
+
+            // Additional fullName validation for length
             if (address.length < 5 || address.length > 50) {
                 addError("address", "Address must be between 5 and 50 characters.");
                 return;
@@ -114,25 +131,25 @@
 </script>
 <!<!-- no change check -->
 <script>
-  $(document).ready(function () {
-    var initialFormData = $("#profileForm").serialize();
+    $(document).ready(function () {
+        var initialFormData = $("#profileForm").serialize();
 
-    // Function to check for changes and enable/disable the Edit Profile button
-    function checkForChanges() {
-      var currentFormData = $("#profileForm").serialize();
-      if (currentFormData === initialFormData) {
-        $("#editProfileBtn").prop("disabled", true);
-      } else {
-        $("#editProfileBtn").prop("disabled", false);
-      }
-    }
+        // Function to check for changes and enable/disable the Edit Profile button
+        function checkForChanges() {
+            var currentFormData = $("#profileForm").serialize();
+            if (currentFormData === initialFormData) {
+                $("#editProfileBtn").prop("disabled", true);
+            } else {
+                $("#editProfileBtn").prop("disabled", false);
+            }
+        }
 
-    // Trigger checkForChanges on form field changes
-    $("#profileForm input, #profileForm textarea").on("input", function () {
-      checkForChanges();
+        // Trigger checkForChanges on form field changes
+        $("#profileForm input, #profileForm textarea").on("input", function () {
+            checkForChanges();
+        });
+
+        // Initial check on page load
+        checkForChanges();
     });
-
-    // Initial check on page load
-    checkForChanges();
-  });
 </script>
