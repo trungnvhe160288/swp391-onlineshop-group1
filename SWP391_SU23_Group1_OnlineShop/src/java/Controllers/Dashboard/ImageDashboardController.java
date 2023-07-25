@@ -75,7 +75,6 @@ public class ImageDashboardController extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
                 break;
             case "add":
-
                 request.setAttribute("products", new ProductDAO().getAll());
                 request.getRequestDispatcher("/WEB-INF/layouts/dashboard.jsp").forward(request, response);
                 break;

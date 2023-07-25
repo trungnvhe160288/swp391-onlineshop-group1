@@ -119,7 +119,6 @@ public class LoginController extends HttpServlet {
         try {
             // Update user profile
             ud.updateUserProfile(id, name, phone, address);
-
             SupportMessage.sendToast(session, 3, "Update Profile Successful !");
             response.sendRedirect(request.getContextPath() + "/login/userProfile.do?id=" + id);
         } catch (Exception e) {
@@ -149,12 +148,12 @@ public class LoginController extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/index.do");
                 } else {
                     // Password change failed due to unexpected error
-                    SupportMessage.sendToast(session, 0, "Failed to change password. Please try again.");
+                    SupportMessage.sendToast(session, 0, "Unexpected error happened. Please try again.");
                     response.sendRedirect(request.getContextPath() + "/index.do");
                 }
             } else {
                 // Old password provided by the user is incorrect
-                SupportMessage.sendToast(session, 0, "Incorrect old password. Please try again.");
+                SupportMessage.sendToast(session, 0, "Failed to change password. Please try again.");
                 response.sendRedirect(request.getContextPath() + "/index.do");
             }
         }
