@@ -132,7 +132,7 @@
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="section-header text-center">
                         <h2 class="h2">Latest From our Blog</h2>
-                        <p>Describe your products,collection, content etc...</p>
+                        <p>Discover the Latest from Our Blog: A Treasure Trove of Exciting Products, Collections, and Engaging Content!</p>
                     </div>
                 </div>
             </div>
@@ -177,23 +177,23 @@
                     <ul class="display-table store-info">
                         <li class="display-table-cell">
                             <i class="icon anm anm-truck-l"></i>
-                            <h5>Free Shipping Worldwide</h5>
+                            <h5>Free Shipping</h5>
                             <span class="sub-text">
-                                Diam augue augue in fusce voluptatem
+                                Enjoy free shipping on all orders.
                             </span>
                         </li>
                         <li class="display-table-cell">
                             <i class="icon anm anm-money-bill-ar"></i>
                             <h5>Money Back Guarantee</h5>
                             <span class="sub-text">
-                                Use this text to display your store information
+                                Shop with confidence knowing that we offer a money-back guarantee on all purchases
                             </span>
                         </li>
                         <li class="display-table-cell">
                             <i class="icon anm anm-comments-l"></i>
                             <h5>24/7 Help Center</h5>
                             <span class="sub-text">
-                                Use this text to display your store information
+                                Our 24/7 help center is always available to assist you with any inquiries or issues you may have.
                             </span>
                         </li>
                     </ul>
