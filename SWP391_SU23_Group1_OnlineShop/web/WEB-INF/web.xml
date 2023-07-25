@@ -37,7 +37,6 @@
         <url-pattern>/dashboard/color/*</url-pattern>
         <url-pattern>/dashboard/user/*</url-pattern>
         <url-pattern>/dashboard/role/*</url-pattern>
-
     </filter-mapping>
     <filter-mapping>
         <filter-name>DashboardLoginFilter</filter-name>
@@ -51,10 +50,11 @@
         <url-pattern>/dashboard/user/*</url-pattern>
         <url-pattern>/dashboard/order/*</url-pattern>
         <url-pattern>/dashboard/role/*</url-pattern>
-
     </filter-mapping>
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
+        <url-pattern>/login/changepass.do</url-pattern>
+        <url-pattern>/login/userProfile.do</url-pattern>
         <url-pattern>/cart/checkout.do</url-pattern>
     </filter-mapping>
     <session-config>
